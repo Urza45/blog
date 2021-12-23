@@ -1,0 +1,21 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "My first blog",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css --style compressed",
+    "sass2": "sass --watch ./sass/main.scss:./public/css/style_not_compressed.css",
+    "prefix": "postcss ./public/css/style.css --use autoprefixer -d ./public/css/prefixed/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Urza45/blog.git"
+  },
+  "author": "Serge Pillay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Urza45/blog/issues"
+  },
+  "homepage": "https://github.com/Urza45/blog#readme"
+}
