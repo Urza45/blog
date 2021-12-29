@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Model;
 
@@ -8,18 +9,15 @@ namespace Model;
  */
 class Autoloader{
 
-    static function register() {
+    static function register() : void
+    {
             spl_autoload_register([__CLASS__, 'autoload']);
     }
 
-    static function autoload($class_name){
-        // var_dump($class_name);
-        // $pos = strripos($class_name, '\\' );
-        // var_dump($pos);
-        // $rest = substr($class_name, 0, $pos);  // retourne "abcde"
-        // var_dump($rest);
-        // $class = $rest . "\\" . $class_name . ".php";
-        require strtolower('../' . $class_name . '.php');
+    static function autoload($class_name) : void
+    {
+        $class = strtolower('../' . $class_name . '.php');
+        require_once $class;
     }
 
 }

@@ -2,10 +2,6 @@
 
 use \Model\Autoloader;
 
-const DEFAULT_APP = 'frontend';
-
-if (!isset($_GET['app']) || !file_exists('../controller/'.$_GET['app'])) $_GET['app'] = DEFAULT_APP;
-
 /**
  * Automatic loading of third-party classes 
  */
@@ -21,18 +17,36 @@ if (file_exists('../vendor/autoload.php')) {
 require '../model/Autoloader.php';
 Autoloader::register();
 
+$url = '';
+if (isset($_GET['url'])) {
+    $url = $_GET['url'];
+}
+
+$app = '';
+if (isset($_GET['app'])) {
+    $app = $_GET['app'];
+}
+
 /**
  * Twig initiation 
  */
-// $loader = new \Twig\Loader\FilesystemLoader('../template');
-// $twig = new \Twig\Environment($loader, [
-//     'cache' => false,
-// ]);
+$loader = new \Twig\Loader\FilesystemLoader('../template');
+$twig = new \Twig\Environment($loader, [
+    'cache' => false,
+]);
 
 /**
- * 
+ * Controller initiation 
  */
-$app = new \Controller\Frontend\Controller();
+$var = "\controller\\" . $app . "\\controller";
+$controller = new $var();
 
-echo $app->index();
+/**
+ * Call action
+ */
+$vue = $controller->index();
 
+/**
+ * Render
+ */
+print $twig->render($vue[0], $vue[1]);

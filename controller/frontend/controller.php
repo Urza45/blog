@@ -1,25 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Controller\Frontend;
 
-use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
-use Twig\TwigFunction;
+class Controller 
+{
 
-class Controller {
-
-    public function __contruct() {
-        
-    }
-
-    public function index() {
-        $loader = new FilesystemLoader('../template');
-        $twig = new Environment($loader, [
-            'strict_variables' => true
-        ]);
-
-        $content = $twig->render('frontend/index.html.twig', ['name' => 'Fabien']);
-        //var_dump($content);
-        return $content;
+    public function index()
+    {
+        return ['frontend/index.html.twig', ['name' => 'Serge']];
     }
 }
