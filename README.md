@@ -19,3 +19,5 @@ git branch -M main
 git push -u origin main  
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ad5aba3d37be4918b5fd70ce5cd173d9)](https://www.codacy.com/gh/Urza45/blog/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Urza45/blog&amp;utm_campaign=Badge_Grade)
+
+Add third-partie extensions with Composer : composer:install
