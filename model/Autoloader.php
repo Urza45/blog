@@ -7,7 +7,7 @@ namespace Model;
  * Class Autoloader
  * Allows you to search for a class in the Model directory 
  */
-class Autoloader{
+class Autoloader {
 
     static function register() : void
     {
