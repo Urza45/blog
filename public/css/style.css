@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/* @import "./utils/functions"; */
+/* @import "./utils/mixins"; */
+/* @import "./utils/extensions"; */
 *, *::after, *::before {
   margin: 0;
   padding: 0;
@@ -6,6 +9,7 @@
 }
 
 html {
+  /* 10px div by def of 16px */
   font-size: 62.5%;
 }
 
@@ -47,6 +51,7 @@ button {
   font-size: 2.75rem;
 }
 
+/* @import "./components/buttons"; */
 .header {
   display: flex;
   justify-content: space-between;
@@ -178,5 +183,11 @@ label {
 .breadcrumb li:first-child::before {
   content: "";
 }
+
+/* @import "./layout/container"; */
+/* @import "./layout/form"; */
+/* @import "./pages/work"; */
+/* @import "./pages/about"; */
+/* @import "./pages/project"; */
 
 /*# sourceMappingURL=style.css.map */
