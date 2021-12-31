@@ -20,7 +20,7 @@ class Router {
         foreach ($routes as $route)
         {
             $vars = [];
-            $urlroute = $route->getAttribute('url');
+
             // On regarde si des variables sont présentes dans l'URL.
             if ($route->hasAttribute('vars'))
             {    
@@ -32,7 +32,7 @@ class Router {
             $module = $route->getAttribute('module');
             $action = $route->getAttribute('action');
         
-            if (preg_match($pattern, $url, $matches, PREG_OFFSET_CAPTURE)) {
+            if (preg_match($pattern, $url)) {
                 /**
                 * Controller initiation 
                 */

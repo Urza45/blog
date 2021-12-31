@@ -2,7 +2,9 @@
 /* @import "./utils/functions"; */
 /* @import "./utils/mixins"; */
 /* @import "./utils/extensions"; */
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
@@ -119,7 +121,7 @@ button {
   .nav .main_pages .main_pages {
     display: none;
     flex-direction: column;
-    background: #48435C;
+    background: #48435c;
     height: 220px;
   }
   .nav .main_pages a {
@@ -127,7 +129,7 @@ button {
   }
 }
 .nav a:hover {
-  background: #5A5766;
+  background: #5a5766;
 }
 @media all and (max-width: 991px) {
   .nav {
@@ -136,7 +138,7 @@ button {
   .nav .main_pages {
     display: none;
     flex-direction: column;
-    background: #48435C;
+    background: #48435c;
     height: 220px;
   }
   .nav a {
@@ -152,7 +154,6 @@ label {
     width: 30px;
     display: flex;
     justify-content: right;
-    /* align-items: center; */
     margin: 0 auto;
     font-size: 40px;
     color: white;
