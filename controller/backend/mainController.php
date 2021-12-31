@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Controller\Backend;
 
-class Controller 
+class MainController 
 {
 
     public function index()

@@ -52,6 +52,14 @@ button {
 }
 
 /* @import "./components/buttons"; */
+.center-div {
+  margin: 0 auto;
+  width: 500px;
+  height: 200px;
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
 .header {
   display: flex;
   justify-content: space-between;

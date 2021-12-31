@@ -3,23 +3,49 @@ declare(strict_types=1);
 
 namespace Model;
 
+use \Model\Request;
+
 class Router {
 
-  private $app;
-  private $url;
-  
-  public function __construct(string $app, string $url) {
-    $this->app = $app;
-    $this->url = $url;
-  }
+    public static function run(Request $request) {
+    
+        $xml = new \DOMDocument;
+        $xml->load(__DIR__.'/../config/routes.xml');
 
-  public function run() {
-    $var = "\controller\\" . $this->app . "\\controller";
-    $controller = new $var();
+        $routes = $xml->getElementsByTagName('route');
+        $params = $request->getParams();
+        $url = '/'.trim($params['url'], '/');
 
+        // On parcourt les routes du fichier XML.
+        foreach ($routes as $route)
+        {
+            $vars = [];
+            $urlroute = $route->getAttribute('url');
+            // On regarde si des variables sont présentes dans l'URL.
+            if ($route->hasAttribute('vars'))
+            {    
+                $vars = explode(',', $route->getAttribute('vars'));
+            }
 
-    $vue = $controller->index();
-    return $vue;
-  }
-
+            $pattern = '`^'.$route->getAttribute('url').'$`';
+            $app = $route->getAttribute('app');
+            $module = $route->getAttribute('module');
+            $action = $route->getAttribute('action');
+        
+            if (preg_match($pattern, $url, $matches, PREG_OFFSET_CAPTURE)) {
+                /**
+                * Controller initiation 
+                */
+                $var = '\Controller\\' . $app . '\\' . $module . 'Controller';
+                $controller = new $var();
+                if (!empty($vars)) {
+                    return $controller->$action($vars);
+                } else {
+                    return $controller->$action();
+                }
+                
+            }       
+        }
+        return ['error/404.html.twig', []];
+    }
 }

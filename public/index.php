@@ -2,6 +2,8 @@
 
 use \Model\Autoloader;
 use \Model\Router;
+use \Model\Request;
+
 /**
  * Automatic loading of third-party classes 
  */
@@ -13,24 +15,12 @@ if (file_exists('../vendor/autoload.php')) {
 
 /**
  * Automatic loading of project classes 
+ * Another method is to use Composer
  */
 require '../model/Autoloader.php';
 Autoloader::register();
 
-var_dump($_GET['url']);
-
-$url = '';
-if (isset($_GET['url'])) {
-	$url = $_GET['url'];
-}
-
-$app = '';
-if (isset($_GET['app']) and in_array($_GET['app'], ['Backend', 'Frontend'])) {
-	$app = $_GET['app'];
-}
-
-$router = new Router($app, $url);
-$router->run();
+$request = new \Model\Request();
 
 /**
  * Twig initiation 
@@ -40,17 +30,10 @@ $twig = new \Twig\Environment($loader, [
 	'cache' => false,
 ]);
 
-
-/**
- * Controller initiation 
- */
-// $var = "\controller\\" . $app . "\\controller";
-// $controller = new $var();
-
 /**
  * Call action
  */
-$vue = $router->run();
+$vue = Router::run($request);
 
 /**
  * Render
