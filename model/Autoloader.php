@@ -16,7 +16,7 @@ class Autoloader {
 
     static function autoload($class_name) : void
     {
-        $class = strtolower('../' . $class_name . '.php');
+        $class = strtolower(dirname(__DIR__) . '/' . $class_name . '.php');
         require_once $class;
     }
 

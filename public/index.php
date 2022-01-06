@@ -20,8 +20,8 @@ use \Model\Request;
 /**
  * Automatic loading of third-party classes 
  */
-if (file_exists('../vendor/autoload.php')) {
-    include_once '../vendor/autoload.php';
+if (file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
+    include_once dirname(__DIR__) . '/vendor/autoload.php';
 } else {
     die('Problème d&acute;installation.<br/>Avez-vous exécuter Composer Install ?');
 }
@@ -30,15 +30,15 @@ if (file_exists('../vendor/autoload.php')) {
  * Automatic loading of project classes 
  * Another method is to use Composer
  */
-require '../model/Autoloader.php';
+require dirname(__DIR__) . '/model/Autoloader.php';
 Autoloader::register();
 
-$request = new \Model\Request();
+$request = new Request();
 
 /**
  * Twig initiation 
  */
-$loader = new \Twig\Loader\FilesystemLoader('../template');
+$loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/template');
 $twig = new \Twig\Environment(
     $loader, 
     [
@@ -49,9 +49,9 @@ $twig = new \Twig\Environment(
 /**
  * Call action
  */
-$vue = Router::run($request);
+$view = Router::getInstance()->run($request);
 
 /**
  * Render
  */
-echo $twig->render($vue[0], $vue[1]);
+echo $twig->render($view[0], $view[1]);
