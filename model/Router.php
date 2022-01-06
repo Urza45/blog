@@ -40,10 +40,8 @@ class Router {
                 $controller = new $var();
                 if (!empty($vars)) {
                     return $controller->$action($vars);
-                } else {
-                    return $controller->$action();
                 }
-                
+                return $controller->$action();
             }       
         }
         return ['error/404.html.twig', []];

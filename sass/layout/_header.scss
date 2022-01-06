@@ -13,8 +13,8 @@
         text-decoration: none;
         max-height: 100%;
         z-index: 5;
-        @media all and (max-width: 991px)
-        {
+        
+        @media all and (max-width: 991px) {
             img {
                 max-height: 100%;
             }

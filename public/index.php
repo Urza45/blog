@@ -1,4 +1,17 @@
 <?php
+/**
+ * Blog personnel
+ * Main file
+ * php version 7.4.9
+ * 
+ * @category Blog
+ * @package  MyBlog
+ * @author   Serge Pillay <serge.pillay@orange.fr>
+ * @license  Free 
+ * @version  GIT: <git_id>
+ * @access   public
+ * @link     https://www.urza-web.fr
+ */
 
 use \Model\Autoloader;
 use \Model\Router;
@@ -8,9 +21,9 @@ use \Model\Request;
  * Automatic loading of third-party classes 
  */
 if (file_exists('../vendor/autoload.php')) {
-	require_once '../vendor/autoload.php';
+    include_once '../vendor/autoload.php';
 } else {
-	die ('Problème d&acute;installation.<br/>Avez-vous charger les librairies tierces nécessaires ?');
+    die('Problème d&acute;installation.<br/>Avez-vous exécuter Composer Install ?');
 }
 
 /**
@@ -26,9 +39,12 @@ $request = new \Model\Request();
  * Twig initiation 
  */
 $loader = new \Twig\Loader\FilesystemLoader('../template');
-$twig = new \Twig\Environment($loader, [
-	'cache' => false,
-]);
+$twig = new \Twig\Environment(
+    $loader, 
+    [
+        'cache' => false,
+    ]
+);
 
 /**
  * Call action

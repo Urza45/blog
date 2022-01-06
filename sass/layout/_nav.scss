@@ -34,8 +34,7 @@
         @media all and (max-width: 991px) {
             height: 60px;
 
-            .main_pages 
-            {
+            .main_pages {
                 display: none;
                 flex-direction: column;
                 background: #48435c;
@@ -49,7 +48,7 @@
     }
 
     a:hover {
-        background: #5a5766
+        background: #5a5766;
     }
 
     @media all and (max-width: 991px) {
@@ -69,8 +68,7 @@
     }
 }
 
-label
-{
+label {
     display: none;
 
     @media all and (max-width: 991px) {
@@ -87,9 +85,7 @@ label
 #toggle {
     display: none;
 
-    @media all and (max-width: 991px)
-    {
-
+    @media all and (max-width: 991px) {
         &:checked + .main_pages {
             display: flex;
         }

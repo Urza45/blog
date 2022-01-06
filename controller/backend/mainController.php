@@ -3,9 +3,13 @@ declare(strict_types=1);
 
 namespace Controller\Backend;
 
-class MainController 
+class MainController
 {
-
+    /**
+     * Index function
+     *
+     * @return void
+     */
     public function index()
     {
         return [
