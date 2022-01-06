@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<routes>
+    <!-- FRONTEND -->
+	<route url="/" app="Frontend" module="Main" action="index" ></route>
+	<!-- Visitor -->
+    <route url="/postlist" app="Frontend" module="Main" action="list" ></route>
+    <route url="/post-([0-9]+)" app="Frontend" module="Main" action="post" vars="id_post" ></route>
+    <route url="/register" app="Frontend" module="Main" action="register" ></route>
+    <route url="/contact" app="Frontend" module="Main" action="contact" ></route>
+    <!-- Connexion -->
+    <route url="/signin" app="Frontend" module="Connexion" action="signIn" ></route>
+    <route url="/signout" app="Frontend" module="Connexion" action="signOut" ></route>
+    <!-- Registered USer -->
+    <route url="/addcomment" app="Frontend" module="Comment" action="add" ></route>
+    <route url="/modifycomment-([0-9]+)" app="Frontend" module="Comment" action="modify" ></route>
+    <route url="/deletecomment-([0-9]+)" app="Frontend" module="Comment" action="delete" ></route>
+    <route url="/askpromotion" app="Frontend" module="Connexion" action="ask" ></route>
+    <!-- ADMINISTRATION -->
+    <route url="/admin" app="Backend" module="Main" action="index" ></route>
+    <!-- Moderator -->
+    <route url="/admin/listcomments" app="Backend" module="Comment" ></route>
+    <route url="/admin/validcomment-([0-9]+)" app="Backend" module="Comment" action="valid" vars="id_comment"></route>
+    <route url="/admin/deletecomment-([0-9]+)" app="Backend" module="Comment" action="delete" vars="id_comment"></route>
+    <!-- Administrator -->
+    <route url="/admin/listregistration" app="Backend" module="Registration" action="listUserToRegister" ></route> 
+    <route url="/admin/validregistration-([0-9]+)" app="Backend" module="Registration" action="validUser" vars="id_user"></route>
+    <route url="/admin/addpost" app="Backend" module="Post" action="add" ></route>
+    <route url="/admin/modifypost-([0-9]+)" app="Backend" module="Post" action="modify" vars="id_post"></route>
+    <route url="/admin/deletepost-([0-9]+)" app="Backend" module="Post" action="delete" vars="id_post"></route>
+    <!-- Super administrator -->
+    <route url="/admin/validmoderator-([0-9]+)" app="Backend" module="Registration" action="validModerator" vars="id_user"></route>
+    <route url="/admin/validadministrator-([0-9]+)" app="Backend" module="Registration" action="validAdministrator" vars="id_user"></route>
+    <route url="/admin/listrequests" app="Backend" module="Main" action="listRequest" ></route>
+    <route url="/admin/listuser" app="Backend" module="User" action="list" ></route>
+    <route url="/admin/modifyuser-([0-9]+)" app="Backend" module="User" action="modify" vars="id_user" ></route>
+    <route url="/admin/deleteuser-([0-9]+)" app="Backend" module="User" action="delete" vars="id_user" ></route>
+</routes>
