@@ -2,9 +2,7 @@
 /* @import "./utils/functions"; */
 /* @import "./utils/mixins"; */
 /* @import "./utils/extensions"; */
-*,
-*::after,
-*::before {
+*, *::after, *::before {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
