@@ -2,7 +2,7 @@
     width: 100%;
     height: 100px;
     background: $colour-primary;
-    z-index: 3;
+    z-index: 1000;
 
     .main_pages {
         display: flex;
@@ -37,7 +37,7 @@
             .main_pages {
                 display: none;
                 flex-direction: column;
-                background: #48435c;
+                background: $colour-background;
                 height: 220px;
             }
 
@@ -49,6 +49,20 @@
 
     a:hover {
         background: #5a5766;
+    }
+
+    & label {
+        display: none;
+    
+        @media all and (max-width: 991px) {
+            width: 30px;
+            display: flex;
+            justify-content: right;
+            margin: 0 auto;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
     }
 
     @media all and (max-width: 991px) {
@@ -68,19 +82,7 @@
     }
 }
 
-label {
-    display: none;
 
-    @media all and (max-width: 991px) {
-        width: 30px;
-        display: flex;
-        justify-content: right;
-        margin: 0 auto;
-        font-size: 40px;
-        color: white;
-        cursor: pointer;
-    }
-}
 
 #toggle {
     display: none;
@@ -119,3 +121,5 @@ label {
         content: "";
     }
 }
+
+

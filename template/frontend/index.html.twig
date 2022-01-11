@@ -2,9 +2,63 @@
 
 {% block title %}FRONTEND !{% endblock %}
 
+{% block header %}
+<nav class="nav">
+  <div class="header__logo">
+    <img src="http://p5blog/image/SP-LOGO-small.png" alt="Logo de la société"/>
+  </div>
+  <label for="toggle">☰</label>
+  <input type="checkbox" id="toggle">
+  <div class="main_pages">
+    <a href="/" class="active">Accueil</a>
+    <a href="/postlist">Liste des posts</a>
+    <a href="#contact">Nous contacter</a>
+    <a href="/signin">Se connecter</a>
+  </div>
+</nav>
+{% endblock %}
+
 {% block body %}
     <section>
-    <h2>Frontend</h2>
-    <p>Bonjour {{ name }}</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Bienvenu(e)</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                <p>Si vous cherchez une personne capable de :</p>
+                    <p>Concevoir et développer les programmes et applications, déterminer des mesures correctives, analyser des
+problèmes techniques, établir un cahier des charges, analyser les besoins du client.
+Maitrise des langages de programmation PHP 5 à 7, HTLM 5 / CSS 3, javascript, Visual Basic pour application,
+Pascal, Delphi, Fortran, Foxpro, SQL (PostgreSQL, MySQL, MS SQL, SGDB).
+Maitrise des logiciels de bureautique tels que Word, Excel, Powerpoint, Publisher.
+Assemblage de PC, remplacement de pièces sur PC et ordinateurs portables.</p>
+<p>alors vous êtes au bon endroit. N'hésitez pas à consulter mes posts ou à me contacter.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Liste des derniers posts</h3>
+                    {% if posts %}
+                    <ul>
+                    {% for post in posts %}
+                        <li>{{ post.title }} - {{ post.dateCreate }}</li>
+                        <li>{{ post.chapo }}</li>
+                        <li><a href="/post-{{ post.id }}">Voir plus ...</a></li>
+                    {% endfor %}
+                    </ul>
+                    {% else %}
+                        A venir bientôt ...
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    
     </section>
+    <br/>
+    {{ include('frontend/contact.html.twig') }}
 {% endblock %}
+
