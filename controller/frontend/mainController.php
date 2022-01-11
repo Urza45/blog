@@ -3,14 +3,32 @@ declare(strict_types=1);
 
 namespace Controller\Frontend;
 
+use \Lib\Managers;
+use Lib\PDOFactory;
+use \Model\Post;
+
 class MainController 
 {
 
     public function index() {
-        return ['frontend/index.html.twig', ['name' => 'Serge']];
+        $manager = new Managers(PDOFactory::getMysqlConnexion());
+        $postManager = $manager->getManagerOf('Post');
+
+        return ['frontend/index.html.twig', [
+                'LastPostList' => $postManager->getListPosts(5)
+            ]
+        ];
     }
 
     public function list() {
+        $manager = new Managers(PDOFactory::getMysqlConnexion());
+        $postManager = $manager->getManagerOf('Post');
+
+        return ['frontend/index.html.twig', [
+                'LastPostList' => $postManager->getListPosts()
+            ]
+        ];
+
         return ['frontend/list.html.twig', ['name' => 'Serge']];
     }
 

@@ -16,6 +16,7 @@
 use \Lib\Autoloader;
 use \Lib\Router;
 use \Lib\Request;
+use \Twig\Extra\Intl\IntlExtension;
 
 /**
  * Automatic loading of third-party classes 
@@ -45,6 +46,10 @@ $twig = new \Twig\Environment(
         'cache' => false,
     ]
 );
+/**
+ * Add Twig extension for format date functions
+ */
+$twig->addExtension(new IntlExtension());
 
 /**
  * Call action

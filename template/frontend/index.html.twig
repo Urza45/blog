@@ -3,6 +3,13 @@
 {% block title %}FRONTEND !{% endblock %}
 
 {% block body %}
-    <h2>Frontend</h2>
+    
+    <h3>Dernier Posts :</h3>
+    <hr />
+    {% for Post in LastPostList %}
+    <p>{{ Post.title }} - {{ Post.dateCreate|format_datetime('short', 'none', locale='fr') }}</p><br />
+    <p>{{ Post.chapo }}</p>
+    <hr />
+    {% endfor %}
     <p>Bonjour {{ name }}</p>
 {% endblock %}
