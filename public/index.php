@@ -13,9 +13,9 @@
  * @link     https://www.urza-web.fr
  */
 
-use \Model\Autoloader;
-use \Model\Router;
-use \Model\Request;
+use \Lib\Autoloader;
+use \Lib\Router;
+use \Lib\Request;
 
 /**
  * Automatic loading of third-party classes 
@@ -30,7 +30,7 @@ if (file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
  * Automatic loading of project classes 
  * Another method is to use Composer
  */
-require dirname(__DIR__) . '/model/Autoloader.php';
+require dirname(__DIR__) . '/lib/Autoloader.php';
 Autoloader::register();
 
 $request = new Request();

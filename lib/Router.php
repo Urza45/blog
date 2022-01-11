@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Model;
+namespace Lib;
 
-use \Model\Request;
+use \Lib\Request;
 
 class Router {
 
