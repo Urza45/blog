@@ -68,9 +68,9 @@ class Router {
                 if (file_exists(dirname(__DIR__) . '/controller//' . $app . '//' . $module . 'Controller.php')) {
                     $controller = new $var();
                     if (!empty($vars)) {
-                        return $controller->$action($vars);
+                        return $controller->$action($vars, $request);
                     }
-                    return $controller->$action();
+                    return $controller->$action($request);
                 }
                 return ['error/404.html.twig', []];
             }       
