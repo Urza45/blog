@@ -12,7 +12,7 @@ class PostManager extends Manager
      * getListPost
      *
      * @param  mixed $number
-     * @return array
+     * @return array of Post
      */
     public function getListPost(int $number = null)
     {
@@ -33,7 +33,7 @@ class PostManager extends Manager
      * getUniquePost
      *
      * @param  mixed $id
-     * @return void
+     * @return instance of User
      */
     public function getUniquePost(int $id)
     {

@@ -12,7 +12,7 @@ class Utilities
         return (preg_match("#^[0-9]{5}$#", $code));
     }
 
-    public static function RandomToken($length){
+    public static function RandomToken($length = null){
         if(!isset($length) || intval($length) <= 8 ){
           $length = 64;
         }
@@ -22,6 +22,6 @@ class Utilities
     }
     
     public static function Salt(){
-        return substr(strtr(base64_encode(hex2bin(self::RandomToken(32))), '+', '.'), 0, 44);
+        return substr(strtr(base64_encode(hex2bin(self::RandomToken(32))), '+', '.'), 0, 10);
     }
 }

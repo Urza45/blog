@@ -6,6 +6,7 @@ namespace Controller\Frontend;
 use \Lib\Managers;
 use \Lib\PDOFactory;
 use \Lib\Request;
+use \Lib\Utilities;
 use \Model\Post;
 
 class MainController 
@@ -26,9 +27,13 @@ class MainController
     public function index(Request $request) {
 
         $postManager = $this->manager->getManagerOf('Post');
+        $userManager = $this->manager->getManagerOf('User');
 
         return ['frontend/index.html.twig', [
-                'LastPostList' => $postManager->getListPost(5)
+                'LastPostList' => $postManager->getListPost(5),
+                'ListUser' => $userManager->getListUser(),
+                'salt' => Utilities::Salt(),
+                'token' => Utilities::RandomToken()
             ]
         ];
     }

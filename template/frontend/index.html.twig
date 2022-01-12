@@ -11,5 +11,12 @@
     <p>{{ Post.chapo }}</p>
     <hr />
     {% endfor %}
-    <p>Bonjour {{ name }}</p>
+    <h3>Liste des utilisateurs</h3>
+    {% for User in ListUser %}
+    <p>{{ User.name }} - {{ User.firstName }}</p><br />
+    <hr />
+    {% endfor %}
+    <p>SALT : {{ salt }}</p><br />
+    <p>PASSWORD : {{ password }}</p><br />
+    <p>TOKEN : {{ token }}</p><br />
 {% endblock %}
