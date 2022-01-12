@@ -24,4 +24,14 @@ class Utilities
     public static function Salt(){
         return substr(strtr(base64_encode(hex2bin(self::RandomToken(32))), '+', '.'), 0, 10);
     }
+
+    public static function password_encode($password, $salt)
+    {
+        return password_hash($password.$salt, PASSWORD_DEFAULT);
+    }
+
+    public static function verify_password($password, $salt, $passwordHash)
+    {
+        return password_verify($password.$salt, $passwordHash);
+    }
 }
