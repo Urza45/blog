@@ -29,7 +29,8 @@
         {{ include('header.html.twig') }}
     </header>
     <h1>Mon super Blog</h1>
-        {% block body %}{% endblock %}
+    {% block flash %}{% endblock %}
+    {% block body %}{% endblock %}
         
     <footer class="text-center">
         {{ include('footer.html.twig') }}
@@ -47,7 +48,7 @@
 
         <!-- Contact Form JavaScript -->
         <script src="/js/jqBootstrapValidation.js"></script>
-        <script src="/js/contact_me.js"></script>
+        <script src="/js/contact.js"></script>
 
         <!-- Theme JavaScript -->
         <script src="/js/freelancer.min.js"></script>

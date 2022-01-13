@@ -6,11 +6,17 @@ class Request
 {
     private $url;
     private $method;
+    private $query;
+
+    
 
     public function __construct()
     {
         $this->method = $_SERVER['REQUEST_METHOD'];
-        $this->url = $_SERVER['QUERY_STRING'];
+        $this->url = $_SERVER['REQUEST_URI'];
+        //var_dump($this->url);
+        $this->query = $_SERVER['QUERY_STRING'];
+        //var_dump($this->query);
     }
 
     public function isGet() {
@@ -34,4 +40,10 @@ class Request
     public function getUrl() {
         return $this->url;
     }
+
+    public function getQuery() {
+        return $this->query;
+    }
+
+    
 }

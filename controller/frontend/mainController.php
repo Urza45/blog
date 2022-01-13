@@ -62,6 +62,20 @@ class MainController
     }
 
     public function contact(Request $request) {
-        return ['frontend/contact.html.twig', ['name' => 'Serge']];
+        //var_dump($request->getParams());
+        $response = [];
+
+        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
+        {
+            $email = new \Lib\MyMail;
+            $response = $email->sendEmailToAdmin($request->getParams());
+        }
+
+        return ['frontend/contact.html.twig', [
+            'name' => 'Serge',
+            'Params' => $request->getParams(),
+            'Response' => $response
+            ]
+        ];
     }
 }

@@ -6,5 +6,6 @@ return [
     "db_user" => "",
     "db_pass" => "",
     "db_host" => "",
-    "db_name" => ""
+    "db_name" => "",
+    "sendTo" => "xx@xxxxx.fr"
 ];
