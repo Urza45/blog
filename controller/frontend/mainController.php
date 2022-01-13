@@ -39,8 +39,7 @@ class MainController
     }
 
     public function list(Request $request) {
-        $manager = new Managers(PDOFactory::getMysqlConnexion());
-        $postManager = $manager->getManagerOf('Post');
+        $postManager = $this->manager->getManagerOf('Post');
 
         return ['frontend/list.html.twig', [
                 'LastPostList' => $postManager->getListPost()

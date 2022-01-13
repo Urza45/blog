@@ -80,7 +80,7 @@ class Post extends Entity
     {
         
         if(empty($title) || !is_string($title)) {
-            $this->erreurs[] = self::INVALID_TITLE;
+            $this->errors[] = self::INVALID_TITLE;
         } else {
             $this->title = $title;
         }
@@ -94,7 +94,7 @@ class Post extends Entity
     public function setChapo($chapo)
     {
         if(empty($chapo) || !is_string($chapo)) {
-            $this->erreurs[] = self::INVALID_CHAPO;
+            $this->errors[] = self::INVALID_CHAPO;
         } else {
             $this->chapo = $chapo;
         }
@@ -108,7 +108,7 @@ class Post extends Entity
     public function setContent($content)
     {
         if(empty($content) || !is_string($content)) {
-            $this->erreurs[] = self::INVALID_CONTENT;
+            $this->errors[] = self::INVALID_CONTENT;
         } else {
             $this->content = $content;
         }
@@ -122,7 +122,7 @@ class Post extends Entity
     public function setDateCreate($dateCreate)
     {
         if (!Utilities::checkDate($dateCreate)) {
-            $this->erreurs[] = self::INVALID_DATE;
+            $this->errors[] = self::INVALID_DATE;
         } else {
             $this->dateCreate = $dateCreate;
         }
@@ -136,7 +136,7 @@ class Post extends Entity
     public function setUser_idUser($user_idUser)
     {
         if (!is_int(intval($user_idUser))) {
-            $this->erreurs[] = self::INVALID_IDUSER;
+            $this->errors[] = self::INVALID_IDUSER;
         } else {
             $this->user_idUser = $user_idUser;
         }

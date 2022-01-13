@@ -35,7 +35,7 @@ class TypeUser extends Entity
     public function setLabel($label)
     {
         if(empty($title) || !is_string($title)) {
-            $this->erreurs[] = self::INVALID_LABEL;
+            $this->errors[] = self::INVALID_LABEL;
         } else {
             $this->label = $label;
         }
