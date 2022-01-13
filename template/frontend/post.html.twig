@@ -2,6 +2,22 @@
 
 {% block title %}Liste des posts{% endblock %}
 
+{% block header %}
+<nav class="nav">
+  <div class="header__logo">
+    <img src="http://p5blog/image/SP-LOGO-small.png" alt="Logo de la société"/>
+  </div>
+  <label for="toggle">☰</label>
+  <input type="checkbox" id="toggle">
+  <div class="main_pages">
+    <a href="/">Accueil</a>
+    <a href="/postlist" class="active">Liste des posts</a>
+    <a href="/contact">Nous contacter</a>
+    <a href="/signin">Se connecter</a>
+  </div>
+</nav>
+{% endblock %}
+
 {% block body %}
     <h2>Détails d'un post</h2>
     <p>Bonjour {{ name }}</p>

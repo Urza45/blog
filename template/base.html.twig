@@ -15,7 +15,7 @@
             <link href="/vendor/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
             <!-- Theme CSS -->
-            <link href="/css/freelancer.min.css" rel="stylesheet">
+            <!-- <link href="/css/freelancer.min.css" rel="stylesheet"> -->
             <link rel="stylesheet" type="text/css" href="/css/style.css" />
             <!-- Custom Fonts -->
             <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -26,9 +26,11 @@
     </head>
     <body class="index">
     <header>
-        {{ include('header.html.twig') }}
+        {% block header %}
+        {% endblock %}
     </header>
-    <h1>Mon super Blog</h1>
+    <h1>Monsieur Serge PILLAY</h1>
+    <p><i>Développeur, aide à la personne ...</i></p>
         {% block body %}{% endblock %}
         
     <footer class="text-center">

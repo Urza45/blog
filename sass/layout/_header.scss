@@ -4,7 +4,7 @@
     background: $colour-primary;
     height: 15rem;
     width: 100%;
-
+    padding: 10px 20px;
     &__logo {
         display: block;
         float: left;
@@ -12,7 +12,8 @@
         padding: 10px 20px;
         text-decoration: none;
         max-height: 100%;
-        z-index: 5;
+        z-index: 1;
+        width: 1em;
         
         @media all and (max-width: 991px) {
             img {
@@ -22,6 +23,14 @@
     }
 }
 
-section.page404 {
-    background: $colour-white;
+section {
+    box-sizing: border-box;
+    width: 100%;
+    border: solid $colour-primary 10px;
+    border-radius: 1.5em;
+    padding: 5px;
+    background: $colour-section;
+    .page404 {
+        background: $colour-white;
+    }
 }
