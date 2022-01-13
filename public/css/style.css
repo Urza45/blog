@@ -2,9 +2,7 @@
 /* @import "./utils/functions"; */
 /* @import "./utils/mixins"; */
 /* @import "./utils/extensions"; */
-*,
-*::after,
-*::before {
+*, *::after, *::before {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
@@ -58,10 +56,7 @@ button {
 /* @import "./components/buttons"; */
 .center-div {
   margin: 0 auto;
-  width: 500px;
-  height: 200px;
-  background-color: #ccc;
-  border-radius: 3px;
+  text-align: center;
 }
 
 .header {
@@ -88,6 +83,7 @@ button {
   }
 }
 
+
 section {
   box-sizing: border-box;
   width: 100%;
@@ -96,7 +92,8 @@ section {
   padding: 5px;
   background: #60a5bc;
 }
-section .page404 {
+
+section.page404 {
   background: #fff;
 }
 
