@@ -79,7 +79,7 @@ class Comments extends Entity
     public function setContent($content)
     {
         if(empty($content) || !is_string($content)) {
-            $this->erreurs[] = self::INVALID_CONTENT;
+            $this->errors[] = self::INVALID_CONTENT;
         } else {
             $this->content = $content;
         }
@@ -93,7 +93,7 @@ class Comments extends Entity
     public function setDate($date)
     {
         if (!Utilities::checkDate($date)) {
-            $this->erreurs[] = self::INVALID_DATE;
+            $this->errors[] = self::INVALID_DATE;
         } else {
             $this->date = $date;
         }
@@ -107,7 +107,7 @@ class Comments extends Entity
     public function setDisabled($disabled)
     {
         if (!is_bool($disabled)) {
-            $this->erreurs[] = self::INVALID_DISABLED;
+            $this->errors[] = self::INVALID_DISABLED;
         } else {
             $this->disabled = $disabled;
         }
@@ -121,7 +121,7 @@ class Comments extends Entity
     public function setUser_idUser($user_idUser)
     {
         if (!is_int(intval($user_idUser))) {
-            $this->erreurs[] = self::INVALID_IDUSER;
+            $this->errors[] = self::INVALID_IDUSER;
         } else {
             $this->user_idUser = $user_idUser;
         }
@@ -135,7 +135,7 @@ class Comments extends Entity
     public function setPost_idPost($post_idPost)
     {
         if (!is_int(intval($post_idPost))) {
-            $this->erreurs[] = self::INVALID_IDPOST;
+            $this->errors[] = self::INVALID_IDPOST;
         } else {
             $this->post_idPost = $post_idPost;
         }

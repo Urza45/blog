@@ -22,7 +22,7 @@ abstract class Entity
 
     public function erreurs()
     {
-        return $this->erreurs;
+        return $this->errors;
     }
 
     /**
