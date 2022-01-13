@@ -2,9 +2,7 @@
 /* @import "./utils/functions"; */
 /* @import "./utils/mixins"; */
 /* @import "./utils/extensions"; */
-*,
-*::after,
-*::before {
+*, *::after, *::before {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
@@ -24,6 +22,8 @@ body {
   font-size: 2rem;
   font-weight: 100;
   line-height: 1.7;
+  min-height: 75rem;
+  padding-top: 4.5rem;
 }
 
 h1 {
@@ -56,10 +56,7 @@ button {
 /* @import "./components/buttons"; */
 .center-div {
   margin: 0 auto;
-  width: 500px;
-  height: 200px;
-  background-color: #ccc;
-  border-radius: 3px;
+  text-align: center;
 }
 
 .header {
@@ -68,6 +65,7 @@ button {
   background: #122c3e;
   height: 15rem;
   width: 100%;
+  padding: 10px 20px;
 }
 .header__logo {
   display: block;
@@ -76,7 +74,8 @@ button {
   padding: 10px 20px;
   text-decoration: none;
   max-height: 100%;
-  z-index: 5;
+  z-index: 1;
+  width: 1em;
 }
 @media all and (max-width: 991px) {
   .header__logo img {
@@ -84,11 +83,25 @@ button {
   }
 }
 
+
+section {
+  box-sizing: border-box;
+  width: 100%;
+  border: solid #122c3e 10px;
+  border-radius: 1.5em;
+  padding: 5px;
+  background: #60a5bc;
+}
+
+section.page404 {
+  background: #fff;
+}
+
 .nav {
   width: 100%;
   height: 100px;
   background: #122c3e;
-  z-index: 3;
+  z-index: 1000;
 }
 .nav .main_pages {
   display: flex;
@@ -121,7 +134,7 @@ button {
   .nav .main_pages .main_pages {
     display: none;
     flex-direction: column;
-    background: #48435c;
+    background: #466272;
     height: 220px;
   }
   .nav .main_pages a {
@@ -130,6 +143,20 @@ button {
 }
 .nav a:hover {
   background: #5a5766;
+}
+.nav label {
+  display: none;
+}
+@media all and (max-width: 991px) {
+  .nav label {
+    width: 30px;
+    display: flex;
+    justify-content: right;
+    margin: 0 auto;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+  }
 }
 @media all and (max-width: 991px) {
   .nav {
@@ -143,21 +170,6 @@ button {
   }
   .nav a {
     width: 50%;
-  }
-}
-
-label {
-  display: none;
-}
-@media all and (max-width: 991px) {
-  label {
-    width: 30px;
-    display: flex;
-    justify-content: right;
-    margin: 0 auto;
-    font-size: 40px;
-    color: white;
-    cursor: pointer;
   }
 }
 
