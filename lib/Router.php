@@ -29,13 +29,8 @@ class Router {
     }
     
     public function run(Request $request) {
-    
-        // $xml = new \DOMDocument;
-        // $xml->load(__DIR__.'/../config/routes.xml');
 
-        // $routes = $xml->getElementsByTagName('route');
-        $params = $request->getParams();
-        $url = '/' . trim($params['url'], '/');
+        $url = '/' . trim($request->getUrl(), '/');
 
         // On parcourt les routes du fichier XML.
         foreach ($this->routes as $route)
@@ -65,10 +60,11 @@ class Router {
                 * Controller initiation 
                 */
                 $var = '\Controller\\' . $app . '\\' . $module . 'Controller';
+
                 if (file_exists(dirname(__DIR__) . '/controller//' . $app . '//' . $module . 'Controller.php')) {
                     $controller = new $var();
                     if (!empty($vars)) {
-                        return $controller->$action($vars, $request);
+                        return $controller->$action($request, $vars);
                     }
                     return $controller->$action($request);
                 }
