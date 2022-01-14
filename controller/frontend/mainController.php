@@ -29,39 +29,6 @@ class MainController
         $postManager = $this->manager->getManagerOf('Post');
         $userManager = $this->manager->getManagerOf('User');
 
-        return ['frontend/index.html.twig', [
-                'LastPostList' => $postManager->getListPost(5),
-                'ListUser' => $userManager->getListUser(),
-                'salt' => Utilities::Salt(),
-                'token' => Utilities::RandomToken()
-            ]
-        ];
-    }
-
-    public function list(Request $request) {
-        $postManager = $this->manager->getManagerOf('Post');
-
-        return ['frontend/list.html.twig', [
-                'LastPostList' => $postManager->getListPost()
-            ]
-        ];
-
-        return ['frontend/list.html.twig', ['name' => 'Serge']];
-    }
-
-    public function post(Request $request, $vars) {
-        return ['frontend/post.html.twig', [
-            'name' => 'Serge',
-            'vars' => $vars
-        ]];
-    }
-
-    public function register(Request $request) {
-        return ['frontend/register.html.twig', ['name' => 'Serge']];
-    }
-
-    public function contact(Request $request) {
-        //var_dump($request->getParams());
         $response = [];
 
         if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
@@ -70,8 +37,68 @@ class MainController
             $response = $email->sendEmailToAdmin($request->getParams());
         }
 
-        return ['frontend/contact.html.twig', [
+        return ['frontend/index.html.twig', [
+                'LastPostList' => $postManager->getListPost(5),
+                'ListUser' => $userManager->getListUser(),
+                'salt' => Utilities::Salt(),
+                'token' => Utilities::RandomToken(),
+                'Params' => $request->getParams(),
+                'Response' => $response,
+                'Page' => $request->getUrl()
+            ]
+        ];
+    }
+
+    public function list(Request $request) {
+
+        $postManager = $this->manager->getManagerOf('Post');
+
+        $response = [];
+
+        return ['frontend/list.html.twig', [
+                'LastPostList' => $postManager->getListPost(),
+                'Response' => $response,
+                'Page' => $request->getUrl()
+            ]
+        ];
+
+        return ['frontend/list.html.twig', ['name' => 'Serge']];
+    }
+
+    public function post(Request $request, $vars) {
+
+        $response = [];
+
+        return ['frontend/post.html.twig', [
             'name' => 'Serge',
+            'vars' => $vars,
+            'Response' => $response,
+            'Page' => $request->getUrl()
+        ]];
+    }
+
+    public function register(Request $request) {
+
+        $response = [];
+
+        return ['frontend/register.html.twig', [
+            'Response' => $response,
+            'Page' => $request->getUrl()
+            ]
+        ];
+    }
+
+    public function contact(Request $request) {
+
+        $response = [];
+
+        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
+        {
+            $email = new \Lib\MyMail;
+            $response = $email->sendEmailToAdmin($request->getParams());
+        }
+
+        return ['frontend/index.html.twig', [
             'Params' => $request->getParams(),
             'Response' => $response
             ]

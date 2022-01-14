@@ -27,11 +27,20 @@
     <body class="index">
     <header>
         {% block header %}
+            {{ include('header.html.twig') }}
         {% endblock %}
     </header>
     <h1>Monsieur Serge PILLAY</h1>
     <p><i>Développeur, aide à la personne ...</i></p>
-    {% block flash %}{% endblock %}
+    {% if Response %}
+        <div class="row">
+            <div class="col-lg-12 text-center alert alert-{{ Response.type }} ">
+                {{ Response.message }}
+            </div>
+        </div>
+    {% endif %}
+    
+
     {% block body %}{% endblock %}
         
     <footer class="text-center">
