@@ -8,8 +8,6 @@ class Request
     private $method;
     private $query;
 
-    
-
     public function __construct()
     {
         $this->method = $_SERVER['REQUEST_METHOD'];
@@ -28,7 +26,14 @@ class Request
     }
 
     public function getParams() {
-        if ($this->isPost()) return $_POST;
+        
+        if ($this->isPost()) {
+            $params = [];
+            foreach ($_POST as $key => $value) {
+                $params[$key] = htmlentities($value);
+            }
+            return $params;
+        }
         if ($this->isGet()) return $_GET;
         return array();
     }

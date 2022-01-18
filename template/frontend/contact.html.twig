@@ -12,7 +12,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <form id="contact-form" method="post" action="/" role="form">
+                    <form id="contact-form" action="/" method="post" role="form">
 
                     <div class="messages"></div>
 
@@ -84,4 +84,10 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact.js"></script>
 {% endblock %}

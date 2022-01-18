@@ -9,6 +9,7 @@ class User extends Entity
 {
     private $name;
     private $firstName;
+    private $pseudo;
     private $email;
     private $phone;
     private $portable;
@@ -148,6 +149,14 @@ class User extends Entity
         return $this->typeUser_idTypeUSer;
     }
 
+    /**
+     * Get the value of pseudo
+     */ 
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
     /** SETTERS */
 
     /**
@@ -170,6 +179,18 @@ class User extends Entity
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of pseudo
+     *
+     * @return  self
+     */ 
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
@@ -306,4 +327,7 @@ class User extends Entity
 
         return $this;
     }
+
+
+    
 }

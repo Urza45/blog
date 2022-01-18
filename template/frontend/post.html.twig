@@ -3,7 +3,10 @@
 {% block title %}Détails d'un post{% endblock %}
 
 {% block body %}
-    <h2>Détails d'un post</h2>
-    <p>Bonjour {{ name }}</p>
-    <p>Blog n° {{ vars.id_post }}</p>
+<section>
+    <h3>{{ post.title|convert_encoding('UTF-8', 'ISO-8859-1') }} - {{ post.dateCreate|date("m/d/Y") }}</h3>
+    <hr/>
+    <p>{{ post.chapo|convert_encoding('UTF-8', 'ISO-8859-1') }}</p>
+    <p>{{ post.content|convert_encoding('UTF-8', 'ISO-8859-1') }}</p>
+</section>
 {% endblock %}

@@ -8,130 +8,119 @@
             <div class="row">
                 <div class="col-lg-6 text-center">
                     <h3>Se connecter</h3>
-                    <hr>
-                    <form id="contact-form" method="post" action="/" role="form">
-
-                    <div class="messages"></div>
-
-                    <div class="controls">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_lastname">Nom *</label>
-                                    <input id="form_lastname" type="text" value="{{ Params.surname }}" name="surname" class="form-control" placeholder="Votre nom *" required="required" data-error="Nom est obligatoire.">
-                                    <div class="help-block with-errors"></div>
+                    <hr />
+                    <form id="login-form" method="post" role="form">
+                        <div class="controls">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_pseudo">Pseudo *</label>
+                                        <input id="form_pseudo" type="text" value="{{ Params.surname }}" name="pseudo" class="form-control" placeholder="Votre pseudo *" required="required" data-error="Vous devez renseigner votre pseudo.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_email">Email *</label>
-                                    <input id="form_email" type="email" value="{{ Params.email }}" name="email" class="form-control" placeholder="Votre email *" required="required" data-error="Un email valide est obligatoire.">
-                                    <div class="help-block with-errors"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_password">Mot de passe *</label>
+                                        <input id="form_password" type="password" value="{{ Params.email }}" name="password" class="form-control" placeholder="Votre mot de passe *" required="required" data-error="Vous devez renseigner votre mot de passe.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="hidden" name="action" value="sending" />
+                                    <input type="submit" class="btn btn-success btn-send" value="Se connecter" />
+                                    <input type="reset" class="btn btn-fail btn-reset" value="Reset"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-muted">
+                                        <strong>*</strong> Ces champs sont obligatoires.
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="form_email">Mot de passe *</label>
-                                    <input id="form_email" type="password" value="{{ Params.email }}" name="email" class="form-control" placeholder="Votre email *" required="required" data-error="Un email valide est obligatoire.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input type="hidden" name="action" value="sending" />
-                                <input type="submit" class="btn btn-success btn-send" value="Se connecter" />
-                                <input type="reset" class="btn btn-fail btn-reset" value="Reset"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="text-muted">
-                                    <strong>*</strong> Ces champs sont obligatoires.
-                                 </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
+                    </form>
                 </div>
                 <div class="col-lg-6 text-center">
                     <h3>S'enregistrer</h3>
                     <hr>
-                    <form id="contact-form" method="post" action="/" role="form">
-
-                    <div class="messages"></div>
-
-                    <div class="controls">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_name">Prénom *</label>
-                                    <input id="form_name" type="text" value="{{ Params.name }}" name="name" class="form-control" placeholder="Votre prénom *" required="required" data-error="Prénom est obligatoire.">
-                                    <div class="help-block with-errors"></div>
+                    <form id="register-form" method="post" action="/" role="form">
+                        <div class="controls">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="form_name">Prénom *</label>
+                                        <input id="form_name" type="text" value="{{ Params.name }}" name="name" class="form-control" placeholder="Votre prénom *" required="required" data-error="Prénom est obligatoire.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="form_lastname">Nom *</label>
+                                        <input id="form_lastname" type="text" value="{{ Params.surname }}" name="surname" class="form-control" placeholder="Votre nom *" required="required" data-error="Nom est obligatoire.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_lastname">Nom *</label>
-                                    <input id="form_lastname" type="text" value="{{ Params.surname }}" name="surname" class="form-control" placeholder="Votre nom *" required="required" data-error="Nom est obligatoire.">
-                                    <div class="help-block with-errors"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="form_email">Email *</label>
+                                        <input id="form_email" type="email" value="{{ Params.email }}" name="email" class="form-control" placeholder="Votre email *" required="required" data-error="Un email valide est obligatoire.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="form_need">Motif de votre message *</label>
+                                        <select id="form_need" name="need" value="{{ Params.need }}" class="form-control" required="required" data-error="Motif.">
+                                            <option value=""></option>
+                                            <option value="Request quotation">Motif 1</option>
+                                            <option value="Request order status">Motif 2</option>
+                                            <option value="Request copy of an invoice">Motif 3</option>
+                                            <option value="Other">Autre</option>
+                                        </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_message">Message *</label>
+                                        <textarea id="form_message" name="message" value="{{ Params.message }}" class="form-control" placeholder="Votre message *" rows="4" required="required" data-error="Un message ?"></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="hidden" name="action" value="sending" />
+                                    <input type="submit" class="btn btn-success btn-send" value="S'enregistrer" />
+                                    <input type="reset" class="btn btn-fail btn-reset" value="Reset"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-muted">
+                                        <strong>*</strong> Ces champs sont obligatoires.
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_email">Email *</label>
-                                    <input id="form_email" type="email" value="{{ Params.email }}" name="email" class="form-control" placeholder="Votre email *" required="required" data-error="Un email valide est obligatoire.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_need">Motif de votre message *</label>
-                                    <select id="form_need" name="need" value="{{ Params.need }}" class="form-control" required="required" data-error="Motif.">
-                                        <option value=""></option>
-                                        <option value="Request quotation">Motif 1</option>
-                                        <option value="Request order status">Motif 2</option>
-                                        <option value="Request copy of an invoice">Motif 3</option>
-                                        <option value="Other">Autre</option>
-                                    </select>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="form_message">Message *</label>
-                                    <textarea id="form_message" name="message" value="{{ Params.message }}" class="form-control" placeholder="Votre message *" rows="4" required="required" data-error="Un message ?"></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <input type="hidden" name="action" value="sending" />
-                                <input type="submit" class="btn btn-success btn-send" value="S'enregistrer" />
-                                <input type="reset" class="btn btn-fail btn-reset" value="Reset"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="text-muted">
-                                    <strong>*</strong> Ces champs sont obligatoires.
-                                 </p>
-                            </div>
-                        </div>
-                    </div>
 
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/register.js"></script>
 {% endblock %}

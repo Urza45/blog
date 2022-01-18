@@ -3,21 +3,15 @@ declare(strict_types=1);
 
 namespace Controller\Frontend;
 
+use \Lib\Controller;
 use \Lib\Managers;
 use \Lib\PDOFactory;
 use \Lib\Request;
 use \Lib\Utilities;
 use \Model\Post;
 
-class MainController 
-{
-    private $manager;
-
-    public function __construct()
-    {
-        $this->manager = new Managers(PDOFactory::getMysqlConnexion());
-    }
-    
+class MainController extends Controller
+{    
     /**
      * index
      *
@@ -29,21 +23,15 @@ class MainController
         $postManager = $this->manager->getManagerOf('Post');
         $userManager = $this->manager->getManagerOf('User');
 
-        $response = [];
-
         if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
         {
             $email = new \Lib\MyMail;
-            $response = $email->sendEmailToAdmin($request->getParams());
+            $this->response = $email->sendEmailToAdmin($request->getParams());
         }
 
         return ['frontend/index.html.twig', [
                 'LastPostList' => $postManager->getListPost(5),
-                'ListUser' => $userManager->getListUser(),
-                'salt' => Utilities::Salt(),
-                'token' => Utilities::RandomToken(),
-                'Params' => $request->getParams(),
-                'Response' => $response,
+                'Response' => $this->response,
                 'Page' => $request->getUrl()
             ]
         ];
@@ -53,36 +41,31 @@ class MainController
 
         $postManager = $this->manager->getManagerOf('Post');
 
-        $response = [];
-
         return ['frontend/list.html.twig', [
                 'LastPostList' => $postManager->getListPost(),
-                'Response' => $response,
+                'Response' => $this->response,
                 'Page' => $request->getUrl()
             ]
         ];
-
-        return ['frontend/list.html.twig', ['name' => 'Serge']];
     }
 
     public function post(Request $request, $vars) {
 
-        $response = [];
+        $postManager = $this->manager->getManagerOf('Post');
 
         return ['frontend/post.html.twig', [
-            'name' => 'Serge',
+            'post' => $postManager->getUniquePost((int) $vars['id_post']),
             'vars' => $vars,
-            'Response' => $response,
+            'Response' => $this->response,
             'Page' => $request->getUrl()
-        ]];
+            ]
+        ];
     }
 
     public function register(Request $request) {
 
-        $response = [];
-
         return ['frontend/register.html.twig', [
-            'Response' => $response,
+            'Response' => $this->response,
             'Page' => $request->getUrl()
             ]
         ];
@@ -90,17 +73,15 @@ class MainController
 
     public function contact(Request $request) {
 
-        $response = [];
-
         if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
         {
             $email = new \Lib\MyMail;
-            $response = $email->sendEmailToAdmin($request->getParams());
+            $this->response = $email->sendEmailToAdmin($request->getParams());
         }
 
         return ['frontend/index.html.twig', [
             'Params' => $request->getParams(),
-            'Response' => $response
+            'Response' => $this->response
             ]
         ];
     }
