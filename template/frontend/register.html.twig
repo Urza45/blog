@@ -54,15 +54,15 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="form_name">Prénom *</label>
-                                        <input id="form_name" type="text" value="{{ Params.name }}" name="name" class="form-control" placeholder="Votre prénom *" required="required" data-error="Prénom est obligatoire.">
+                                        <label for="form_first_name">Prénom *</label>
+                                        <input id="form_first_name" type="text" value="{{ Params.firstName }}" name="firstname" class="form-control" placeholder="Votre prénom *" required="required" data-error="Prénom est obligatoire.">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="form_lastname">Nom *</label>
-                                        <input id="form_lastname" type="text" value="{{ Params.surname }}" name="surname" class="form-control" placeholder="Votre nom *" required="required" data-error="Nom est obligatoire.">
+                                        <input id="form_lastname" type="text" value="{{ Params.lastname }}" name="lastname" class="form-control" placeholder="Votre nom *" required="required" data-error="Nom est obligatoire.">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -77,14 +77,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="form_need">Motif de votre message *</label>
-                                        <select id="form_need" name="need" value="{{ Params.need }}" class="form-control" required="required" data-error="Motif.">
-                                            <option value=""></option>
-                                            <option value="Request quotation">Motif 1</option>
-                                            <option value="Request order status">Motif 2</option>
-                                            <option value="Request copy of an invoice">Motif 3</option>
-                                            <option value="Other">Autre</option>
-                                        </select>
+                                        <label for="form_pseudo">Pseudo *</label>
+                                        <input id="form_pseudo" type="text" value="{{ Params.pseudo }}" name="pseudo" class="form-control" placeholder="Votre pseudo *" required="required" data-error="Vous devez choisir un pseudo.">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -92,15 +86,26 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="form_message">Message *</label>
-                                        <textarea id="form_message" name="message" value="{{ Params.message }}" class="form-control" placeholder="Votre message *" rows="4" required="required" data-error="Un message ?"></textarea>
+                                        <label for="form_password">Mot de passe *</label>
+                                        <input id="form_password" type="password" value="{{ Params.password }}" name="password" class="form-control" placeholder="Votre mot de passe *" required="required" data-error="Vous devez renseigner votre mot de passe.">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_confirm_password">Confirmer votre mot de passe *</label>
+                                        <input id="form_confirm_password" type="password" value="{{ Params.confirmedPassword }}" name="confirmedPassword" class="form-control" placeholder="Votre mot de passe *" required="required" data-error="Vous devez renseigner votre mot de passe.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-12">
                                     <input type="hidden" name="action" value="sending" />
                                     <input type="submit" class="btn btn-success btn-send" value="S'enregistrer" />
-                                    <input type="reset" class="btn btn-fail btn-reset" value="Reset"/>
+                                    <input type="reset" class="btn btn-fail btn-reset" value="Reset" onclick="" />
                                 </div>
                             </div>
                             <div class="row">

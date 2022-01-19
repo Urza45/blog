@@ -29,7 +29,6 @@
     <header>
         {% block header %}
             {{ include('header.html.twig') }}
-            {{ Session.name }}
         {% endblock %}
     </header>
     <h1>Monsieur Serge PILLAY</h1>
@@ -63,8 +62,9 @@
     <script src="/js/freelancer.min.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <!--
+    
     <script src="/js/jqBootstrapValidation.js"></script>
+    <!--
     <script src="/js/contact.js"></script>
     -->
     {% block javascripts %}

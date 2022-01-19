@@ -64,6 +64,7 @@ class ConnexionController extends Controller
 
         return ['frontend/register.html.twig', [
             'Response' => $this->response,
+            'Page' => '/signin'
             ]
         ];
     }
