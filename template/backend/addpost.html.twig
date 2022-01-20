@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<section class="admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Ajout d'un post</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <form id="contact-form" method="post" action="/backend/addpost" role="form">
+                    <div class="controls">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_title">Titre *</label>
+                                    <input id="form_title" type="text" value="{{ Params.title }}" name="title" class="form-control" placeholder="Le titre *" required="required" data-error="Titre est obligatoire.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_chapo">Chapo *</label>
+                                    <textarea id="form_chapo" name="chapo" value="{{ Params.chapo }}" class="form-control" placeholder="Inscriver votre chapo *" rows="4" required="required" data-error="Un chapo ?"></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_content">Texte *</label>
+                                    <textarea id="form_content" name="content" value="{{ Params.content }}" class="form-control" placeholder="Le contenu *" rows="8" required="required" data-error="Un contenu ?"></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="hidden" name="action" value="sending" />
+                                <input type="submit" class="btn btn-success btn-send" value="Envoyer" />
+                                <input type="reset" class="btn btn-fail btn-reset" value="Reset"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="text-muted">
+                                    <strong>*</strong> Ces champs sont obligatoires.
+                                 </p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -95,8 +95,13 @@ section {
 section.page404 {
   background: #fff;
 }
+
 section.comments {
   background: #b4406a;
+}
+
+section.admin {
+  background: #d2a058;
 }
 
 nav {
