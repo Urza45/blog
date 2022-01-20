@@ -2,25 +2,27 @@
 
 {% block title %}Liste des posts{% endblock %}
 
-{% block header %}
-<nav class="nav">
-  <div class="header__logo">
-    <img src="http://p5blog/image/SP-LOGO-small.png" alt="Logo de la société"/>
-  </div>
-  <label for="toggle">☰</label>
-  <input type="checkbox" id="toggle">
-  <div class="main_pages">
-    <a href="/">Accueil</a>
-    <a href="/postlist" class="active">Liste des posts</a>
-    <a href="/#contact">Nous contacter</a>
-    <a href="/signin">Se connecter</a>
-  </div>
-</nav>
-{% endblock %}
-
 {% block body %}
-    <section>
-    <h2>Liste des posts</h2>
-    <p>Bonjour {{ name }}</p>
-    </section>
+<section>
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h3><B>Liste des posts</B></h3>
+        </div>
+        <div class="col-lg-12">
+            {% if LastPostList %}
+                {% for post in LastPostList %}
+                    <hr/>
+                    <h3>{{ post.title|convert_encoding('UTF-8', 'ISO-8859-1') }} - {{ post.dateCreate|date("m/d/Y") }}</h3>
+                    <p><b>{{ post.chapo|convert_encoding('UTF-8', 'ISO-8859-1') }}</b></p>
+                    <p><a href="/post-{{ post.id }}">Voir plus ...</a></p>
+                {% endfor %}
+            {% else %}
+                <hr/>
+                <p>A venir bientôt ...</p>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+</section>
 {% endblock %}

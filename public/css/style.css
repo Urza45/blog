@@ -2,7 +2,9 @@
 /* @import "./utils/functions"; */
 /* @import "./utils/mixins"; */
 /* @import "./utils/extensions"; */
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
@@ -36,7 +38,7 @@ h1 {
 h2 {
   font-family: "Share Tech Mono", "Helvetica Neue", sans-serif;
   font-weight: 900;
-  font-size: 5rem;
+  font-size: 2rem;
   font-style: italic;
 }
 
@@ -83,7 +85,6 @@ button {
   }
 }
 
-
 section {
   box-sizing: border-box;
   width: 100%;
@@ -92,9 +93,11 @@ section {
   padding: 5px;
   background: #60a5bc;
 }
-
 section.page404 {
   background: #fff;
+}
+section.comments {
+  background: #b4406a;
 }
 
 .nav {

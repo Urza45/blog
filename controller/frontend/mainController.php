@@ -7,7 +7,6 @@ use \Lib\Managers;
 use \Lib\PDOFactory;
 use \Lib\Request;
 use \Lib\Utilities;
-use \Model\Post;
 
 class MainController 
 {
@@ -42,18 +41,26 @@ class MainController
         $postManager = $this->manager->getManagerOf('Post');
 
         return ['frontend/list.html.twig', [
-                'LastPostList' => $postManager->getListPost()
+                'LastPostList' => $postManager->getListPost(),
+                'Response' => $this->response,
+                'Page' => $request->getUrl()
             ]
         ];
-
-        return ['frontend/list.html.twig', ['name' => 'Serge']];
     }
 
     public function post(Request $request, $vars) {
+        $postManager = $this->manager->getManagerOf('Post');
+        $commentsManager = $this->manager->getManagerOf('Comments');
+        $response = [];
+        
         return ['frontend/post.html.twig', [
-            'name' => 'Serge',
-            'vars' => $vars
-        ]];
+            'post' => $postManager->getUniquePost((int) $vars['id_post']),
+            'comments' => $commentsManager->getListFromPost((int) $vars['id_post']),
+            'vars' => $vars,
+            'Response' => $response,
+            'Page' => $request->getUrl()
+            ]
+        ];
     }
 
     public function register(Request $request) {
