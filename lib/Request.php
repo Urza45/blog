@@ -2,13 +2,13 @@
 
 namespace Lib;
 
+use \Lib\FormValidator;
+
 class Request
 {
     private $url;
     private $method;
     private $query;
-
-    
 
     public function __construct()
     {
@@ -28,8 +28,21 @@ class Request
     }
 
     public function getParams() {
-        if ($this->isPost()) return $_POST;
-        if ($this->isGet()) return $_GET;
+        
+        if ($this->isPost()) {
+            $params = [];
+            foreach ($_POST as $key => $value) {
+                $params[$key] = FormValidator::purify($value);
+            }
+            return $params;
+        }
+        if ($this->isGet()) {
+            $params = [];
+            foreach ($_GET as $key => $value) {
+                $params[$key] = FormValidator::purify($value);
+            }
+            return $params;
+        }
         return array();
     }
 

@@ -30,7 +30,11 @@ class Router {
     
     public function run(Request $request) {
 
-        $url = '/' . trim($request->getUrl(), '/');
+        if (preg_match("/\?/", $request->getUrl())) {
+            $url = '/' . trim($request->getParams()['url'], '/');
+         } else {
+            $url = '/' . trim($request->getUrl(), '/');
+        }
 
         // On parcourt les routes du fichier XML.
         foreach ($this->routes as $route)

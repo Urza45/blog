@@ -1,17 +1,4 @@
 
-
-{% block title %}Nous contacter{% endblock %}
-
-{% block flash %}
-    {% if Response %}
-    <div class="row">
-        <div class="col-lg-12 text-center alert alert-{{ Response.type }} ">
-            {{ Response.message }}
-        </div>
-    </div>
-    {% endif %}
-{% endblock %}
-
 {% block body %}
     <section id="contact">
         <div class="container">
@@ -25,10 +12,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-
-                    <form id="contact-form" method="post" action="/contact" role="form">
+                    <form id="contact-form" action="/" method="post" role="form">
 
                     <div class="messages"></div>
 
@@ -37,14 +21,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="form_name">Firstname *</label>
+                                    <label for="form_name">Prénom *</label>
                                     <input id="form_name" type="text" value="{{ Params.name }}" name="name" class="form-control" placeholder="Votre prénom *" required="required" data-error="Prénom est obligatoire.">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="form_lastname">Lastname *</label>
+                                    <label for="form_lastname">Nom *</label>
                                     <input id="form_lastname" type="text" value="{{ Params.surname }}" name="surname" class="form-control" placeholder="Votre nom *" required="required" data-error="Nom est obligatoire.">
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -60,13 +44,13 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="form_need">Please specify your need *</label>
+                                    <label for="form_need">Motif de votre message *</label>
                                     <select id="form_need" name="need" value="{{ Params.need }}" class="form-control" required="required" data-error="Motif.">
                                         <option value=""></option>
-                                        <option value="Request quotation">Motif 1</option>
-                                        <option value="Request order status">Motif 2</option>
-                                        <option value="Request copy of an invoice">Motif 3</option>
-                                        <option value="Other">Autre</option>
+                                        <option value="Demande d'information">Demande d'information</option>
+                                        <option value="Demande de devis">Demande de devis</option>
+                                        <option value="Demande de rendez-vous">Demande de rendez-vous</option>
+                                        <option value="Autre">Autre</option>
                                     </select>
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -100,3 +84,10 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Contact Form JavaScript 
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact.js"></script>-->
+{% endblock %}

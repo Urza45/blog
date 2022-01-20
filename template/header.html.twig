@@ -1,15 +1,31 @@
-<nav class="nav">
-  <div class="header__logo">
-    <img src="http://p5blog/image/SP-LOGO.png" alt="Logo de la société"/>
-  </div>
-  <label for="toggle">☰</label>
-  <input type="checkbox" id="toggle">
-  <div class="main_pages">
-    <a href="/" class="active">Accueil</a>
-    <a href="/postlist">Liste des posts</a>
-    <a href="#contact">Nous contacter</a>
-    <a href="/signin">Se connecter</a>
-  </div>
+<div>
+<nav class="nav">  
+    <div class="header__logo">
+        <img src="/image/SP-LOGO-small.png" alt="Logo de la société"/>
+    </div>
+    <label for="toggle">☰</label>
+    <input type="checkbox" id="toggle">
+    <div class="main_pages">
+        <a href="/" {% if Page == '/' %}class="active"{% endif %}>Accueil</a>
+        <a href="/postlist" {% if Page == '/postlist' %}class="active"{% endif %}>Liste des posts</a>
+        <a href="/#contact">Nous contacter</a>
+        {% if session.connected == '1' %}
+            <a href="/signout">Se déconnecter</a>
+        {% else %}
+            <a href="/signin" {% if Page == '/signin' %}class="active"{% endif %}>Se connecter</a>
+        {% endif %}
+    </div>
 </nav>
+</div>
+{% if session.connected == '1' %}
+            <p>
+                Vous êtes connecté en tant que : <i class="fa fa-user"></i> {{ session.name }}
+                {% if session.admin > 1 %}
+                     - <a href="/admin">Administration</a>
+                {% endif %}
+            </p>
+{% endif %}
+
+
 
 
