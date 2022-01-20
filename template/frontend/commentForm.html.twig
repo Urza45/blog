@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <p>
+        <form id="comment-form" method="post" action="/addcomment" role="form">
+        <div class="controls">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="form_comment">Votre commentaire *</label>
+                        <textarea id="form_comment" name="comment" value="{{ Params.message }}" class="form-control" placeholder="Votre message *" rows="4" required="required" data-error="Un message ?"></textarea>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-md-12  text-center">
+                    <input type="hidden" name="id_post" value="sending" />
+                    <input type="hidden" name="id_post" value="sending" />
+                    <input type="hidden" name="action" value="sending" />
+                    <input type="submit" class="btn btn-success btn-send" value="Soumettre" />
+                    <input type="reset" class="btn btn-fail btn-reset" value="Reset"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="text-muted">
+                        <strong>*</strong> Ces champs sont obligatoires.
+                     </p>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>

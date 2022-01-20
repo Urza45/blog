@@ -16,8 +16,13 @@ class Autoloader {
 
     static function autoload($class_name) : void
     {
-        $class = strtolower(dirname(__DIR__) . '/' . $class_name . '.php');
-        require_once $class;
+        $class = dirname(__DIR__) . '/' . lcfirst(str_replace('\\', DIRECTORY_SEPARATOR, $class_name)) . '.php';
+        if(file_exists($class))
+        {
+            require_once($class);
+        } else {
+            echo 'ERROR: '. $class . '<br/>';
+        }
     }
 
 }

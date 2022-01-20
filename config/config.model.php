@@ -7,5 +7,8 @@ return [
     "db_pass" => "",
     "db_host" => "",
     "db_name" => "",
-    "sendTo" => "xx@xxxxx.fr"
+    "sendTo" => "xx@xxxxx.fr",
+    "from" => "xx@xxxxx.fr",
+    "subject" => "Nouveau message depuis le formulaire de contact",
+    "webUrl" => "https://..."
 ];

@@ -2,24 +2,56 @@
 
 {% block title %}Liste des posts{% endblock %}
 
-{% block header %}
-<nav class="nav">
-  <div class="header__logo">
-    <img src="http://p5blog/image/SP-LOGO-small.png" alt="Logo de la société"/>
-  </div>
-  <label for="toggle">☰</label>
-  <input type="checkbox" id="toggle">
-  <div class="main_pages">
-    <a href="/">Accueil</a>
-    <a href="/postlist" class="active">Liste des posts</a>
-    <a href="/contact">Nous contacter</a>
-    <a href="/signin">Se connecter</a>
-  </div>
-</nav>
-{% endblock %}
-
 {% block body %}
-    <h2>Détails d'un post</h2>
-    <p>Bonjour {{ name }}</p>
-    <p>Blog n° {{ vars.id_post }}</p>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>{{ post.title|convert_encoding('UTF-8', 'ISO-8859-1') }} <br/> {{ post.dateCreate|date("m - d - Y") }}</h2>
+                <hr/>
+            </div>
+            <div class="col-lg-12">
+                <p><b>{{ post.chapo|convert_encoding('UTF-8', 'ISO-8859-1')|nl2br }}</b></p>
+                <p>{{ post.content|convert_encoding('UTF-8', 'ISO-8859-1')|nl2br }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="comments">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Liste des commentaires
+            </div>
+            <div class="col-lg-12">
+            {% if comments %}
+                {% for comment in comments %}
+                    <hr/>
+                    <h4>By {{ comment.pseudo|convert_encoding('UTF-8', 'ISO-8859-1') }} - {{ comment.dateCreate|date("m/d/Y") }}</h4>
+                    <p>{{ comment.content|convert_encoding('UTF-8', 'ISO-8859-1') }}</p>
+                    {% if comment.user_idUser == session.id %}                    
+                        <p><a href="/modifycomment-{{ comment.id }}">Modifier</a> - 
+                        <a href="/deletecomment-{{ comment.id }}" onclick="return confirm('Etes-vous sûr ?')">Supprimer</a></p>
+                    {% endif %}
+                    <p><a href="/modifycomment-{{ comment.id }}">Modifier</a> - 
+                        <a href="/deletecomment-{{ comment.id }}" onclick="return confirm('Etes-vous sûr ?')">Supprimer</a></p>
+                {% endfor %}
+            {% else %}
+                <hr/>
+                <p>A venir bientôt ...</p>comments.id, content, user_idUser, post_idPost, user.pseudo date, disabled
+            {% endif %}
+            </div>
+            <div class="col-lg-12">
+                <hr/>
+                <h2>Ajouter un commentaire</h2>
+                {% if session.connected %}
+                    {% include('frontend/commentForm.html.twig') %}
+                {% else %}
+                    <p>Vous devez être connecté pour poster un commentaire.</p>
+                    {% include('frontend/commentForm.html.twig') %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

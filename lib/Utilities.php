@@ -14,7 +14,7 @@ class Utilities
 
     public static function RandomToken($length = null){
         if(!isset($length) || intval($length) <= 8 ){
-          $length = 64;
+          $length = 32;
         }
         if (function_exists('random_bytes')) {
             return bin2hex(random_bytes($length));
