@@ -24,6 +24,7 @@
     <!-- Administrator -->
     <route url="/admin/listregistration" app="Backend" module="Registration" action="listUserToRegister" ></route> 
     <route url="/admin/validregistration-([0-9]+)" app="Backend" module="Registration" action="validUser" vars="id_user"></route>
+    <route url="/admin/listpost" app="Backend" module="Post" action="index" ></route>
     <route url="/admin/addpost" app="Backend" module="Post" action="add" ></route>
     <route url="/admin/modifypost-([0-9]+)" app="Backend" module="Post" action="modify" vars="id_post"></route>
     <route url="/admin/deletepost-([0-9]+)" app="Backend" module="Post" action="delete" vars="id_post"></route>

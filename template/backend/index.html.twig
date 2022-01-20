@@ -1,6 +1,21 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h2>Backend</h2>
-    <p>Bonjour {{ name }}</p>
+<section class="admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Administration</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="btn-group-vertical col-lg-12 text-center">
+                <a href="/admin/listpost" class="btn btn-primary"><h2>Gestion des Posts</h2></a><br/>
+                <a href="/admin/" class="btn btn-primary"><h2>Gestion des commentaires</h2></a><br/>
+                <a href="/admin/" class="btn btn-primary"><h2>Gestion des utilisateurs</h2></a>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

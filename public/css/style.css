@@ -2,7 +2,9 @@
 /* @import "./utils/functions"; */
 /* @import "./utils/mixins"; */
 /* @import "./utils/extensions"; */
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
@@ -83,7 +85,6 @@ button {
   }
 }
 
-
 section {
   box-sizing: border-box;
   width: 100%;
@@ -92,9 +93,11 @@ section {
   padding: 5px;
   background: #60a5bc;
 }
-
 section.page404 {
   background: #fff;
+}
+section.admin {
+  background: #d2a058;
 }
 
 .nav {
