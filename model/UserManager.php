@@ -15,7 +15,7 @@ class UserManager extends Manager
      */
     public function getListUser(int $number = null)
     {
-        $sql = 'SELECT id, name, firstName, email, phone, portable,'
+        $sql = 'SELECT id, name, firstName, pseudo, email, phone, portable,'
         .' password, salt, statusConnected, activeUser, validationKey'
         .' validationKey, activatedUser, dateCreate, typeUser_idTypeUSer'
         .' FROM user ORDER BY name, firstName DESC';
@@ -40,7 +40,7 @@ class UserManager extends Manager
      */
     public function getUnique(int $id)
     {
-        $sql = 'SELECT id, name, firstName, email, phone, portable,'
+        $sql = 'SELECT id, name, firstName, pseudo, email, phone, portable,'
         .' password, salt, statusConnected, activeUser, validationKey'
         .' validationKey, activatedUser, dateCreate, typeUser_idTypeUSer'
         .' FROM user WHERE id = :id';
@@ -49,7 +49,28 @@ class UserManager extends Manager
         $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
         $requete->execute();
     
-        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\User');
+    
+        if ($user = $requete->fetch())
+        {
+            return $user;
+        }
+    
+        return null;
+    }
+
+    public function getUniqueByPseudo(string $pseudo)
+    {
+        $sql = 'SELECT id, name, firstName, pseudo, email, phone, portable,'
+        .' password, salt, statusConnected, activeUser, validationKey'
+        .' validationKey, activatedUser, dateCreate, typeUser_idTypeUSer'
+        .' FROM user WHERE pseudo = :pseudo';
+        
+        $requete = $this->dao->prepare($sql);
+        $requete->bindValue(':pseudo', $pseudo);
+        $requete->execute();
+    
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\User');
     
         if ($user = $requete->fetch())
         {
@@ -98,21 +119,23 @@ class UserManager extends Manager
         $sql = 'INSERT INTO user SET '
         . 'name = :name,'
         . 'firstName = :firstName, '
+        . 'pseudo = :pseudo, '
         . 'email = :email, '
-        . 'phone = phone, '
-        . 'portable = :portable'
-        . 'password = :password'
-        . 'salt = :salt'
-        . 'statusConnected = :statusConnected'
-        . 'activeUser = :activeUser'
-        . 'validationKey = :validationKey'
-        . 'activatedUser = :activatedUser'
-        . 'dateCreate = :dateCreate'
+        . 'phone = :phone, '
+        . 'portable = :portable, '
+        . 'password = :password, '
+        . 'salt = :salt, '
+        . 'statusConnected = :statusConnected, '
+        . 'activeUser = :activeUser, '
+        . 'validationKey = :validationKey, '
+        . 'activatedUser = :activatedUser, '
+        . 'dateCreate = :dateCreate, '
         . 'TypeUser_idTypeUser = :TypeUser_idTypeUser';
         $requete = $this->dao->prepare($sql);
 
         $requete->bindValue(':name', $user->getName());
         $requete->bindValue(':firstName', $user->getFirstName());
+        $requete->bindValue(':pseudo', $user->getPseudo());
         $requete->bindValue(':email', $user->getEmail());
         $requete->bindValue(':phone', $user->getPhone());
         $requete->bindValue(':portable', $user->getPortable());
@@ -124,7 +147,7 @@ class UserManager extends Manager
         $requete->bindValue(':activatedUser', $user->getActivatedUser());
         $requete->bindValue(':dateCreate', $user->getDateCreate());
         $requete->bindValue(':TypeUser_idTypeUser', $user->getTypeUser_idTypeUser());
-    
+        
         $requete->execute();
     }
     
@@ -136,37 +159,43 @@ class UserManager extends Manager
      */
     private function modify(User $user)
     {
+        
         $sql = 'UPDATE user SET '
-        . 'name = :name,'
+        . 'name = :name, '
         . 'firstName = :firstName, '
+        . 'pseudo = :pseudo, '
         . 'email = :email, '
-        . 'phone = phone, '
-        . 'portable = :portable'
-        . 'password = :password'
-        . 'salt = :salt'
-        . 'statusConnected = :statusConnected'
-        . 'activeUser = :activeUser'
-        . 'validationKey = :validationKey'
-        . 'activatedUser = :activatedUser'
-        . 'dateCreate = :dateCreate'
-        . 'TypeUser_idTypeUser = :TypeUser_idTypeUser'
+        . 'phone = :phone, '
+        . 'portable = :portable, '
+        . 'password = :password, '
+        . 'salt = :salt, '
+        . 'statusConnected = :statusConnected, '
+        . 'activeUser = :activeUser, '
+        . 'validationKey = :validationKey, '
+        . 'activatedUser = :activatedUser, '
+        . 'dateCreate = :dateCreate, '
+        . 'TypeUser_idTypeUser = :TypeUser_idTypeUser '
         . 'WHERE id = :id';
+        var_dump($sql);
         $requete = $this->dao->prepare($sql);
 
         $requete->bindValue(':name', $user->getName());
         $requete->bindValue(':firstName', $user->getFirstName());
+        $requete->bindValue(':pseudo', $user->getPseudo());
         $requete->bindValue(':email', $user->getEmail());
         $requete->bindValue(':phone', $user->getPhone());
         $requete->bindValue(':portable', $user->getPortable());
         $requete->bindValue(':password', $user->getPassword());
         $requete->bindValue(':salt', $user->getSalt());
-        $requete->bindValue(':statusConnected', $user->getStatusConnected());
-        $requete->bindValue(':activeUser', $user->getActiveUser());
+        $requete->bindValue(':statusConnected', $user->getStatusConnected(), \PDO::PARAM_INT);
+        $requete->bindValue(':activeUser', $user->getActiveUser(), \PDO::PARAM_INT);
         $requete->bindValue(':validationKey', $user->getValidationKey());
         $requete->bindValue(':activatedUser', $user->getActivatedUser());
         $requete->bindValue(':dateCreate', $user->getDateCreate());
-        $requete->bindValue(':TypeUser_idTypeUser', $user->getTypeUser_idTypeUser());
+        $requete->bindValue(':TypeUser_idTypeUser', $user->getTypeUser_idTypeUser(), \PDO::PARAM_INT);
         $requete->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
+        
+        $requete->execute();
     }
     
     /**
@@ -179,6 +208,22 @@ class UserManager extends Manager
     {
         $this->dao->exec('DELETE FROM user WHERE id = '.(int) $id);
         $this->dao->exec('DELETE FROM comments WHERE User_idUser = '.(int) $id);
+    }
+    
+    /**
+     * ifExistPseudo
+     *
+     * @param  mixed $pseudo
+     * @return bool
+     */
+    public function ifExistPseudo(string $pseudo ) : bool
+    {
+        $ifExistPseudo = false;
+        $requete = $this->dao->query('SELECT COUNT(*) FROM User')->fetchColumn();
+        if ($requete > 0) {
+            $ifExistPseudo = true;
+        }
+        return $ifExistPseudo;
     }
 
 }

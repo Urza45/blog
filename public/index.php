@@ -13,6 +13,8 @@
  * @link     https://www.urza-web.fr
  */
 
+session_start();
+
 use \Lib\Autoloader;
 use \Lib\Router;
 use \Lib\Request;
@@ -50,6 +52,13 @@ $twig = new \Twig\Environment(
  * Add Twig extension for format date functions
  */
 $twig->addExtension(new IntlExtension());
+/**
+ * Allow twig to access the session 
+ */
+if (isset($_SESSION)) {
+    $twig->addGlobal('session', $_SESSION);
+}
+ 
 
 /**
  * Call action
