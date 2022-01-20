@@ -4,11 +4,10 @@ declare(strict_types=1);
 namespace Controller\Frontend;
 
 use \Lib\Controller;
-use \Lib\Managers;
-use \Lib\PDOFactory;
 use \Lib\Request;
 use \Lib\Utilities;
-use \Model\Post;
+use \Lib\MyMail;
+use \Model\User;
 
 class MainController extends Controller
 {    
@@ -25,7 +24,7 @@ class MainController extends Controller
 
         if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
         {
-            $email = new \Lib\MyMail;
+            $email = new MyMail;
             $this->response = $email->sendEmailToAdmin($request->getParams());
         }
 
@@ -64,9 +63,50 @@ class MainController extends Controller
 
     public function register(Request $request) {
 
+        $userManager = $this->manager->getManagerOf('User');
+
+        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'registration'))
+        {
+            // Check password matching
+            if ($request->getParams()['passwordFirst'] === $request->getParams()['confirmedPassword'] ) {
+                // Verification of the existence of nickname 
+                $user = $userManager->getUniqueByPseudo($request->getParams()['pseudo']);
+
+                if ($user) {
+                    $this->response = ['type' => 'danger' , 'message' => 'Le pseudo est déjà pris'];
+                } else {
+                    $user = new User();
+                    $user->setName($request->getParams()['lastname']);
+                    $user->setFirstName($request->getParams()['firstname']);
+                    $user->setEmail($request->getParams()['email']);
+                    $user->setPseudo($request->getParams()['pseudo']);
+                    $user->setSalt(Utilities::Salt());
+                    $user->setPassword(Utilities::password_encode($request->getParams()['passwordFirst'],$user->getSalt()));
+                    $user->setValidationKey(Utilities::RandomToken());
+                    $user->setDateCreate(date('Y/m/d'));
+                    $tab = [
+                        'phone' => '',
+                        'portable' => '',
+                        'statusConnected' => 0,
+                        'activeUser' => 1,
+                        'activatedUser' => 0,
+                        'TypeUser_idTypeUSer' => 1,
+                    ];
+                    $user->hydrate($tab);
+                    $userManager->save($user);
+                    $email = new MyMail;
+                    $this->response = $email->sendActivationEmail($user);
+                }
+            } else {
+                $this->response = ['type' => 'danger' , 'message' => 'Les mots de passe ne correspondent pas'];
+            }
+            
+        }
+        
         return ['frontend/register.html.twig', [
+            'Params' => $request->getParams(),
             'Response' => $this->response,
-            'Page' => $request->getUrl()
+            'Page' => '/signin'
             ]
         ];
     }

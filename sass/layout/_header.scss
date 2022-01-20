@@ -32,7 +32,7 @@ section {
     padding: 5px;
     background: $colour-section;
 
-    .page404 {
+    &.page404 {
         background: $colour-white;
     }
 }

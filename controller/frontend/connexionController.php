@@ -92,4 +92,32 @@ class ConnexionController extends Controller
         header('Location: /');
 
     }
+
+    public function activation(Request $request)
+    {
+        $userManager = $this->manager->getManagerOf('User');
+        
+        // Verification of the existence of nickname in database and retrieval of corresponding user information.
+        $user = $userManager->getUniqueByPseudo($request->getParams()['p']);
+
+        if ($user) {
+            if ($user->getActivated() == 1) {
+                $this->response = [ 'type' => 'success', 'message' => 'Votre activation a déjà été effectuée.'];
+            } else {
+                if ($request->getParams()['v'] === $user->getValidationKey()) {
+                    $user->setActivatedUser(1);
+                    $userManager->save($user);
+                    $this->response = [ 'type' => 'success', 'message' => 'Votre activation a bien été effectuée. Vous pouvez vous connecter.'];
+                }
+            }
+        } else {
+            $this->response = [ 'type' => 'danger', 'message' => 'Le pseudo recherché n\'est pas enregistré en base de données.'];
+        }
+
+        return ['frontend/index.html.twig', [
+            'Response' => $this->response,
+            'Page' => '/'
+            ]
+        ];
+    }
 }

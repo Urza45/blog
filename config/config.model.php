@@ -9,5 +9,6 @@ return [
     "db_name" => "",
     "sendTo" => "xx@xxxxx.fr",
     "from" => "xx@xxxxx.fr",
-    "subject" => "Nouveau message depuis le formulaire de contact"
+    "subject" => "Nouveau message depuis le formulaire de contact",
+    "webUrl" => "https://..."
 ];

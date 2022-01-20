@@ -2,6 +2,8 @@
 
 namespace Lib;
 
+use \Lib\FormValidator;
+
 class Request
 {
     private $url;
@@ -30,11 +32,17 @@ class Request
         if ($this->isPost()) {
             $params = [];
             foreach ($_POST as $key => $value) {
-                $params[$key] = htmlentities($value);
+                $params[$key] = FormValidator::purify($value);
             }
             return $params;
         }
-        if ($this->isGet()) return $_GET;
+        if ($this->isGet()) {
+            $params = [];
+            foreach ($_GET as $key => $value) {
+                $params[$key] = FormValidator::purify($value);
+            }
+            return $params;
+        }
         return array();
     }
 

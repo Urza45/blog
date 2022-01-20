@@ -92,7 +92,7 @@ section {
   padding: 5px;
   background: #60a5bc;
 }
-section .page404 {
+section.page404 {
   background: #fff;
 }
 
