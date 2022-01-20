@@ -101,7 +101,7 @@ class ConnexionController extends Controller
         $user = $userManager->getUniqueByPseudo($request->getParams()['p']);
 
         if ($user) {
-            if ($user->getActivated() == 1) {
+            if ($user->getActivatedUser() == 1) {
                 $this->response = [ 'type' => 'success', 'message' => 'Votre activation a déjà été effectuée.'];
             } else {
                 if ($request->getParams()['v'] === $user->getValidationKey()) {
