@@ -20,7 +20,7 @@ class PostManager extends Manager
         if (isset($number)) {
             $sql .= ' limit ' . $number;
         }
-
+        
         $requete = $this->dao->query($sql);
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\Post');
 

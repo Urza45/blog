@@ -51,10 +51,12 @@ class MainController extends Controller
     public function post(Request $request, $vars) {
 
         $postManager = $this->manager->getManagerOf('Post');
-
+        $commentsManager = $this->manager->getManagerOf('Comments');
+        
         return ['frontend/post.html.twig', [
             'post' => $postManager->getUniquePost((int) $vars['id_post']),
-            'vars' => $vars,
+            'comments' => $commentsManager->getListFromPost((int) $vars['id_post']),
+            'vars' => $vars,  
             'Response' => $this->response,
             'Page' => $request->getUrl()
             ]

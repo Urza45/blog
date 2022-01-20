@@ -28,6 +28,19 @@ class CommentsManager extends Manager
         
         return $listComments;
     }
+
+    public function getListFromPost(int $number)
+    {
+        $sql = 'SELECT comments.id, content, user_idUser, post_idPost, user.pseudo, date, disabled FROM comments, user '
+            . 'WHERE post_idPost=' . $number. ' AND user.id=user_idUser '
+            . 'ORDER BY comments.id DESC';
+        
+        $requete = $this->dao->query($sql);
+    
+        $listComments = $requete->fetchAll();
+            
+        return $listComments;
+    }
     
     /**
      * getUnique
@@ -41,7 +54,7 @@ class CommentsManager extends Manager
         $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
         $requete->execute();
     
-        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comments');
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\Comments');
     
         if ($comments = $requete->fetch())
         {

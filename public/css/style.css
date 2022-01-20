@@ -37,7 +37,7 @@ h1 {
 h2 {
   font-family: "Share Tech Mono", "Helvetica Neue", sans-serif;
   font-weight: 900;
-  font-size: 5rem;
+  font-size: 2rem;
   font-style: italic;
 }
 
@@ -94,6 +94,9 @@ section {
 }
 section.page404 {
   background: #fff;
+}
+section.comments {
+  background: #b4406a;
 }
 
 nav {
