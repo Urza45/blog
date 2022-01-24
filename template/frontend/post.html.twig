@@ -4,6 +4,27 @@
 
 {% block body %}
 <section>
+    <div class="container" >
+        <!-- Modal -->
+        <div class="modal fade" id="empModal" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">User Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" method="POST" class="needs-validation" novalidate>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -29,12 +50,10 @@
                     <hr/>
                     <h4>By {{ comment.pseudo|convert_encoding('UTF-8', 'ISO-8859-1') }} - {{ comment.dateCreate|date("m/d/Y") }}</h4>
                     <p>{{ comment.content|convert_encoding('UTF-8', 'ISO-8859-1') }}</p>
-                    {% if comment.user_idUser == session.id %}                    
-                        <p><a href="/modifycomment-{{ comment.id }}">Modifier</a> - 
-                        <a href="/deletecomment-{{ comment.id }}" onclick="return confirm('Etes-vous sûr ?')">Supprimer</a></p>
+                    {% if comment.user_idUser == session.idUser %}
+                        <p><button id="theElement1" name="theElement1" data-id="{{ comment.id }}" data-route="/modifycomment-{{ comment.id }}" data-title="Modifier votre commentaire" class='btn btn-info userinfo'>Modifier votre commentaire</button> - 
+                        <button id="theElement1" name="theElement1" data-id="{{ comment.id }}" data-route="/deletecomment-{{ comment.id }}" data-title="Supprimer votre commentaire" class='btn btn-info userinfo'>Supprimer votre commentaire</button>
                     {% endif %}
-                    <p><a href="/modifycomment-{{ comment.id }}">Modifier</a> - 
-                        <a href="/deletecomment-{{ comment.id }}" onclick="return confirm('Etes-vous sûr ?')">Supprimer</a></p>
                 {% endfor %}
             {% else %}
                 <hr/>
@@ -48,10 +67,14 @@
                     {% include('frontend/commentForm.html.twig') %}
                 {% else %}
                     <p>Vous devez être connecté pour poster un commentaire.</p>
-                    {% include('frontend/commentForm.html.twig') %}
                 {% endif %}
             </div>
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Contact Form JavaScript -->
+    <script src="/js/modal.js"></script>-->
 {% endblock %}
