@@ -2,22 +2,16 @@
 
 namespace Controller\Backend;
 
+use \Lib\Controller;
 use \Lib\Request;
 use \Lib\Managers;
 use \Lib\PDOFactory;
 
-class PostController
+class PostController extends Controller
 {
-    private $manager;
-
-    public function __construct()
-    {
-        $this->manager = new Managers(PDOFactory::getMysqlConnexion());
-    }
 
     public function index(Request $request)
     {
-        $response = [];
 
         $postManager = $this->manager->getManagerOf('Post');
         $userManager = $this->manager->getManagerOf('User');
@@ -27,7 +21,7 @@ class PostController
         return ['backend/listpost.html.twig', [
             'name' => 'Serge',
             'Posts' => $postManager->getListPost(),
-            'Response' => $response
+            'Response' => $this->response
             ]
         ];
     }

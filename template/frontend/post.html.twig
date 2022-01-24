@@ -27,18 +27,16 @@
             {% if comments %}
                 {% for comment in comments %}
                     <hr/>
-                    <h4>By {{ comment.pseudo|convert_encoding('UTF-8', 'ISO-8859-1') }} - {{ comment.dateCreate|date("m/d/Y") }}</h4>
+                    <h4>Par {{ comment.pseudo|convert_encoding('UTF-8', 'ISO-8859-1') }} - {{ comment.dateCreate|date("m/d/Y") }}</h4>
                     <p>{{ comment.content|convert_encoding('UTF-8', 'ISO-8859-1') }}</p>
-                    {% if comment.user_idUser == session.id %}                    
+                    {% if comment.user_idUser == session.idUser %}                    
                         <p><a href="/modifycomment-{{ comment.id }}">Modifier</a> - 
                         <a href="/deletecomment-{{ comment.id }}" onclick="return confirm('Etes-vous sûr ?')">Supprimer</a></p>
                     {% endif %}
-                    <p><a href="/modifycomment-{{ comment.id }}">Modifier</a> - 
-                        <a href="/deletecomment-{{ comment.id }}" onclick="return confirm('Etes-vous sûr ?')">Supprimer</a></p>
                 {% endfor %}
             {% else %}
                 <hr/>
-                <p>A venir bientôt ...</p>comments.id, content, user_idUser, post_idPost, user.pseudo date, disabled
+                <p>A venir bientôt ...</p>
             {% endif %}
             </div>
             <div class="col-lg-12">
@@ -48,7 +46,6 @@
                     {% include('frontend/commentForm.html.twig') %}
                 {% else %}
                     <p>Vous devez être connecté pour poster un commentaire.</p>
-                    {% include('frontend/commentForm.html.twig') %}
                 {% endif %}
             </div>
         </div>
