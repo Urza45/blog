@@ -22,8 +22,6 @@ class PostController
         $postManager = $this->manager->getManagerOf('Post');
         $userManager = $this->manager->getManagerOf('User');
 
-        var_dump($postManager->getListPost());
-
         return ['backend/listpost.html.twig', [
             'name' => 'Serge',
             'Posts' => $postManager->getListPost(),

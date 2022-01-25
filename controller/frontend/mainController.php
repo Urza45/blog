@@ -7,6 +7,7 @@ use \Lib\Controller;
 use \Lib\Request;
 use \Lib\Utilities;
 use \Lib\MyMail;
+use \Model\Comments;
 use \Model\User;
 
 class MainController extends Controller
@@ -50,13 +51,24 @@ class MainController extends Controller
 
     public function post(Request $request, $vars) {
 
+        if (isset($request->getParams()['action'])) {
+
+        }
+        
         $postManager = $this->manager->getManagerOf('Post');
         $commentsManager = $this->manager->getManagerOf('Comments');
-        
+        $Params = new Comments();
+        $Params->setDisabled('0');
+        $Params->setPost_idPost($vars['id_post']);
+        $Params->setUser_idUser($this->session->getAttribute('idUser'));
+        $Params->setDate(date('Y/m/d'));
+
         return ['frontend/post.html.twig', [
             'post' => $postManager->getUniquePost((int) $vars['id_post']),
+            'action' => '/addcomment',
             'comments' => $commentsManager->getListFromPost((int) $vars['id_post']),
             'vars' => $vars,  
+            'Params' => $Params,
             'Response' => $this->response,
             'Page' => $request->getUrl()
             ]

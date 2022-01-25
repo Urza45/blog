@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="form_comment">{{ Params.date|date('d/m/Y') }} - Votre commentaire *</label>
-                        <textarea id="form_comment" name="content" class="form-control" placeholder="Votre message *" rows="4" required="required" data-error="Un message ?">{{ Params.content|raw }}</textarea>
+                        <p>{{ Params.content|raw }}</p>
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
@@ -18,15 +18,8 @@
                     <input type="hidden" name="disabled" value="{{ Params.disabled }}" />
                     <input type="hidden" name="date" value="{{ Params.date|date('Y/m/d') }}" />
                     <input type="hidden" name="action" value="sending" />
-                    <input type="submit" class="btn btn-success btn-send" value="Soumettre" />
+                    <input type="submit" class="btn btn-danger btn-send" value="Supprimer" />
                     <input type="reset" class="btn btn-fail btn-reset" value="Reset"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <p class="text-muted">
-                        <strong>*</strong> Ces champs sont obligatoires.
-                     </p>
                 </div>
             </div>
         </div>

@@ -13,9 +13,9 @@
     <route url="/activation" app="frontend" module="connexion" action="activation" ></route>
     <!-- Registered USer -->
     <route url="/addcomment" app="frontend" module="comment" action="add" ></route>
-    <route url="/modifycomment-([0-9]+)" app="frontend" module="comment" action="modify" ></route>
-    <route url="/deletecomment-([0-9]+)" app="frontend" module="comment" action="delete" ></route>
-    <route url="/askpromotion" app="frontend" module="connexion" action="ask" ></route>
+    <route url="/modifycomment-([0-9]+)" app="frontend" module="comment" action="modify" vars="id_comment" ></route>
+    <route url="/deletecomment-([0-9]+)" app="frontend" module="comment" action="delete" vars="id_comment" ></route>
+    <route url="/askpromotion" app="frontend" module="connexion" action="ask" vars="id_user" ></route>
     <!-- ADMINISTRATION -->
     <route url="/admin" app="backend" module="main" action="index" ></route>
     <!-- Moderator -->

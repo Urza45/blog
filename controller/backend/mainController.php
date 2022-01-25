@@ -12,11 +12,6 @@ class MainController
      */
     public function index()
     {
-        return [
-            'backend/index.html.twig', 
-            [
-                'name' => 'Serge'
-            ]
-        ];
+        return [ 'backend/index.html.twig', [] ];
     }
 }

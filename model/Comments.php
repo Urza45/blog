@@ -19,11 +19,17 @@ class Comments extends Entity
     const INVALID_IDUSER = 4;
     const INVALID_IDPOST = 5;
 
-    public function isVAlid()
+    public function isValid()
     {
-        return !(empty($this->content) || empty($this->date)
-            || empty($this->disabled) || empty($this->user_idUser)
-            || empty($this->post_idPost)
+        // var_dump(empty($this->content));
+        // var_dump(empty($this->date));
+        // var_dump($this->disabled);
+        // var_dump(!in_array($this->disabled, ['0', '1']));
+        // var_dump(empty($this->user_idUser));
+        // var_dump(empty($this->post_idPost));
+        return !( (empty($this->content) || empty($this->date)
+            || !in_array($this->disabled, ['0', '1']) || empty($this->user_idUser)
+            || empty($this->post_idPost))
         );
     }
 
@@ -106,7 +112,7 @@ class Comments extends Entity
      */ 
     public function setDisabled($disabled)
     {
-        if (!is_bool($disabled)) {
+        if (!(in_array($disabled, ['0', '1'])  )) {
             $this->errors[] = self::INVALID_DISABLED;
         } else {
             $this->disabled = $disabled;

@@ -154,13 +154,11 @@ class CommentsManager extends Manager
      */
     public function delete(int $id)
     {
-        $sql = 'UPDATE comments SET disabled = :disabled WHERE id = :id';
-        $requete = $this->dao->prepare($sql);
-
-        $requete->bindValue(':disabled', 1);;
-        $requete->bindValue(':id', $id, \PDO::PARAM_INT);
-
-        $requete->execute();
+        $countComment = $this->dao->exec('DELETE FROM comments WHERE id = '.(int) $id);
+        if ($countComment == 0) {
+            return [ 'type' => 'danger', 'message' => 'Un problème est survenu. Le commentaire n\'a pas été effacé.'];
+        }
+        return [ 'type' => 'success', 'message' => 'Le commentaire est bien effacé.'];
     }
 
 }
