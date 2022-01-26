@@ -21,12 +21,6 @@ class Comments extends Entity
 
     public function isValid()
     {
-        // var_dump(empty($this->content));
-        // var_dump(empty($this->date));
-        // var_dump($this->disabled);
-        // var_dump(!in_array($this->disabled, ['0', '1']));
-        // var_dump(empty($this->user_idUser));
-        // var_dump(empty($this->post_idPost));
         return !( (empty($this->content) || empty($this->date)
             || !in_array($this->disabled, ['0', '1']) || empty($this->user_idUser)
             || empty($this->post_idPost))

@@ -19,8 +19,9 @@
     <!-- ADMINISTRATION -->
     <route url="/admin" app="backend" module="main" action="index" ></route>
     <!-- Moderator -->
-    <route url="/admin/listcomments" app="backend" module="comment" ></route>
+    <route url="/admin/listcomments" app="backend" module="comment" action="list"></route>
     <route url="/admin/validcomment-([0-9]+)" app="backend" module="comment" action="valid" vars="id_comment"></route>
+    <route url="/admin/bancomment-([0-9]+)" app="backend" module="comment" action="ban" vars="id_comment"></route>
     <route url="/admin/deletecomment-([0-9]+)" app="backend" module="comment" action="delete" vars="id_comment"></route>
     <!-- Administrator -->
     <route url="/admin/listregistration" app="Backend" module="Registration" action="listUserToRegister" ></route> 

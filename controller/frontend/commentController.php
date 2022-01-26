@@ -69,7 +69,6 @@ class CommentController extends Controller
     public function delete(Request $request, $vars)
     {
         if (isset($request->getParams()['action'])) {
-            var_dump($request->getParams());
             $this->response = $this->manager->getManagerOf('Comments')->delete($vars['id_comment']);
             $Params = new Comments();
             $Params->setDisabled('0');
@@ -88,9 +87,6 @@ class CommentController extends Controller
             ];
         }
         
-
-
-
         $commentManager = $this->manager->getManagerOf('Comments');
         $comment = $commentManager->getUnique((int) $vars['id_comment']);
 

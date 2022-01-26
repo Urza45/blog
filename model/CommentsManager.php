@@ -160,5 +160,30 @@ class CommentsManager extends Manager
         }
         return [ 'type' => 'success', 'message' => 'Le commentaire est bien effacé.'];
     }
+    
+    /**
+     * ban
+     *
+     * @param  mixed $id
+     * @param  mixed $disabled
+     * @return void
+     */
+    public function ban(int $id, int $disabled)
+    {
+        $countComment = $this->dao->exec('UPDATE comments SET disabled = '. $disabled .' WHERE id = '.(int) $id);
+        if ($disabled == 0 ) {
+            if ($countComment == 0) {
+                return [ 'type' => 'danger', 'message' => 'Un problème est survenu. Le commentaire n\'a pas été interdit.'];
+            } 
+            return [ 'type' => 'success', 'message' => 'Le commentaire est bien interdit.'];
+        } else {
+            if ($countComment == 0) {
+                return [ 'type' => 'danger', 'message' => 'Un problème est survenu. Le commentaire n\'a pas été autorisé.'];
+            }
+            return [ 'type' => 'success', 'message' => 'Le commentaire est bien autorisé.'];
+        }
+        
+    }
+
 
 }

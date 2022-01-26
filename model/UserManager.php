@@ -176,7 +176,7 @@ class UserManager extends Manager
         . 'dateCreate = :dateCreate, '
         . 'TypeUser_idTypeUser = :TypeUser_idTypeUser '
         . 'WHERE id = :id';
-        var_dump($sql);
+
         $requete = $this->dao->prepare($sql);
 
         $requete->bindValue(':name', $user->getName());
