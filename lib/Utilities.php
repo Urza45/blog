@@ -2,6 +2,8 @@
 
 namespace Lib;
 
+use \lib\Session;
+
 class Utilities
 {
     public static function checkDate($date) {
@@ -33,5 +35,22 @@ class Utilities
     public static function verify_password($password, $salt, $passwordHash)
     {
         return password_verify($password.$salt, $passwordHash);
+    }
+
+    public static function captcha(Session $session)
+    {
+        $session->setAttribute('captcha', mt_rand(1000,9999));
+
+        $img = imagecreate(65,30);
+	    $font = dirname(__DIR__) .'/public/fonts/28_Days_Later.ttf';
+	 
+	    $bg = imagecolorallocate($img,255,255,255);
+	    $textcolor = imagecolorallocate($img, 0, 0, 0);
+	 
+	    imagettftext($img, 23, 0, 3, 30, $textcolor, $font, $session->getAttribute('captcha'));
+	 
+	    header('Content-type:image/jpeg');
+	    imagejpeg($img);
+	    imagedestroy($img);
     }
 }
