@@ -54,6 +54,22 @@ button {
   font-size: 2.75rem;
 }
 
+.red {
+  color: red !important;
+}
+
+.green {
+  color: green !important;
+}
+
+.blue {
+  color: blue;
+}
+
+.small {
+  font-size: small;
+}
+
 /* @import "./components/buttons"; */
 .center-div {
   margin: 0 auto;
@@ -95,13 +111,14 @@ section {
 section.page404 {
   background: #fff;
 }
-
 section.comments {
   background: #b4406a;
 }
-
 section.admin {
   background: #d2a058;
+}
+section.account {
+  background: #e3e3e4;
 }
 
 nav {

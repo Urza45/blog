@@ -45,9 +45,14 @@ $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/template');
 $twig = new \Twig\Environment(
     $loader, 
     [
+        'debug' => true,
         'cache' => false,
     ]
 );
+/**
+ * Add Twig extension for debugging
+ */
+$twig->addExtension(new \Twig\Extension\DebugExtension());
 /**
  * Add Twig extension for format date functions
  */

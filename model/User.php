@@ -21,6 +21,7 @@ class User extends Entity
     private $activatedUser;
     private $dateCreate;
     private $typeUser_idTypeUSer;
+    private $askPromotion;
 
     const INVALID_NAME = 1;
     const INVALID_FIRSTNAME = 2;
@@ -35,6 +36,7 @@ class User extends Entity
     const INVALID_ACTIVATED_USER = 11;
     const INVALID_DATE = 12;
     const INVALID_IDUSER = 13;
+    const INVALID_ASKPROMOTION = 14;
 
     public function isVAlid()
     {
@@ -155,6 +157,16 @@ class User extends Entity
     public function getPseudo()
     {
         return $this->pseudo;
+    }
+    
+    /**
+     * Get the value of askPromotion
+     *
+     * @return void
+     */
+    public function getAskPromotion()
+    {
+        return $this->askPromotion;
     }
 
     /** SETTERS */
@@ -328,6 +340,11 @@ class User extends Entity
         return $this;
     }
 
+    public function setAskPromotion($value)
+    {
+        $this->askPromotion = $value;
 
+        return $this;
+    }
     
 }

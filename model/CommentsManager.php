@@ -163,4 +163,9 @@ class CommentsManager extends Manager
         $requete->execute();
     }
 
+    public function countByUser()
+    {
+        return $this->dao->query('SELECT `User_idUser`, disabled, COUNT(disabled) as nbc FROM `comments` GROUP BY User_idUser, disabled')->fetchall();
+    }
+
 }

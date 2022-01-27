@@ -1,0 +1,87 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<section class="admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Liste des utilisateurs</h2>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Légende :</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <p class="green"><i class="fa fa-square" aria-hidden="true"></i> Utilisateur activé</p>
+                </div>
+                <div class="col-lg-4">
+                    <p class="blue"><i class="fa fa-square" aria-hidden="true"></i> Utilisateur non activé</p>
+                </div>
+                <div class="col-lg-4">
+                    <p class="red"><i class="fa fa-square" aria-hidden="true"></i> Utilisateur banni</p>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        {% for user in Users %}
+            <div class="row">
+                <div class="col-lg-3">
+                    {% if user.activatedUser == 1 %}
+                        {% set color = 'green' %}
+                    {% elseif user.activatedUser == 0 %}
+                        {% set color = 'blue' %}
+                    {% elseif user.activeUser == 0 %}
+                        {% set color = 'red' %}
+                    {% endif %}
+                    <p class="{{ color }}">{{ user.name }} {{ user.firstName }}</p>
+                    <p class="small">{{ user.email }}</p>
+                </div>
+                <div class="col-lg-3">
+                    {% for nbComment in nbComments %}
+                        {% if nbComment.User_idUser == user.id %}
+                            {% if nbComment.disabled == 0 %}
+                                <p class="small green">Nombre de commentaires OK : {{ nbComment.nbc|raw }}</p>
+                            {% endif %}
+                            {% if nbComment.disabled == 1 %}
+                                <p class="small red">Nombre de commentaires KO : {{ nbComment.nbc|raw }}</p>
+                                <a href="" class="btn btn-danger">Bannir</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-lg-3">
+                    {% for type in ListType %}
+                        {% if type.id == user.typeUser_idTypeUSer %}
+                            <p class="small">{{ type.label|raw }}</p>
+                            {% if type.id == 1 and user.activatedUser == 1 and user.askpromotion == 1 %}
+                                <a href="/admin/promote-{{ user.id }}" class="btn btn-primary">Promouvoir modérateur</a>
+                            {% endif %}
+                            {% if type.id == 2 and user.askpromotion == 1 %}
+                                <a href="" class="btn btn-primary">Promouvoir administrateur</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %} 
+                </div>
+                <div class="col-lg-3">
+                    {% for type in ListType %}
+                        {% if type.id == user.typeUser_idTypeUSer %}
+                            {% if type.id > 1 and type.id < 4 %}
+                                <a href="/admin/demote-{{ user.id }}" class="btn btn-danger">Rétrograder</a>
+                            {% endif %}
+                            {% if type.id < 4 and user.activatedUser == 0 %}
+                                <a href="/admin/deleteuser-{{ user.id }}" class="btn btn-danger">Supprimer</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <hr/>
+        {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+    
