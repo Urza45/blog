@@ -82,7 +82,6 @@ class ConnexionController extends Controller
             $userManager = $this->manager->getManagerOf('User');
 
             $user = $userManager->getUnique((int) $this->session->getAttribute('idUser'));
-            var_dump($user);
             $user->setStatusConnected('0');
             $userManager->save($user);
         }
