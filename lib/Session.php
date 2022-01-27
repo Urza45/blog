@@ -5,14 +5,14 @@ namespace Lib;
 class Session {
     
     /**
-     * __construct
+     * start
      * Start or restore the session
      *
      * @return void
      */
-    public function __construct()
+    public function start()
     {
-        //session_start();
+        session_start();
     }
     
     /**
@@ -24,7 +24,6 @@ class Session {
     public function destroy()
     {
         session_destroy();
-        //session_start();
     }
     
     /**
@@ -71,6 +70,11 @@ class Session {
         {
             throw new \Exception("Attribut '$name' absent de la session");
         }
+    }
+
+    public function existSession()
+    {
+        return isset($_SESSION);
     }
 
 }

@@ -86,13 +86,14 @@ class CommentsManager extends Manager
      */
     public function save(Comments $comments)
     {
+        var_dump($comments);
         if ($comments->isValid())
         {
             $comments->isNew() ? $this->add($comments) : $this->modify($comments);
         }
         else
         {
-            throw new \RuntimeException('Votre post doit être validé pour être enregistré.');
+            throw new \RuntimeException('Votre commentaire doit être validé pour être enregistré.');
         }
     }
     
@@ -154,13 +155,41 @@ class CommentsManager extends Manager
      */
     public function delete(int $id)
     {
-        $sql = 'UPDATE comments SET disabled = :disabled WHERE id = :id';
-        $requete = $this->dao->prepare($sql);
+        $countComment = $this->dao->exec('DELETE FROM comments WHERE id = '.(int) $id);
+        if ($countComment == 0) {
+            return [ 'type' => 'danger', 'message' => 'Un problème est survenu. Le commentaire n\'a pas été effacé.'];
+        }
+        return [ 'type' => 'success', 'message' => 'Le commentaire est bien effacé.'];
+    }
+    
+    /**
+     * ban
+     *
+     * @param  mixed $id
+     * @param  mixed $disabled
+     * @return void
+     */
+    public function ban(int $id, int $disabled)
+    {
+        $countComment = $this->dao->exec('UPDATE comments SET disabled = '. $disabled .' WHERE id = '.(int) $id);
+        if ($disabled == 0 ) {
+            if ($countComment == 0) {
+                return [ 'type' => 'danger', 'message' => 'Un problème est survenu. Le commentaire n\'a pas été interdit.'];
+            } 
+            return [ 'type' => 'success', 'message' => 'Le commentaire est bien interdit.'];
+        } else {
+            if ($countComment == 0) {
+                return [ 'type' => 'danger', 'message' => 'Un problème est survenu. Le commentaire n\'a pas été autorisé.'];
+            }
+            return [ 'type' => 'success', 'message' => 'Le commentaire est bien autorisé.'];
+        }
+        
+    }
 
-        $requete->bindValue(':disabled', 1);;
-        $requete->bindValue(':id', $id, \PDO::PARAM_INT);
 
-        $requete->execute();
+    public function countByUser()
+    {
+        return $this->dao->query('SELECT `User_idUser`, disabled, COUNT(disabled) as nbc FROM `comments` GROUP BY User_idUser, disabled')->fetchall();
     }
 
 }

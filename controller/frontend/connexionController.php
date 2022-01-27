@@ -82,7 +82,6 @@ class ConnexionController extends Controller
             $userManager = $this->manager->getManagerOf('User');
 
             $user = $userManager->getUnique((int) $this->session->getAttribute('idUser'));
-            var_dump($user);
             $user->setStatusConnected('0');
             $userManager->save($user);
         }
@@ -92,7 +91,13 @@ class ConnexionController extends Controller
         header('Location: /');
 
     }
-
+    
+    /**
+     * activation
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function activation(Request $request)
     {
         $userManager = $this->manager->getManagerOf('User');
@@ -119,5 +124,118 @@ class ConnexionController extends Controller
             'Page' => '/'
             ]
         ];
+    }
+    
+    /**
+     * account
+     *
+     * @param  mixed $request
+     * @param  mixed $vars
+     * @return void
+     */
+    public function account(Request $request, $vars)
+    {
+        if ($this->session->existsAttribute('connected')) 
+        {
+            $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
+            $level = $this->manager->getManagerOf('TypeUser')->getLabel((int) $user->getTypeUser_idTypeUSer());
+            //var_dump($user);
+            //var_dump($level);
+            return ['frontend/user.html.twig', [
+                'Response' => $this->response,
+                'User' => $user,
+                'level' => $level
+                ]
+            ];
+        }
+        return ['error/forbidden.html.twig', [] ];
+    }
+    
+    /**
+     * ask
+     *
+     * @param  mixed $request
+     * @param  mixed $vars
+     * @return void
+     */
+    public function ask(Request $request, $vars)
+    {
+        if ($this->session->existsAttribute('connected')) 
+        {
+            $this->response = $this->manager->getManagerOf('USer')->askPromotion((int) $vars['id_user']);
+            $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
+            $level = $this->manager->getManagerOf('TypeUser')->getLabel((int) $user->getTypeUser_idTypeUSer());
+
+            return ['frontend/user.html.twig', [
+                'Response' => $this->response,
+                'User' => $user,
+                'level' => $level
+                ]
+            ];
+
+        }
+        return ['error/forbidden.html.twig', [] ];
+    }
+
+    public function modify(Request $request, $vars)
+    {
+        if ($this->session->existsAttribute('connected')) 
+        {
+            $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
+
+            $user->setName($request->getParams()['name']);
+            $user->setFirstName($request->getParams()['firstName']);
+            $user->setEmail($request->getParams()['email']);
+            $user->setPhone($request->getParams()['phone']);
+            $user->setPortable($request->getParams()['portable']);
+
+            if ($this->manager->getManagerOf('User')->save($user) == 1) {
+                $this->response = [ 'type'=> 'success', 'message' => 'Modification(s) enregistrée(s).'];
+            } else {
+                $this->response = [ 'type'=> 'danger', 'message' => 'Une erreur est survenue. Pas de modification effectuée.'];
+            }
+            
+            $level = $this->manager->getManagerOf('TypeUser')->getLabel((int) $user->getTypeUser_idTypeUSer());
+
+            return ['frontend/user.html.twig', [
+                'Response' => $this->response,
+                'User' => $user,
+                'level' => $level
+                ]
+            ];
+        }
+    }
+
+    public function password(Request $request, $vars)
+    {
+        if ($this->session->existsAttribute('connected')) 
+        {
+            $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
+
+            // Password verification
+            if (!Utilities::verify_password($request->getParams()['passwordOld'], $user->getSalt(), $user->getPassword()))
+            {
+                $this->response = [ 'type'=> 'danger', 'message' => 'L\'ancien mot de passe n\'est pas correct.'];
+            } elseif ( $request->getParams()['passwordFirst'] <> $request->getParams()['confirmedPassword']) {
+                $this->response = [ 'type'=> 'danger', 'message' => 'Confirmation de mot de passe erronée.'];
+            } else {
+                $user->setSalt(Utilities::Salt());
+                $user->setPassword(Utilities::password_encode($request->getParams()['passwordFirst'], $user->getSalt()));
+                if ($this->manager->getManagerOf('User')->save($user) == 1) {
+                    $this->response = [ 'type'=> 'success', 'message' => 'Mot de passe modifié.'];
+                } else {
+                    $this->response = [ 'type'=> 'danger', 'message' => 'Une erreur est survenue. Mot de passe non modifié.'];
+                }
+            }
+
+            $level = $this->manager->getManagerOf('TypeUser')->getLabel((int) $user->getTypeUser_idTypeUSer());
+
+            return ['frontend/user.html.twig', [
+                'Response' => $this->response,
+                'User' => $user,
+                'level' => $level
+                ]
+            ];
+        }
     }
 }

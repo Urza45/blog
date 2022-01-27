@@ -21,11 +21,11 @@ class TypeUserManager extends Manager
 
     public function getLabel(int $id)
     {
-        $sql = 'SELECT label FROM typeuser WHERE id ='.$id;
+        $sql = 'SELECT id,label FROM typeuser WHERE id ='.$id;
         $requete = $this->dao->query($sql);
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\TypeUser');
 
-        $label = $requete->fetchAll();
+        $label = $requete->fetch();
         
         return $label;
     }

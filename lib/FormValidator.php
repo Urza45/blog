@@ -13,11 +13,12 @@ class FormValidator
      */
     public static function purify($data)
     {
-        if ((isset($data) && ($data != '')) && strlen($data) < 255 ) {
+        if ( (isset($data) && ($data != ''))) {
             $data = trim($data);
             $data = stripslashes($data);
-            $data = htmlentities($data, ENT_QUOTES, 'UTF-8');
-
+            //$data = htmlentities($data, ENT_QUOTES, 'UTF-8');
+            $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+             
             return $data;
         }
     }

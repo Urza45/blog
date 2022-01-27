@@ -7,7 +7,8 @@ use \lib\Session;
 class Utilities
 {
     public static function checkDate($date) {
-        return (preg_match('#^([0-9]{2})(/-)([0-9]{2})\2([0-9]{4})$#', $date, $m) == 1 && checkdate($m[3], $m[1], $m[4]));
+        $dt = \DateTime::createFromFormat("Y/m/d", $date);
+        return $dt && $dt->format("Y/m/d") === $date;
     }
 
     public static function checkPostalCode($code) {

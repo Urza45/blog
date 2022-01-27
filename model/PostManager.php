@@ -137,8 +137,12 @@ class PostManager extends Manager
      */
     public function delete(int $id)
     {
-        $this->dao->exec('DELETE FROM post WHERE id = '.(int) $id);
-        $this->dao->exec('DELETE FROM comments WHERE Post_idPOST = '.(int) $id);
+        $countPost = $this->dao->exec('DELETE FROM post WHERE id = '.(int) $id);
+        if ($countPost == 0) {
+            return [ 'type' => 'danger', 'Un problème est survenu. Le post n\'a pas été effacé.'];
+        }
+        $countComment = $this->dao->exec('DELETE FROM comments WHERE Post_idPOST = '.(int) $id);
+        return [ 'type' => 'success', 'message' => 'Le post est bien effacé. '. $countComment . ' commentaire(s) correspondant ont également été supprimés.'];
     }
 
 }

@@ -14,9 +14,7 @@ class Request
     {
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->url = $_SERVER['REQUEST_URI'];
-        //var_dump($this->url);
         $this->query = $_SERVER['QUERY_STRING'];
-        //var_dump($this->query);
     }
 
     public function isGet() {
