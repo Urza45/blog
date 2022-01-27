@@ -10,10 +10,16 @@
             </div>
         </div>
         <div class="row text-center">
-            <div class="btn-group-vertical col-lg-12 text-center">
+            <div class="btn-group-vertical col-lg-12 text-center">      
+            {% if session.admin > 1 %}
+                <a href="/admin/listcomments" class="btn btn-primary"><h2>Gestion des commentaires</h2></a><br/>
+            {% endif %}
+            {% if session.admin > 2 %}
                 <a href="/admin/listpost" class="btn btn-primary"><h2>Gestion des Posts</h2></a><br/>
-                <a href="/admin/" class="btn btn-primary"><h2>Gestion des commentaires</h2></a><br/>
+            {% endif %}
+            {% if session.admin > 3 %}
                 <a href="/admin/" class="btn btn-primary"><h2>Gestion des utilisateurs</h2></a>
+            {% endif %}
             </div>
         </div>
     </div>

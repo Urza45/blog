@@ -4,6 +4,27 @@
 
 {% block body %}
 <section>
+    <div class="container" >
+        <!-- Modal -->
+        <div class="modal fade" id="empModal" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">User Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" method="POST" class="needs-validation" novalidate>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -11,7 +32,7 @@
                 <hr/>
             </div>
             <div class="col-lg-12">
-                <p><b>{{ post.chapo|striptags('<b>')|raw|nl2br }}</b></p>
+                <p><b>{{ post.chapo|raw|nl2br }}</b></p>
                 <p>{{ post.content|raw|nl2br }}</p>
             </div>
         </div>
@@ -27,11 +48,11 @@
             {% if comments %}
                 {% for comment in comments %}
                     <hr/>
-                    <h4>Par {{ comment.pseudo|raw }} - {{ comment.dateCreate|date("d/m/Y") }}</h4>
-                    <p>{{ comment.content|raw }}</p>
-                    {% if comment.user_idUser == session.idUser %}                    
-                        <p><a href="/modifycomment-{{ comment.id }}">Modifier</a> - 
-                        <a href="/deletecomment-{{ comment.id }}" onclick="return confirm('Etes-vous sûr ?')">Supprimer</a></p>
+                    <h4>Par {{ comment.pseudo|raw }} - {{ comment.dateCreate|date("m/d/Y") }}</h4>
+                    <p>{{ comment.content|raw|nl2br }}</p>
+                    {% if comment.user_idUser == session.idUser %}
+                        <p><button id="theElement1" name="theElement1" data-id="{{ comment.id }}" data-route="/modifycomment-{{ comment.id }}" data-title="Modifier votre commentaire" class='btn btn-info userinfo'>Modifier votre commentaire</button> - 
+                        <button id="theElement1" name="theElement1" data-id="{{ comment.id }}" data-route="/deletecomment-{{ comment.id }}" data-title="Supprimer votre commentaire" class='btn btn-info userinfo'>Supprimer votre commentaire</button>
                     {% endif %}
                 {% endfor %}
             {% else %}
@@ -51,4 +72,9 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Contact Form JavaScript -->
+    <script src="/js/modal.js"></script>-->
 {% endblock %}

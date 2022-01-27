@@ -21,7 +21,7 @@
             <p>
                 Vous êtes connecté en tant que : <i class="fa fa-user"></i> {{ session.name }}
                 {% if session.admin > 1 %}
-                     - <a href="/admin">Administration</a>
+                     - <a href="/admin" class="btn btn-info userinfo">Administration</a>
                 {% endif %}
             </p>
 {% endif %}

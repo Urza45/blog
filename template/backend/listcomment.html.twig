@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<section class="admin">
+    <div class="container" >
+        <!-- Modal -->
+        <div class="modal fade" id="empModal" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">User Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" method="POST" class="needs-validation" novalidate>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Liste des commentaires</h2>
+                <hr />
+            </div>
+        </div>
+        {% for comment in Comments %}
+        <div class="row">
+            <div class="col-lg-6">
+                <p>{{ comment.content|raw|nl2br }}</p>
+                {% if comment.disabled == '1'%}
+                    <p><i>Ce commentaire n'est pas autorisé.</i></p>
+                {% endif %}
+            </div>
+            <div class="col-lg-3 text-center">
+                {% if comment.disabled == '0'%}
+                    <a href="/admin/bancomment-{{ comment.id }}" class="btn btn-warning"><i class="fa fa-ban" aria-hidden="true"></i> Interdire</a>
+                {% else %}
+                    <a href="/admin/validcomment-{{ comment.id }}" class="btn btn-info">Autoriser</a>
+                {% endif %}
+            </div>
+            <div class="col-lg-3 text-center">
+                <button id="theElement1" name="theElement1" data-id="{{ comment.id }}" data-route="/admin/deletecomment-{{ comment.id }}" data-title="Supprimer votre commentaire" class='btn btn-danger userinfo'>Supprimer votre commentaire</button>
+            </div>         
+        </div>
+        <hr /> 
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Modal Form JavaScript -->
+    <script src="/js/modal.js"></script>-->
+{% endblock %}
