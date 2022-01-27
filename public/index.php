@@ -53,7 +53,6 @@ $twig = new \Twig\Environment(
         'cache' => false,
     ]
 );
-
 /**
  * Add Twig extension for debugging
  */

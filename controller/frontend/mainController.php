@@ -32,7 +32,7 @@ class MainController extends Controller
         return ['frontend/index.html.twig', [
                 'LastPostList' => $postManager->getListPost(5),
                 'Response' => $this->response,
-                'Page' => $request->getUrl()
+                'Page' => $request->getUrl(),
             ]
         ];
     }
@@ -138,5 +138,10 @@ class MainController extends Controller
             'Response' => $this->response
             ]
         ];
+    }
+
+    public function captcha()
+    {
+        return Utilities::captcha($this->session);
     }
 }
