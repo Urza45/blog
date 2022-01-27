@@ -13,11 +13,12 @@
  * @link     https://www.urza-web.fr
  */
 
-session_start();
+//session_start();
 
 use \Lib\Autoloader;
 use \Lib\Router;
 use \Lib\Request;
+use \Lib\Session;
 use \Twig\Extra\Intl\IntlExtension;
 
 /**
@@ -36,6 +37,9 @@ if (file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
 require dirname(__DIR__) . '/lib/Autoloader.php';
 Autoloader::register();
 
+$session = new Session();
+$session->start();
+
 $request = new Request();
 
 /**
@@ -49,6 +53,7 @@ $twig = new \Twig\Environment(
         'cache' => false,
     ]
 );
+
 /**
  * Add Twig extension for debugging
  */
@@ -60,11 +65,10 @@ $twig->addExtension(new IntlExtension());
 /**
  * Allow twig to access the session 
  */
-if (isset($_SESSION)) {
+if ($session->existSession()) {
     $twig->addGlobal('session', $_SESSION);
 }
  
-
 /**
  * Call action
  */

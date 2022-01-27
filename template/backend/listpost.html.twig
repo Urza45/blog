@@ -18,14 +18,16 @@
         {% for post in Posts %}
         <div class="row">
             <div class="col-lg-6">
-                {{ post.title }} 
+                {{ post.dateCreate|date("d/m/Y") }} - {{ post.title|raw }} 
             </div>
+            {% if (session.idUser == post.user_idUser) or (session.admin == 4) %}
             <div class="col-lg-3 text-center">
                 <a href="/admin/modifypost-{{ post.id }}" class="btn btn-primary">Modifier</a> 
             </div>
             <div class="col-lg-3 text-center">
-                <a href="/admin/deletepost-{{ post.id }}" class="btn btn-primary" >Supprimer</a>
-            </div>               
+                <a href="/admin/deletepost-{{ post.id }}" class="btn btn-primary" onclick="return confirm('Etes-vous sûr ?');">Supprimer</a>
+            </div>
+            {% endif %}            
         </div>
         {% endfor %}
         </div>

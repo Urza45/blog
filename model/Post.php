@@ -19,7 +19,7 @@ class Post extends Entity
     const INVALID_DATE = 4;
     const INVALID_IDUSER = 5;
 
-    public function isVAlid()
+    public function isValid()
     {
         return !(empty($this->title) || empty($this->chapo)
             || empty($this->content) || empty($this->dateCreate)
@@ -66,7 +66,7 @@ class Post extends Entity
      */ 
     public function getUser_idUser()
     {
-        return $this->User_idUser;
+        return $this->user_idUser;
     }
 
     /** SETTERS */
@@ -107,7 +107,7 @@ class Post extends Entity
      */ 
     public function setContent($content)
     {
-        if(empty($content) || !is_string($content)) {
+        if(empty($content)) {
             $this->errors[] = self::INVALID_CONTENT;
         } else {
             $this->content = $content;
