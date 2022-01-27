@@ -1,0 +1,163 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+<section class="account">
+    <div class="container">
+        <form id="user-form" action="/modifyaccount-{{ User.id }}" method="post" role="form">
+        <div class="row">
+            <div class="col-lg-3 text-right">
+                <label for="form_name">Nom * :</label>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <input id="form_name" type="text" value="{{ User.name }}" name="name" class="form-control" placeholder="Votre prénom *" required="required" data-error="Prénom est obligatoire.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right">
+                <label for="form_firstname">Prénom * :</label>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <input id="form_firstname" type="text" value="{{ User.firstName }}" name="firstName" class="form-control" placeholder="Votre prénom *" required="required" data-error="Prénom est obligatoire.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 text-right">
+                <p>Pseudo : </p>
+            </div>
+            <div class="col-lg-3">
+                <p>{{ User.pseudo }}</p><p class="small"><i>(Ne peux pas être modifié)</i></p>
+            </div>
+            <div class="col-lg-3 text-right">
+                <label for="form_email">Email * :</label>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <input id="form_email" type="text" value="{{ User.email }}" name="email" class="form-control" placeholder="Votre prénom *" required="required" data-error="Prénom est obligatoire.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 text-right">
+                <label for="form_phone">Téléphone :</label>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <input id="form_phone" type="text" value="{{ User.phone|raw }}" name="phone" class="form-control" placeholder="Votre téléphone">
+                    <div class="help-block with-errors"></div>
+                </div>
+                <p>{{ User.phone|raw }}</p>
+            </div>
+            <div class="col-lg-3 text-right">
+                <label for="form_phone">Mobile :</label>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <input id="form_portable" type="text" value="{{ User.portable|raw }}" name="portable" class="form-control" placeholder="Votre portable">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <input type="hidden" name="action" value="sending" />
+            <input type="submit" class="btn btn-success btn-send" value="Sauvegarder" />
+            <input type="reset" class="btn btn-fail btn-reset" value="Reset"/>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="text-muted">
+                    <strong>*</strong> Ces champs sont obligatoires.
+                </p>
+            </div>
+        </div>
+        </form>
+    </div>
+    <div class="container">
+        <hr />
+        <div class="row">
+            <div class="col-lg-3 text-right">
+                <p>Niveau d'accès : </p>
+            </div>
+            <div class="col-lg-3">
+                <p>{{ level.label|raw }}</p>
+            </div>
+            {% if level.id == 1 %}
+            <div class="col-lg-6 text-center">
+                {% if User.askpromotion == 0 %}
+                    <a href="/askpromotion-{{ User.id }}" class="btn btn-primary">Devenir modérateur</a>
+                {% else %}
+                    <p class="small">Demande de promotion en cours.</p>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% if level.id == 2 %}
+            <div class="col-lg-6 text-center">
+                {% if User.askpromotion == 0 %}
+                    <a href="" class="btn btn-primary">Devenir administrateur</a>
+                {% else %}
+                    <p class="small">Demande de promotion en cours.</p>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+    <form id="password-form" action="/modifypassword-{{ User.id }}" method="post" role="form">
+        <div class="row">
+            <div class="col-lg-6 text-right">
+                <label for="form_passwordOld">Mot de passe actuel * :</label>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <input id="form_passwordOld" type="password" value="" name="passwordOld" class="form-control" placeholder="Votre mot de passe *" required="required" data-error="Vous devez renseigner votre mot de passe.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 text-right">
+                <label for="form_passwordFirst">Nouveau mot de passe * :</label>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <input id="form_passwordFirst" type="password" value="" name="passwordFirst" class="form-control" placeholder="Votre mot de passe *" required="required" data-error="Vous devez renseigner votre mot de passe.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 text-right">
+                <label for="form_confirm_password">Confirmer votre mot de passe * :</label>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <input id="form_confirm_password" type="password" value="" name="confirmedPassword" class="form-control" placeholder="Votre mot de passe *" required="required" data-error="Vous devez renseigner votre mot de passe.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <input type="hidden" name="action" value="registration" />
+                <input type="submit" class="btn btn-success btn-send" value="Changer le mot de passe" />
+                <input type="reset" class="btn btn-fail btn-reset" value="Reset" onclick="" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p class="text-muted">
+                    <strong>*</strong> Ces champs sont obligatoires.
+                </p>
+            </div>
+        </div>
+    </form>
+    </div>
+</section>
+{% endblock %}

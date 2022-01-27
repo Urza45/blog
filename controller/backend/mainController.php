@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Controller\Backend;
 
-class MainController
+use \Lib\Controller;
+
+class MainController extends Controller
 {
     /**
      * Index function
@@ -12,6 +14,13 @@ class MainController
      */
     public function index()
     {
-        return [ 'backend/index.html.twig', [] ];
+        if ($this->session->existsAttribute('admin')) {
+            if (!in_array($this->session->getAttribute('admin'), ['2', '3', '4']))
+            {
+                return ['error/forbidden.html.twig', [] ];
+            }
+            return ['backend/index.html.twig', [] ];
+        }
+        return ['error/forbidden.html.twig', [] ];
     }
 }

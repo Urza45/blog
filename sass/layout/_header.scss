@@ -39,8 +39,12 @@ section {
     &.comments {
         background: $colour-accent;
     }
-    
+
     &.admin {
         background: $colour-secondary;
+    }
+
+    &.account {
+        background: $colour-lightgray;
     }
 }

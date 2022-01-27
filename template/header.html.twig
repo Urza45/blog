@@ -18,12 +18,12 @@
 </nav>
 </div>
 {% if session.connected == '1' %}
-            <p>
-                Vous êtes connecté en tant que : <i class="fa fa-user"></i> {{ session.name }}
-                {% if session.admin > 1 %}
-                     - <a href="/admin" class="btn btn-info userinfo">Administration</a>
-                {% endif %}
-            </p>
+    <p>
+        Vous êtes connecté en tant que : {{ session.name }} - <a href="/account-{{ session.idUser}}" class="btn btn-primary"><i class="fa fa-user"></i> Mon compte</a>
+        {% if session.admin > 1 %}
+            - <a href="/admin" class="btn btn-primary">Administration</a>
+        {% endif %}
+    </p>
 {% endif %}
 
 
