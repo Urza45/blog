@@ -2,53 +2,79 @@
 
 namespace Controller\Backend;
 
+use \Lib\Controller;
 use \Lib\Request;
 use \Lib\Managers;
 use \Lib\PDOFactory;
+use \Model\Post;
 
-class PostController
+class PostController extends Controller
 {
-    private $manager;
-
-    public function __construct()
-    {
-        $this->manager = new Managers(PDOFactory::getMysqlConnexion());
-    }
 
     public function index(Request $request)
     {
-        $response = [];
 
         $postManager = $this->manager->getManagerOf('Post');
         $userManager = $this->manager->getManagerOf('User');
 
         return ['backend/listpost.html.twig', [
-            'name' => 'Serge',
             'Posts' => $postManager->getListPost(),
-            'Response' => $response
+            'Response' => $this->response
             ]
         ];
     }
     
     public function add(Request $request)
     {
-        $response = [];
-
-        return ['backend/addpost.html.twig', [
-            'name' => 'Serge',
+        $postManager = $this->manager->getManagerOf('Post');
+        
+        if (isset($request->getParams()['action'])) {
+            $post = new Post();
+            $post->hydrate($request->getParams());
+            $post->setDateCreate(date('Y/m/d'));
+            if ($request->getParams()['action'] == "newpost") {
+                $post->setUser_idUser($this->session->getAttribute('idUser'));
+            }
+            $postManager->save($post);
+            $this->response = [ 'type' => 'success', 'message' => 'Votre post a bien été enregistré.'];
+            return ['backend/listpost.html.twig', [
+                'Posts' => $postManager->getListPost(),
+                'Response' => $this->response
+                ]
+            ];
+        }
+        
+        return ['backend/post.html.twig', [
+            'action' => 'newpost',
             'Params' => $request->getParams(),
-            'Response' => $response
+            'Response' => $this->response
             ]
         ];
     }
 
     public function modify(Request $request, $vars)
     {
+        $post = $this->manager->getManagerOf('Post')->getUniquePost($vars['id_post']);
 
+        return ['backend/post.html.twig', [
+            'action' => 'modifypost',
+            'Params' => $post,
+            'Response' => $this->response
+            ]
+        ];
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, $vars)
     {
+        $this->response = $this->manager->getManagerOf('Post')->delete($vars['id_post']);
+        
+        $postManager = $this->manager->getManagerOf('Post');
+        $userManager = $this->manager->getManagerOf('User');
 
+        return ['backend/listpost.html.twig', [
+            'Posts' => $postManager->getListPost(),
+            'Response' => $this->response
+            ]
+        ];
     }
 }

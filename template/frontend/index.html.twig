@@ -30,8 +30,8 @@ Assemblage de PC, remplacement de pièces sur PC et ordinateurs portables.</p>
                     {% if LastPostList %}
                         {% for post in LastPostList %}
                             <hr/>
-                            <h3>{{ post.title|convert_encoding('UTF-8', 'ISO-8859-1') }} - {{ post.dateCreate|date("m/d/Y") }}</h3>
-                            <p>{{ post.chapo|convert_encoding('UTF-8', 'ISO-8859-1') }}</p>
+                            <h3>{{ post.dateCreate|date("m/d/Y") }} - {{ post.title|raw }}</h3>
+                            <p>{{ post.chapo|raw }}</p>
                             <p><a href="/post-{{ post.id }}">Voir plus ...</a></p>
                         {% endfor %}
                     {% else %}
