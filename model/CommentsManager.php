@@ -86,13 +86,14 @@ class CommentsManager extends Manager
      */
     public function save(Comments $comments)
     {
+        var_dump($comments);
         if ($comments->isValid())
         {
             $comments->isNew() ? $this->add($comments) : $this->modify($comments);
         }
         else
         {
-            throw new \RuntimeException('Votre post doit être validé pour être enregistré.');
+            throw new \RuntimeException('Votre commentaire doit être validé pour être enregistré.');
         }
     }
     
