@@ -37,22 +37,28 @@ class ConnexionController extends Controller
                     if ($user->getActivatedUser() == '0') {
                         $this->response = ['type' => 'danger' , 'message' => 'Vous n\'avez pas activé votre compte.'];
                     } else {
-                        // Connected user
-                        if ($user->getStatusConnected() == '1') {
-                            $this->response = ['type' => 'danger' , 'message' => 'Vous êtes déjà connecté.'];
-                        } else { // All is ok :)
-                            $this->response = ['type' => 'success' , 'message' => 'Connexion réussie'];
+                        // Banned user
+                        if ($user->getActiveUser() == '0') {
+                            $this->response = ['type' => 'danger' , 'message' => 'L\'accès à votre compte a été interdit.'];
+                        } else {
+                            // Connected user
+                            if ($user->getStatusConnected() == '1') {
+                                $this->response = ['type' => 'danger' , 'message' => 'Vous êtes déjà connecté.'];
+                            } else { // All is ok :)
+                                $this->response = ['type' => 'success' , 'message' => 'Connexion réussie'];
                     
-                            $this->session->setAttribute('name', $user->getName() . ' ' .$user->getFirstname());
-                            $this->session->setAttribute('connected', '1');
-                            $this->session->setAttribute('admin', $user->getTypeUser_idTypeUSer());
-                            $this->session->setAttribute('idUser', $user->getId());
-                            $user->setStatusConnected('1');
+                                $this->session->setAttribute('name', $user->getName() . ' ' .$user->getFirstname());
+                                $this->session->setAttribute('connected', '1');
+                                $this->session->setAttribute('admin', $user->getTypeUser_idTypeUSer());
+                                $this->session->setAttribute('idUser', $user->getId());
+                                $user->setStatusConnected('1');
 
-                            $userManager->save($user);
+                                $userManager->save($user);
                         
-                            header('Location: /');
+                                header('Location: /');
+                            }
                         }
+                        
                     }
                 } else {
                     $this->response = ['type' => 'danger' , 'message' => 'Connexion échouée'];
@@ -62,7 +68,7 @@ class ConnexionController extends Controller
             }
         }
 
-        return ['frontend/register.html.twig', [
+        return ['frontend/connexion.html.twig', [
             'Response' => $this->response,
             'Page' => '/signin'
             ]
@@ -139,8 +145,6 @@ class ConnexionController extends Controller
         {
             $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
             $level = $this->manager->getManagerOf('TypeUser')->getLabel((int) $user->getTypeUser_idTypeUSer());
-            //var_dump($user);
-            //var_dump($level);
             return ['frontend/user.html.twig', [
                 'Response' => $this->response,
                 'User' => $user,

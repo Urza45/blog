@@ -274,4 +274,14 @@ class UserManager extends Manager
         }
         return [ 'type' => 'success', 'message' => 'Utilisateur banni.'];
     }
+
+    public function active(int $id)
+    {
+        $countUser = $this->dao->exec('UPDATE user SET activeUser = 1 WHERE id ='. (int) $id);
+        if ($countUser == 0) {
+            return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
+        }
+        return [ 'type' => 'success', 'message' => 'Utilisateur activé.'];
+    }
+
 }

@@ -42,5 +42,6 @@
     <route url="/admin/listuser" app="backend" module="user" action="list" ></route>
     <route url="/admin/modifyuser-([0-9]+)" app="backend" module="user" action="modify" vars="id_user" ></route>
     <route url="/admin/banuser-([0-9]+)" app="backend" module="user" action="ban" vars="id_user" ></route>
+    <route url="/admin/activeuser-([0-9]+)" app="backend" module="user" action="active" vars="id_user" ></route>
     <route url="/admin/deleteuser-([0-9]+)" app="backend" module="user" action="delete" vars="id_user" ></route>
 </routes>

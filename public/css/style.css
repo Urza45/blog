@@ -63,7 +63,7 @@ button {
 }
 
 .blue {
-  color: blue;
+  color: blue !important;
 }
 
 .small {
@@ -197,5 +197,3 @@ nav label {
 /* @import "./pages/work"; */
 /* @import "./pages/about"; */
 /* @import "./pages/project"; */
-
-/*# sourceMappingURL=style.css.map */
