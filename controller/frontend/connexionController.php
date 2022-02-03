@@ -169,6 +169,10 @@ class ConnexionController extends Controller
     {
         if ($this->session->existsAttribute('connected')) 
         {
+            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) 
+            {
+                return ['error/403.html.twig', [] ];
+            }
             $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
             $level = $this->manager->getManagerOf('TypeUser')->getLabel((int) $user->getTypeUser_idTypeUSer());
 
@@ -179,7 +183,7 @@ class ConnexionController extends Controller
                 ]
             ];
         }
-        return ['error/forbidden.html.twig', [] ];
+        return ['error/403.html.twig', [] ];
     }
     
     /**
@@ -193,6 +197,10 @@ class ConnexionController extends Controller
     {
         if ($this->session->existsAttribute('connected')) 
         {
+            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) 
+            {
+                return ['error/403.html.twig', [] ];
+            }
             $this->response = $this->manager->getManagerOf('USer')->askPromotion((int) $vars['id_user']);
             $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
             $level = $this->manager->getManagerOf('TypeUser')->getLabel((int) $user->getTypeUser_idTypeUSer());
@@ -205,13 +213,24 @@ class ConnexionController extends Controller
             ];
 
         }
-        return ['error/forbidden.html.twig', [] ];
+        return ['error/403.html.twig', [] ];
     }
-
+    
+    /**
+     * modify
+     *
+     * @param  mixed $request
+     * @param  mixed $vars
+     * @return void
+     */
     public function modify(Request $request, $vars)
     {
         if ($this->session->existsAttribute('connected')) 
         {
+            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) 
+            {
+                return ['error/403.html.twig', [] ];
+            }
             $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
 
             $user->setName($request->getParams()['name']);
@@ -236,11 +255,22 @@ class ConnexionController extends Controller
             ];
         }
     }
-
+    
+    /**
+     * password
+     *
+     * @param  mixed $request
+     * @param  mixed $vars
+     * @return void
+     */
     public function password(Request $request, $vars)
     {
         if ($this->session->existsAttribute('connected')) 
         {
+            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) 
+            {
+                return ['error/403.html.twig', [] ];
+            }
             $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
 
             // Password verification

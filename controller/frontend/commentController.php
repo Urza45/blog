@@ -7,9 +7,20 @@ use Lib\Request;
 use Model\Comments;
 
 class CommentController extends Controller
-{
+{    
+    /**
+     * add
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function add(Request $request)
     {
+        if ($this->session->existsAttribute('connected') <> 1) 
+        {
+            return ['error/403.html.twig', [] ];
+        }
+        
         $commentManager = $this->manager->getManagerOf('Comments');
         
         if (isset($request->getParams()['action'])) {
@@ -34,9 +45,21 @@ class CommentController extends Controller
             ];
         }
     }
-
+    
+    /**
+     * modify
+     *
+     * @param  mixed $request
+     * @param  mixed $vars
+     * @return void
+     */
     public function modify(Request $request, $vars)
     {
+        if ($this->session->existsAttribute('connected') <> 1) 
+        {
+            return ['error/403.html.twig', [] ];
+        }
+
         $commentManager = $this->manager->getManagerOf('Comments');
         
         if (isset($request->getParams()['action'])) {
@@ -65,9 +88,21 @@ class CommentController extends Controller
             ]
         ]; 
     }
-
+    
+    /**
+     * delete
+     *
+     * @param  mixed $request
+     * @param  mixed $vars
+     * @return void
+     */
     public function delete(Request $request, $vars)
     {
+        if ($this->session->existsAttribute('connected') <> 1) 
+        {
+            return ['error/403.html.twig', [] ];
+        }
+        
         if (isset($request->getParams()['action'])) {
             $this->response = $this->manager->getManagerOf('Comments')->delete($vars['id_comment']);
             $Params = new Comments();

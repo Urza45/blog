@@ -3,6 +3,8 @@
     <!-- FRONTEND -->
 	<route url="/" app="frontend" module="main" action="index" ></route>
     <route url="/captcha" app="frontend" module="main" action="captcha" ></route>
+    <route url="/picture" app="frontend" module="main" action="picture" ></route>
+    <route url="/error403" app="frontend" module="main" action="error403" ></route>
 	<!-- Visitor -->
     <route url="/postlist" app="frontend" module="main" action="list" ></route>
     <route url="/post-([0-9]+)" app="frontend" module="main" action="post" vars="id_post" ></route>
