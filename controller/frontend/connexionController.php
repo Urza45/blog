@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Controller\Frontend;
 
 use \Lib\Controller;
+use Lib\MyMail;
 use \Lib\Request;
 use \Lib\Utilities;
 
@@ -43,7 +44,15 @@ class ConnexionController extends Controller
                         } else {
                             // Connected user
                             if ($user->getStatusConnected() == '1') {
-                                $this->response = ['type' => 'danger' , 'message' => 'Vous êtes déjà connecté.'];
+                                $code = mt_rand(1000,9999);
+                                $userManager->saveCode($code, $user->getId());
+                                $mail = new MyMail;
+                                $mail->sendConnectedMail($user, $code);
+
+
+
+                                $this->response = ['type' => 'danger' , 'message' => 'Vous êtes déjà connecté. Un email avec un code vous a été envoyé.'];
+
                             } else { // All is ok :)
                                 $this->response = ['type' => 'success' , 'message' => 'Connexion réussie'];
                     
@@ -132,6 +141,26 @@ class ConnexionController extends Controller
         ];
     }
     
+    public function code(Request $request)
+    {
+        $userManager = $this->manager->getManagerOf('User');
+        
+        // Verification of the existence of nickname in database and retrieval of corresponding user information.
+        $user = $userManager->getUniqueByPseudo($request->getParams()['p']);
+
+        if ($user) {
+            if ($request->getParams()['v'] === $user->getValidationKey()) {
+                $user->setStatusConnected(0);
+                $userManager->save($user);
+                return ['frontend/index.html.twig', [
+                    'Response' => $this->response,
+                    'Page' => '/'
+                    ]
+                ]; 
+            }
+        }
+    }
+
     /**
      * account
      *

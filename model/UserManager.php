@@ -284,4 +284,34 @@ class UserManager extends Manager
         return [ 'type' => 'success', 'message' => 'Utilisateur activé.'];
     }
 
+    public function getCode(int $id)
+    {
+        $sql = 'SELECT code FROM user WHERE id = :id';
+
+        $requete = $this->dao->prepare($sql);
+
+        $requete->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        $requete->execute();
+        
+        return $requete->fetch();
+    }
+
+    public function saveCode($code, $id)
+    {
+        $sql = 'UPDATE user SET '
+        . 'code = :code '
+        . 'WHERE id = :id';
+        
+        $requete = $this->dao->prepare($sql);
+
+        $requete->bindValue(':code', $code, \PDO::PARAM_INT);
+        $requete->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        $requete->execute();
+        $row_count = $requete->rowCount();
+        return $row_count;
+
+    }
+
 }

@@ -10,6 +10,7 @@
     <route url="/signin" app="frontend" module="connexion" action="signIn" ></route>
     <route url="/signout" app="frontend" module="connexion" action="signOut" ></route>
     <route url="/activation" app="frontend" module="connexion" action="activation" ></route>
+    <route url="/code" app="frontend" module="connexion" action="code" ></route>
     <!-- Registered USer -->
     <route url="/addcomment" app="frontend" module="comment" action="add" ></route>
     <route url="/modifycomment-([0-9]+)" app="frontend" module="comment" action="modify" vars="id_comment" ></route>
