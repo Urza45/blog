@@ -33,7 +33,8 @@
                         {% set color = 'green' %}
                     {% elseif user.activatedUser == 0 %}
                         {% set color = 'blue' %}
-                    {% elseif user.activeUser == 0 %}
+                    {% endif %}
+                    {% if user.activeUser == 0 %}
                         {% set color = 'red' %}
                     {% endif %}
                     <p class="{{ color }}">{{ user.name }} {{ user.firstName }}</p>
@@ -47,7 +48,11 @@
                             {% endif %}
                             {% if nbComment.disabled == 1 %}
                                 <p class="small red">Nombre de commentaires KO : {{ nbComment.nbc|raw }}</p>
-                                <a href="" class="btn btn-danger">Bannir</a>
+                                {% if user.activeUser == 0 %}
+                                    <a href="/admin/activeuser-{{ user.id }}" class="btn btn-primary">Activer</a>
+                                {% else %}
+                                    <a href="/admin/banuser-{{ user.id }}" class="btn btn-danger">Bannir</a>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
                     {% endfor %}
@@ -60,7 +65,7 @@
                                 <a href="/admin/promote-{{ user.id }}" class="btn btn-primary">Promouvoir modérateur</a>
                             {% endif %}
                             {% if type.id == 2 and user.askpromotion == 1 %}
-                                <a href="" class="btn btn-primary">Promouvoir administrateur</a>
+                                <a href="/admin/promote-{{ user.id }}" class="btn btn-primary">Promouvoir administrateur</a>
                             {% endif %}
                         {% endif %}
                     {% endfor %} 

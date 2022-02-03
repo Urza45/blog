@@ -64,7 +64,7 @@ button {
 }
 
 .blue {
-    color: blue;
+    color: blue !important;
 }
 
 .small {

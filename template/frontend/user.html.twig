@@ -101,7 +101,7 @@
             {% if level.id == 2 %}
             <div class="col-lg-6 text-center">
                 {% if User.askpromotion == 0 %}
-                    <a href="" class="btn btn-primary">Devenir administrateur</a>
+                    <a href="/askpromotion-{{ User.id }}" class="btn btn-primary">Devenir administrateur</a>
                 {% else %}
                     <p class="small">Demande de promotion en cours.</p>
                 {% endif %}
