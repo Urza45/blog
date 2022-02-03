@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="form_email">Votre code *</label>
+                    <input id="form_email" type="email" value="{{ Params.email }}" name="email" class="form-control" placeholder="* * * *" required="required" data-error="Un email valide est obligatoire.">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

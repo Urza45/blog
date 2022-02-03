@@ -7,11 +7,11 @@
     <route url="/postlist" app="frontend" module="main" action="list" ></route>
     <route url="/post-([0-9]+)" app="frontend" module="main" action="post" vars="id_post" ></route>
     <route url="/register" app="frontend" module="main" action="register" ></route>
-    <!-- <route url="/contact" app="frontend" module="main" action="contact" ></route> -->
     <!-- Connexion -->
     <route url="/signin" app="frontend" module="connexion" action="signIn" ></route>
     <route url="/signout" app="frontend" module="connexion" action="signOut" ></route>
     <route url="/activation" app="frontend" module="connexion" action="activation" ></route>
+    <route url="/code" app="frontend" module="connexion" action="code" ></route>
     <!-- Registered USer -->
     <route url="/addcomment" app="frontend" module="comment" action="add" ></route>
     <route url="/modifycomment-([0-9]+)" app="frontend" module="comment" action="modify" vars="id_comment" ></route>
@@ -28,20 +28,16 @@
     <route url="/admin/bancomment-([0-9]+)" app="backend" module="comment" action="ban" vars="id_comment"></route>
     <route url="/admin/deletecomment-([0-9]+)" app="backend" module="comment" action="delete" vars="id_comment"></route>
     <!-- Administrator -->
-    <!-- <route url="/admin/listregistration" app="Backend" module="Registration" action="listUserToRegister" ></route> -->
-    <!-- <route url="/admin/validregistration-([0-9]+)" app="Backend" module="Registration" action="validUser" vars="id_user"></route> -->
     <route url="/admin/listpost" app="Backend" module="Post" action="index" ></route>
     <route url="/admin/addpost" app="Backend" module="Post" action="add" ></route>
     <route url="/admin/modifypost-([0-9]+)" app="Backend" module="Post" action="modify" vars="id_post"></route>
     <route url="/admin/deletepost-([0-9]+)" app="Backend" module="Post" action="delete" vars="id_post"></route>
     <!-- Super administrator -->
-    <!-- <route url="/admin/validmoderator-([0-9]+)" app="backend" module="registration" action="validModerator" vars="id_user"></route> -->
-    <!-- <route url="/admin/validadministrator-([0-9]+)" app="backend" module="registration" action="validAdministrator" vars="id_user"></route> -->
     <route url="/admin/promote-([0-9]+)" app="backend" module="user" action="promote" vars="id_user"></route>
     <route url="/admin/demote-([0-9]+)" app="backend" module="user" action="demote" vars="id_user"></route>
-    <!-- <route url="/admin/listrequests" app="backend" module="main" action="listRequest" ></route> -->
     <route url="/admin/listuser" app="backend" module="user" action="list" ></route>
     <route url="/admin/modifyuser-([0-9]+)" app="backend" module="user" action="modify" vars="id_user" ></route>
     <route url="/admin/banuser-([0-9]+)" app="backend" module="user" action="ban" vars="id_user" ></route>
+    <route url="/admin/activeuser-([0-9]+)" app="backend" module="user" action="active" vars="id_user" ></route>
     <route url="/admin/deleteuser-([0-9]+)" app="backend" module="user" action="delete" vars="id_user" ></route>
 </routes>
