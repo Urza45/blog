@@ -1,199 +1,226 @@
 /* @import "./utils/functions"; */
 /* @import "./utils/mixins"; */
 /* @import "./utils/extensions"; */
+
 *,
 *::after,
 *::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
 }
 
 html {
-  /* 10px div by def of 16px */
-  font-size: 62.5%;
+    /* 10px div by def of 16px */
+    font-size: 62.5%;
 }
 
 body {
-  box-sizing: border-box;
-  background: #466272;
-  padding: 1% 1% 1% 1%;
-  font-family: "Open Sans", "Helvetica Neue", sans-serif;
-  color: #122c3e;
-  font-size: 2rem;
-  font-weight: 100;
-  line-height: 1.7;
-  min-height: 75rem;
-  padding-top: 4.5rem;
+    box-sizing: border-box;
+    background: #466272;
+    padding: 1% 1% 1% 1%;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    color: #122c3e;
+    font-size: 2rem;
+    font-weight: 100;
+    line-height: 1.7;
+    min-height: 75rem;
+    padding-top: 4.5rem;
 }
 
 h1 {
-  font-family: "oswald", "Helvetica Neue", sans-serif;
-  font-weight: 900;
-  font-size: 5rem;
-  font-style: italic;
+    font-family: "oswald", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 5rem;
+    font-style: italic;
 }
 
 h2 {
-  font-family: "Share Tech Mono", "Helvetica Neue", sans-serif;
-  font-weight: 900;
-  font-size: 2rem;
-  font-style: italic;
+    font-family: "Share Tech Mono", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    font-style: italic;
 }
 
 textarea {
-  font-family: "Open Sans", "Helvetica Neue", sans-serif;
-  font-weight: 100;
-  font-size: 2rem;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-weight: 100;
+    font-size: 2rem;
 }
 
 button {
-  font-family: "Open Sans", "Helvetica Neue", sans-serif;
-  font-weight: 900;
-  font-style: italic;
-  font-size: 2.75rem;
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 2.75rem;
 }
 
 .red {
-  color: red !important;
+    color: red !important;
 }
 
 .green {
-  color: green !important;
+    color: green !important;
 }
 
 .blue {
-  color: blue !important;
+    color: blue !important;
 }
 
 .small {
-  font-size: small;
+    font-size: small;
 }
 
 /* @import "./components/buttons"; */
 .center-div {
-  margin: 0 auto;
-  text-align: center;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  background: #122c3e;
-  height: 15rem;
-  width: 100%;
-  padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    background: #122c3e;
+    height: 15rem;
+    width: 100%;
+    padding: 10px 20px;
 }
+
 .header__logo {
-  display: block;
-  float: left;
-  font-size: 2em;
-  padding: 10px 20px;
-  text-decoration: none;
-  max-height: 100%;
-  z-index: 1;
-  width: 1em;
+    display: block;
+    float: left;
+    font-size: 2em;
+    padding: 10px 20px;
+    text-decoration: none;
+    max-height: 100%;
+    z-index: 1;
+    width: 1em;
 }
+
 @media all and (max-width: 991px) {
-  .header__logo img {
-    height: 50%;
-  }
+    .header__logo img {
+        height: 50%;
+    }
 }
 
 section {
-  box-sizing: border-box;
-  width: 100%;
-  border: solid #122c3e 10px;
-  border-radius: 1.5em;
-  padding: 5px;
-  background: #60a5bc;
+    box-sizing: border-box;
+    width: 100%;
+    border: solid #122c3e 10px;
+    border-radius: 1.5em;
+    padding: 5px;
+    background: #60a5bc;
 }
+
 section.page404 {
-  background: #fff;
+    background: #fff;
 }
+
 section.comments {
-  background: #b4406a;
+    background: #b4406a;
 }
+
 section.admin {
-  background: #d2a058;
+    background: #d2a058;
 }
+
 section.account {
   background: #e3e3e4;
 }
 
 nav {
-  width: 100%;
-  height: 100px;
-  background: #122c3e;
+    width: 100%;
+    height: 100px;
+    background: #122c3e;
 }
+
 nav .main_pages {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
+
 nav .main_pages a {
-  width: 15%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-  text-decoration: none;
-  font-family: Arial, sans-serif;
-  color: #fff;
-  background-color: #122c3e;
-  z-index: 1000;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #122c3e;
+    z-index: 1000;
 }
+
 nav .main_pages a.active {
   color: #d2a058;
   font-weight: bold;
 }
+
 nav .main_pages a:hover {
   background: #60a5bc;
 }
+
 @media all and (max-width: 991px) {
-  nav {
-    height: 60px;
-  }
-  nav .main_pages {
-    display: none;
-    flex-direction: column;
-    background: #60a5bc;
-    height: 220px;
-  }
-  nav .main_pages a {
-    width: 100%;
-  }
-  nav .main_pages:hover {
-    background: #60a5bc;
-  }
+    nav {
+        height: 60px;
+    }
+
+    nav .main_pages {
+        display: none;
+        flex-direction: column;
+        background: #60a5bc;
+        height: 220px;
+    }
+
+    nav .main_pages a {
+        width: 100%;
+    }
+
+    nav .main_pages:hover {
+        background: #60a5bc;
+    }
 }
+
 nav label {
-  display: none;
+    display: none;
 }
+
 @media all and (max-width: 991px) {
-  nav label {
-    width: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    font-size: 40px;
-    color: #fff;
-    cursor: pointer;
-  }
+    nav label {
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        font-size: 40px;
+        color: #fff;
+        cursor: pointer;
+    }
 }
 
 #toggle {
   display: none;
 }
+
 @media all and (max-width: 991px) {
-  #toggle:checked + .main_pages {
-    display: flex;
-  }
+    #toggle:checked + .main_pages {
+        display: flex;
+    }
 }
 
 /* @import "./layout/container"; */
-/* @import "./layout/form"; */
+@media all and (max-width: 991px) {
+    form label {
+        display: block;
+        font-size: 2rem;
+        line-height: 2rem;
+        padding-top: 1.5rem;
+        text-align: center;
+    }
+}
+
 /* @import "./pages/work"; */
 /* @import "./pages/about"; */
 /* @import "./pages/project"; */

@@ -1,0 +1,12 @@
+form {
+    @media all and (max-width: 991px) {
+        & label {
+            display: block;
+            font-size: 2rem;
+            line-height: 2rem;
+            padding-top: $grid-gutter;
+            text-align: center;
+        }
+    }
+
+}

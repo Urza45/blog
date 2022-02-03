@@ -337,5 +337,4 @@ class UserManager extends Manager
         return $row_count;
 
     }
-
 }

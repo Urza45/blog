@@ -20,14 +20,14 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group form__field">
                                     <label for="form_name">Prénom *</label>
                                     <input id="form_name" type="text" value="{{ Params.name }}" name="name" class="form-control" placeholder="Votre prénom *" required="required" data-error="Prénom est obligatoire.">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group form__field">
                                     <label for="form_lastname">Nom *</label>
                                     <input id="form_lastname" type="text" value="{{ Params.surname }}" name="surname" class="form-control" placeholder="Votre nom *" required="required" data-error="Nom est obligatoire.">
                                     <div class="help-block with-errors"></div>
@@ -36,14 +36,14 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group form__field">
                                     <label for="form_email">Email *</label>
                                     <input id="form_email" type="email" value="{{ Params.email }}" name="email" class="form-control" placeholder="Votre email *" required="required" data-error="Un email valide est obligatoire.">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group form__field">
                                     <label for="form_need">Motif de votre message *</label>
                                     <select id="form_need" name="need" value="{{ Params.need }}" class="form-control" required="required" data-error="Motif.">
                                         <option value=""></option>
@@ -58,13 +58,13 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
+                                <div class="form-group form__field">
                                     <label for="form_message">Message *</label>
                                     <textarea id="form_message" name="message" value="{{ Params.message }}" class="form-control" placeholder="Votre message *" rows="4" required="required" data-error="Un message ?"></textarea>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 form__field">
                                 <label for="form_captcha"><img src="/captcha" /></label>
                                 <input id="form_captcha" type="text" value="{{ Params.email }}" name="captcha" class="form-control" placeholder="Captcha *" required="required" data-error="Captcha est obligatoire.">
                             </div>

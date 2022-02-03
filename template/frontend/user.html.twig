@@ -7,6 +7,12 @@
     <div class="container">
         <form id="user-form" action="/modifyaccount-{{ User.id }}" method="post" role="form">
         <div class="row">
+            <div class="col-lg-12 text-center">
+                <p>Pseudo : {{ User.pseudo }}</p><p class="small"><i>(Ne peux pas être modifié)</i></p>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-lg-3 text-right">
                 <label for="form_name">Nom * :</label>
             </div>
@@ -27,12 +33,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 text-right">
-                <p>Pseudo : </p>
-            </div>
-            <div class="col-lg-3">
-                <p>{{ User.pseudo }}</p><p class="small"><i>(Ne peux pas être modifié)</i></p>
-            </div>
+            
             <div class="col-lg-3 text-right">
                 <label for="form_email">Email * :</label>
             </div>
@@ -80,12 +81,14 @@
     <div class="container">
         <hr />
         <div class="row">
+            <form>
             <div class="col-lg-3 text-right">
-                <p>Niveau d'accès : </p>
+                <label for="form_access">Niveau d'accès :</label>
             </div>
             <div class="col-lg-3">
-                <p>{{ level.label|raw }}</p>
+                <input id="form_access" type="text" value="{{ level.label|raw }}" class="form-control" disabled >
             </div>
+            </form>
             {% if level.id == 1 %}
             <div class="col-lg-6 text-center">
                 {% if User.askpromotion == 0 %}
