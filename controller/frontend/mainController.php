@@ -144,4 +144,9 @@ class MainController extends Controller
     {
         return Utilities::captcha($this->session);
     }
+
+    public function picture(Request $request)
+    {
+        return Utilities::ViewPicture($request->getParams()['name'], $request->getParams()['type']);
+    }
 }

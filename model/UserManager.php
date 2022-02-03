@@ -298,43 +298,4 @@ class UserManager extends Manager
         }
         return [ 'type' => 'success', 'message' => 'Utilisateur banni.'];
     }
-
-    public function askPromotion(int $id)
-    {
-        $countUser = $this->dao->exec('UPDATE user SET askpromotion = 1 WHERE id = '.(int) $id);
-        if ($countUser == 0) {
-            return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
-        }
-        return [ 'type' => 'success', 'message' => 'Votre demande est bien enregistrée.'];
-    }
-
-    public function promote(int $id)
-    {
-        $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser + 1, askPromotion = 0 WHERE id = '.(int) $id;
-        $countUser = $this->dao->exec($sql);
-        if ($countUser == 0) {
-            return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
-        }
-        return [ 'type' => 'success', 'message' => 'Promotion bien enregistrée.'];
-    }
-
-    public function demote(int $id)
-    {
-        $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser - 1 WHERE id = '.(int) $id;
-        $countUser = $this->dao->exec($sql);
-        if ($countUser == 0) {
-            return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
-        }
-        return [ 'type' => 'success', 'message' => 'Rétrogradation bien enregistrée.'];
-    }
-
-    public function ban(int $id)
-    {
-        $countUser = $this->dao->exec('UPDATE user SET activeUser = 0 WHERE id ='. (int) $id);
-        if ($countUser == 0) {
-            return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
-        }
-        return [ 'type' => 'success', 'message' => 'Utilisateur banni.'];
-    }
-
 }
