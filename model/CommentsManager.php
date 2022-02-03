@@ -170,8 +170,10 @@ class CommentsManager extends Manager
      */
     public function ban(int $id, int $disabled)
     {
-        $countComment = $this->dao->exec('UPDATE comments SET disabled = '. $disabled .' WHERE id = '.(int) $id);
-        if ($disabled == 0 ) {
+        $sql = 'UPDATE comments SET disabled = '. $disabled .' WHERE id = '.(int) $id;
+
+        $countComment = $this->dao->exec($sql);
+        if ($disabled == 1 ) {
             if ($countComment == 0) {
                 return [ 'type' => 'danger', 'message' => 'Un problème est survenu. Le commentaire n\'a pas été interdit.'];
             } 
