@@ -25,14 +25,19 @@ class MainController extends Controller
 
         if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
         {
-            $email = new MyMail;
-            $this->response = $email->sendEmailToAdmin($request->getParams());
+            if ($request->getParams()['captcha'] == $this->session->getAttribute('captcha'))
+            {
+                $email = new MyMail;
+                $this->response = $email->sendEmailToAdmin($request->getParams());
+            } else {
+                $this->response = [ 'type' => 'danger', 'message' => 'Captcha erroné'];
+            }
         }
 
         return ['frontend/index.html.twig', [
                 'LastPostList' => $postManager->getListPost(5),
                 'Response' => $this->response,
-                'Page' => $request->getUrl()
+                'Page' => $request->getUrl(),
             ]
         ];
     }
@@ -138,5 +143,10 @@ class MainController extends Controller
             'Response' => $this->response
             ]
         ];
+    }
+
+    public function captcha()
+    {
+        return Utilities::captcha($this->session);
     }
 }

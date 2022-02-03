@@ -236,7 +236,13 @@ class UserManager extends Manager
         }
         return $ifExistPseudo;
     }
-
+    
+    /**
+     * askPromotion
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function askPromotion(int $id)
     {
         $countUser = $this->dao->exec('UPDATE user SET askpromotion = 1 WHERE id = '.(int) $id);
@@ -245,7 +251,13 @@ class UserManager extends Manager
         }
         return [ 'type' => 'success', 'message' => 'Votre demande est bien enregistrée.'];
     }
-
+    
+    /**
+     * promote
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function promote(int $id)
     {
         $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser + 1, askPromotion = 0 WHERE id = '.(int) $id;
@@ -255,7 +267,13 @@ class UserManager extends Manager
         }
         return [ 'type' => 'success', 'message' => 'Promotion bien enregistrée.'];
     }
-
+    
+    /**
+     * demote
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function demote(int $id)
     {
         $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser - 1 WHERE id = '.(int) $id;
@@ -265,7 +283,13 @@ class UserManager extends Manager
         }
         return [ 'type' => 'success', 'message' => 'Rétrogradation bien enregistrée.'];
     }
-
+    
+    /**
+     * ban
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function ban(int $id)
     {
         $countUser = $this->dao->exec('UPDATE user SET activeUser = 0 WHERE id ='. (int) $id);

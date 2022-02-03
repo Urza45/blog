@@ -2,6 +2,7 @@
 <routes>
     <!-- FRONTEND -->
 	<route url="/" app="frontend" module="main" action="index" ></route>
+    <route url="/captcha" app="frontend" module="main" action="captcha" ></route>
 	<!-- Visitor -->
     <route url="/postlist" app="frontend" module="main" action="list" ></route>
     <route url="/post-([0-9]+)" app="frontend" module="main" action="post" vars="id_post" ></route>

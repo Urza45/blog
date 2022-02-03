@@ -65,6 +65,10 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
+                                <label for="form_captcha"><img src="/captcha" /></label>
+                                <input id="form_captcha" type="text" value="{{ Params.email }}" name="captcha" class="form-control" placeholder="Captcha *" required="required" data-error="Captcha est obligatoire.">
+                            </div>
+                            <div class="col-md-12">
                                 <input type="hidden" name="action" value="sending" />
                                 <input type="submit" class="btn btn-success btn-send" value="Envoyer" />
                                 <input type="reset" class="btn btn-fail btn-reset" value="Reset"/>
