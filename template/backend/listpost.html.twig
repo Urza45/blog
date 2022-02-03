@@ -20,7 +20,7 @@
             <div class="col-lg-6">
                 {{ post.dateCreate|date("d/m/Y") }} - {{ post.title|raw }} 
             </div>
-            {% if (session.idUser == post.user_idUser) or (session.admin == 4) %}
+            {% if (session.idUser == post.user_idUser) or (session.admin >= 3) %}
             <div class="col-lg-3 text-center">
                 <a href="/admin/modifypost-{{ post.id }}" class="btn btn-primary">Modifier</a> 
             </div>

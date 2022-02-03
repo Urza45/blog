@@ -51,18 +51,20 @@ class MainController extends Controller
 
     public function post(Request $request, $vars) {
 
-        if (isset($request->getParams()['action'])) {
+        $Params = null;
 
+        if ($this->session->existsAttribute('idUser')) 
+        {
+            $Params = new Comments();
+            $Params->setDisabled('0');
+            $Params->setPost_idPost($vars['id_post']);
+            $Params->setUser_idUser($this->session->getAttribute('idUser'));
+            $Params->setDate(date('Y/m/d'));
         }
-        
+
         $postManager = $this->manager->getManagerOf('Post');
         $commentsManager = $this->manager->getManagerOf('Comments');
-        $Params = new Comments();
-        $Params->setDisabled('0');
-        $Params->setPost_idPost($vars['id_post']);
-        $Params->setUser_idUser($this->session->getAttribute('idUser'));
-        $Params->setDate(date('Y/m/d'));
-
+        
         return ['frontend/post.html.twig', [
             'post' => $postManager->getUniquePost((int) $vars['id_post']),
             'action' => '/addcomment',
@@ -147,7 +149,12 @@ class MainController extends Controller
 
     public function picture(Request $request)
     {
-        return Utilities::ViewPicture($request->getParams()['name'], $request->getParams()['type']);
+        if (isset($request->getParams()['name']) && isset($request->getParams()['type']) 
+            && (in_array(strtoupper($request->getParams()['type']), ['PDF', 'JPG', 'JPEG', 'PNG']))) 
+        {
+            return Utilities::ViewPicture($request->getParams()['name'], $request->getParams()['type']);
+        }
+        return ['error/404.html.twig', [] ];
     }
 
     public function error403()
