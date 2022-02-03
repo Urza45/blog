@@ -139,8 +139,7 @@ class ConnexionController extends Controller
         {
             $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
             $level = $this->manager->getManagerOf('TypeUser')->getLabel((int) $user->getTypeUser_idTypeUSer());
-            //var_dump($user);
-            //var_dump($level);
+
             return ['frontend/user.html.twig', [
                 'Response' => $this->response,
                 'User' => $user,
