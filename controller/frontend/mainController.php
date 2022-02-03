@@ -149,4 +149,9 @@ class MainController extends Controller
     {
         return Utilities::ViewPicture($request->getParams()['name'], $request->getParams()['type']);
     }
+
+    public function error403()
+    {
+        return ['error/403.html.twig', [] ];
+    }
 }

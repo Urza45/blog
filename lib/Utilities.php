@@ -52,7 +52,7 @@ class Utilities
      * @return void
      */
     public static function Salt(){
-        return substr(strtr(base64_encode(hex2bin(self::RandomToken(32))), '+', '.'), 0, 10);
+        return substr(strtr(base64_encode(hex2bin( self::RandomToken(32))), '+', '.'), 0, 10);
     }
     
     /**

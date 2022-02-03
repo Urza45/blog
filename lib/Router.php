@@ -65,7 +65,7 @@ class Router {
                 */
                 $var = '\Controller\\' . $app . '\\' . $module . 'Controller';
 
-                if (file_exists(dirname(__DIR__) . '/controller//' . $app . '//' . $module . 'Controller.php')) {
+                if (is_file(dirname(__DIR__) . '/controller//' . $app . '//' . $module . 'Controller.php')) {
                     $controller = new $var();
                     if (!empty($vars)) {
                         return $controller->$action($request, $vars);

@@ -148,7 +148,7 @@ class ConnexionController extends Controller
                 ]
             ];
         }
-        return ['error/forbidden.html.twig', [] ];
+        return ['error/403.html.twig', [] ];
     }
     
     /**
@@ -174,7 +174,7 @@ class ConnexionController extends Controller
             ];
 
         }
-        return ['error/forbidden.html.twig', [] ];
+        return ['error/403.html.twig', [] ];
     }
 
     public function modify(Request $request, $vars)
