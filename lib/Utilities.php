@@ -112,7 +112,7 @@ class Utilities
             header("Content-Disposition:inline;filename='$name");
             readfile("image/" . $name);
         }
-        header("content-type:images/".$type);
+        header("content-type:image/".$type);
         echo file_get_contents("image/" . $name);
     }
 }
