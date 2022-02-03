@@ -48,9 +48,6 @@ class ConnexionController extends Controller
                                 $userManager->saveCode($code, $user->getId());
                                 $mail = new MyMail;
                                 $mail->sendConnectedMail($user, $code);
-
-
-
                                 $this->response = ['type' => 'danger' , 'message' => 'Vous êtes déjà connecté. Un email avec un code vous a été envoyé.'];
 
                             } else { // All is ok :)
