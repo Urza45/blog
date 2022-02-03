@@ -152,7 +152,7 @@ class ConnexionController extends Controller
             if ($request->getParams()['v'] === $user->getValidationKey()) {
                 $user->setStatusConnected(0);
                 $userManager->save($user);
-                return ['frontend/index.html.twig', [
+                return ['frontend/code.html.twig', [
                     'Response' => $this->response,
                     'Page' => '/'
                     ]
