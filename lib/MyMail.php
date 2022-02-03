@@ -16,7 +16,12 @@ class MyMail
     const OK_MESSAGE = 'Votre message a bien été envoyé.';
     const ACTIVATION_MESSAGE = 'Un email d\'activation vous a été envoyé.';
     const ERROR_MESSAGE = 'Une erreur est survenue. Veuillez réessayer plus tard.';
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         $config = Config::getInstance();
@@ -25,7 +30,13 @@ class MyMail
         $this->subject = $config->get('subject');
         $this->webUrl = $config->get('webUrl');
     }
-
+    
+    /**
+     * sendEmailToAdmin
+     *
+     * @param  mixed $tab
+     * @return void
+     */
     public function sendEmailToAdmin(array $tab)
     {
         try
@@ -57,7 +68,13 @@ class MyMail
             return array('type' => 'danger', 'message' => self::ERROR_MESSAGE);
         }
     }
-
+    
+    /**
+     * sendActivationEmail
+     *
+     * @param  mixed $user
+     * @return void
+     */
     public function sendActivationEmail(User $user)
     {
         try
@@ -85,6 +102,60 @@ class MyMail
             <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
                 <tr style="background-color: #e0e0e0;"> 
                     <th><a href="' . $this->webUrl .'/activation/?p=' . $user->getPseudo() . '&v=' . $user->getValidationKey() . '">Activer votre compte</a></th> 
+                </tr> 
+            </table>
+        </body> 
+        </html>'; 
+
+            // All the neccessary headers for the email.
+            $headers = [
+                'MIME-Version: 1.0',
+                'Content-Type: text/html; charset="UTF-8";',
+                'From: ' . $this->from,
+                'Reply-To: ' . $this->from,
+                'Return-Path: ' . $this->from,
+            ];
+            // Send email
+            if (mail($this->sendTo, $this->subject, $this->emailText, implode("\n", $headers))) {
+                return array('type' => 'success', 'message' => self::ACTIVATION_MESSAGE);
+            }
+            return array('type' => 'danger', 'message' => self::ERROR_MESSAGE);
+        }
+        catch (\Exception $e)
+        {
+            return array('type' => 'danger', 'message' => self::ERROR_MESSAGE);
+        }
+    }
+
+    public function sendConnectedMail(User $user, $code)
+    {
+        
+        
+        try
+        {
+            $this->sendTo = $user->getEmail();
+            $this->subject = 'Vous êtes déjà coonecté.';
+
+            $this->emailText = '<html> 
+        <head> 
+            <titleBienvenu(e) sur mon blog</title> 
+        </head> 
+        <body> 
+            <h1>Merci de vous joindre à nous !</h1> 
+            <p>Vous n\'avez pas réussi à vous connecté.</p>
+            <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
+                <tr> 
+                    <th>Nom :</th><td>' . $user->getName() . ' ' . $user->getFirstName() . '</td> 
+                </tr> 
+                <tr style="background-color: #e0e0e0;"> 
+                    <th>Email:</th><td>' . $user->getEmail() . '</td> 
+                </tr> 
+            </table>
+            <br/>
+            <p>Code pour déboquer votre compte : ' . $code . '</p>
+            <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
+                <tr style="background-color: #e0e0e0;"> 
+                    <th><a href="' . $this->webUrl .'/code/?p=' . $user->getPseudo() . '&v=' . $user->getValidationKey() . '">Débloquer votre compte</a></th> 
                 </tr> 
             </table>
         </body> 

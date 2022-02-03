@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Controller\Frontend;
 
 use \Lib\Controller;
+use Lib\MyMail;
 use \Lib\Request;
 use \Lib\Utilities;
 
@@ -37,22 +38,33 @@ class ConnexionController extends Controller
                     if ($user->getActivatedUser() == '0') {
                         $this->response = ['type' => 'danger' , 'message' => 'Vous n\'avez pas activé votre compte.'];
                     } else {
-                        // Connected user
-                        if ($user->getStatusConnected() == '1') {
-                            $this->response = ['type' => 'danger' , 'message' => 'Vous êtes déjà connecté.'];
-                        } else { // All is ok :)
-                            $this->response = ['type' => 'success' , 'message' => 'Connexion réussie'];
-                    
-                            $this->session->setAttribute('name', $user->getName() . ' ' .$user->getFirstname());
-                            $this->session->setAttribute('connected', '1');
-                            $this->session->setAttribute('admin', $user->getTypeUser_idTypeUSer());
-                            $this->session->setAttribute('idUser', $user->getId());
-                            $user->setStatusConnected('1');
+                        // Banned user
+                        if ($user->getActiveUser() == '0') {
+                            $this->response = ['type' => 'danger' , 'message' => 'L\'accès à votre compte a été interdit.'];
+                        } else {
+                            // Connected user
+                            if ($user->getStatusConnected() == '1') {
+                                $code = mt_rand(1000,9999);
+                                $userManager->saveCode($code, $user->getId());
+                                $mail = new MyMail;
+                                $mail->sendConnectedMail($user, $code);
+                                $this->response = ['type' => 'danger' , 'message' => 'Vous êtes déjà connecté. Un email avec un code vous a été envoyé.'];
 
-                            $userManager->save($user);
+                            } else { // All is ok :)
+                                $this->response = ['type' => 'success' , 'message' => 'Connexion réussie'];
+                    
+                                $this->session->setAttribute('name', $user->getName() . ' ' .$user->getFirstname());
+                                $this->session->setAttribute('connected', '1');
+                                $this->session->setAttribute('admin', $user->getTypeUser_idTypeUSer());
+                                $this->session->setAttribute('idUser', $user->getId());
+                                $user->setStatusConnected('1');
+
+                                $userManager->save($user);
                         
-                            header('Location: /');
+                                header('Location: /');
+                            }
                         }
+                        
                     }
                 } else {
                     $this->response = ['type' => 'danger' , 'message' => 'Connexion échouée'];
@@ -62,7 +74,7 @@ class ConnexionController extends Controller
             }
         }
 
-        return ['frontend/register.html.twig', [
+        return ['frontend/connexion.html.twig', [
             'Response' => $this->response,
             'Page' => '/signin'
             ]
@@ -126,6 +138,26 @@ class ConnexionController extends Controller
         ];
     }
     
+    public function code(Request $request)
+    {
+        $userManager = $this->manager->getManagerOf('User');
+        
+        // Verification of the existence of nickname in database and retrieval of corresponding user information.
+        $user = $userManager->getUniqueByPseudo($request->getParams()['p']);
+
+        if ($user) {
+            if ($request->getParams()['v'] === $user->getValidationKey()) {
+                $user->setStatusConnected(0);
+                $userManager->save($user);
+                return ['frontend/code.html.twig', [
+                    'Response' => $this->response,
+                    'Page' => '/'
+                    ]
+                ]; 
+            }
+        }
+    }
+
     /**
      * account
      *
@@ -143,6 +175,7 @@ class ConnexionController extends Controller
             }
             $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
             $level = $this->manager->getManagerOf('TypeUser')->getLabel((int) $user->getTypeUser_idTypeUSer());
+
             return ['frontend/user.html.twig', [
                 'Response' => $this->response,
                 'User' => $user,

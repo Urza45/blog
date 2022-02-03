@@ -143,4 +143,21 @@ class UserController extends Controller
         }
         return ['error/403.html.twig', [] ];
     }
+
+    public function active(Request $request, $vars)
+    {
+        $this->response = $this->manager->getManagerOf('User')->active($vars['id_user']);
+
+        $users = $this->manager->getManagerOf('User')->getListUser();
+        $types = $this->manager->getManagerOf('TypeUser')->getListType();
+        $nbComments = $this->manager->getManagerOf('Comments')->countByUser();
+
+        return ['backend/listusers.html.twig', [
+                'Users' => $users,
+                'ListType' => $types,
+                'nbComments' => $nbComments,
+                'Response' => $this->response
+            ] 
+        ];
+    }
 }

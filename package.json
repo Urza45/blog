@@ -4,8 +4,8 @@
   "description": "My first blog",
   "main": "index.js",
   "scripts": {
-    "sass": "sass --watch ./sass/main.scss:./public/css/style.css --style compressed",
-    "sass2": "sass --watch ./sass/main.scss:./public/css/style_not_compressed.css",
+    "sass": "sass --no-source-map --watch ./sass/main.scss:./public/css/style.css --style compressed",
+    "sass2": "sass2 --no-source-map --watch ./sass/main.scss:./public/css/style_not_compressed.css",
     "prefix": "postcss ./public/css/style.css --use autoprefixer -d ./public/css/prefixed/"
   },
   "repository": {

@@ -86,7 +86,6 @@ class CommentsManager extends Manager
      */
     public function save(Comments $comments)
     {
-        var_dump($comments);
         if ($comments->isValid())
         {
             $comments->isNew() ? $this->add($comments) : $this->modify($comments);
