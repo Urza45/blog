@@ -34,7 +34,7 @@ class Utilities
      * Generates a random 32-character token 
      *
      * @param  mixed $length
-     * @return void
+     * @return string
      */
     public static function RandomToken($length = null){
         if(!isset($length) || intval($length) <= 8 ){
@@ -49,7 +49,7 @@ class Utilities
      * Salt
      * Generates a 10 character random key
      *
-     * @return void
+     * @return string
      */
     public static function Salt(){
         return substr(strtr(base64_encode(hex2bin( self::RandomToken(32))), '+', '.'), 0, 10);
