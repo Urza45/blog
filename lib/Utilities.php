@@ -87,8 +87,8 @@ class Utilities
         $img = imagecreate(65,30);
 	    $font = dirname(__DIR__) .'/public/fonts/28_Days_Later.ttf';
 	 
-	    $bg = imagecolorallocate($img,255,255,255);
-	    $textcolor = imagecolorallocate($img, 0, 0, 0);
+	    $textcolor = imagecolorallocate($img,255,255,255); // First use define background color
+	    $textcolor = imagecolorallocate($img, 0, 0, 0);    // Second use define text color
 	 
 	    imagettftext($img, 23, 0, 3, 30, $textcolor, $font, $session->getAttribute('captcha'));
 	 

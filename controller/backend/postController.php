@@ -108,7 +108,6 @@ class PostController extends Controller
             $this->response = $this->manager->getManagerOf('Post')->delete($vars['id_post']);
         
             $postManager = $this->manager->getManagerOf('Post');
-            $userManager = $this->manager->getManagerOf('User');
 
             return ['backend/listpost.html.twig', [
                 'Posts' => $postManager->getListPost(),

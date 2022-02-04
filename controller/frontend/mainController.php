@@ -21,7 +21,6 @@ class MainController extends Controller
     public function index(Request $request) {
 
         $postManager = $this->manager->getManagerOf('Post');
-        $userManager = $this->manager->getManagerOf('User');
 
         if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
         {
@@ -41,7 +40,13 @@ class MainController extends Controller
             ]
         ];
     }
-
+    
+    /**
+     * list
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function list(Request $request) {
 
         $postManager = $this->manager->getManagerOf('Post');
@@ -53,7 +58,14 @@ class MainController extends Controller
             ]
         ];
     }
-
+    
+    /**
+     * post
+     *
+     * @param  mixed $request
+     * @param  mixed $vars
+     * @return void
+     */
     public function post(Request $request, $vars) {
 
         $Params = null;
@@ -81,7 +93,13 @@ class MainController extends Controller
             ]
         ];
     }
-
+    
+    /**
+     * register
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function register(Request $request) {
 
         $userManager = $this->manager->getManagerOf('User');
@@ -91,9 +109,7 @@ class MainController extends Controller
             // Check password matching
             if ($request->getParams()['passwordFirst'] === $request->getParams()['confirmedPassword'] ) {
                 // Verification of the existence of nickname 
-                $user = $userManager->getUniqueByPseudo($request->getParams()['pseudo']);
-
-                if ($user) {
+                if ($userManager->ifExistPseudo($request->getParams()['pseudo'])) {
                     $this->response = ['type' => 'danger' , 'message' => 'Le pseudo est déjà pris'];
                 } else {
                     $user = new User();
@@ -131,7 +147,13 @@ class MainController extends Controller
             ]
         ];
     }
-
+    
+    /**
+     * contact
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function contact(Request $request) {
 
         if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
@@ -146,12 +168,23 @@ class MainController extends Controller
             ]
         ];
     }
-
+    
+    /**
+     * captcha
+     *
+     * @return void
+     */
     public function captcha()
     {
         return Utilities::captcha($this->session);
     }
-
+    
+    /**
+     * picture
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function picture(Request $request)
     {
         if (isset($request->getParams()['name']) && isset($request->getParams()['type']) 
@@ -161,7 +194,12 @@ class MainController extends Controller
         }
         return ['error/404.html.twig', [] ];
     }
-
+    
+    /**
+     * error403
+     *
+     * @return void
+     */
     public function error403()
     {
         return ['error/403.html.twig', [] ];

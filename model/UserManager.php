@@ -230,7 +230,7 @@ class UserManager extends Manager
     public function ifExistPseudo(string $pseudo ) : bool
     {
         $ifExistPseudo = false;
-        $requete = $this->dao->query('SELECT COUNT(*) FROM User')->fetchColumn();
+        $requete = $this->dao->query('SELECT COUNT(*) FROM User WHERE pseudo="' . $pseudo.'"')->fetchColumn();
         if ($requete > 0) {
             $ifExistPseudo = true;
         }
