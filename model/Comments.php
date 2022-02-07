@@ -21,7 +21,12 @@ class Comments extends Entity
     const INVALID_DISABLED = 3;
     const INVALID_IDUSER = 4;
     const INVALID_IDPOST = 5;
-
+    
+    /**
+     * isValid
+     *
+     * @return void
+     */
     public function isValid()
     {
         return !( (empty($this->content) || empty($this->date)

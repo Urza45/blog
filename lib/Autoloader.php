@@ -26,7 +26,7 @@ class Autoloader {
         {
             require_once($class);
         } else {
-            echo 'ERROR: '. $class . '<br/>';
+            print_r('ERROR: '. $class . '<br/>');
         }
     }
 

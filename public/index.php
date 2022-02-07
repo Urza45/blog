@@ -20,6 +20,7 @@ use \Lib\Router;
 use \Lib\Request;
 use \Lib\Session;
 use \Lib\Config;
+use Lib\MyTwig;
 use \Twig\Extra\Intl\IntlExtension;
 
 /**
@@ -48,28 +49,28 @@ $request = new Request();
 /**
  * Twig initiation 
  */
-$loader = new \Twig\Loader\FilesystemLoader($config->get('directory') . '/template');
-$twig = new \Twig\Environment(
-    $loader, 
-    [
-        'debug' => true,
-        'cache' => false,
-    ]
-);
+// $loader = new \Twig\Loader\FilesystemLoader($config->get('directory') . '/template');
+// $twig = new \Twig\Environment(
+//     $loader, 
+//     [
+//         'debug' => true,
+//         'cache' => false,
+//     ]
+// );
 /**
  * Add Twig extension for debugging
  */
-$twig->addExtension(new \Twig\Extension\DebugExtension());
+//$twig->addExtension(new \Twig\Extension\DebugExtension());
 /**
  * Add Twig extension for format date functions
  */
-$twig->addExtension(new IntlExtension());
+//$twig->addExtension(new IntlExtension());
 /**
  * Allow twig to access the session 
  */
-if ($session->existSession()) {
-    $twig->addGlobal('session', $_SESSION);
-}
+//if ($session->existSession()) {
+//    $twig->addGlobal('session', $_SESSION);
+//}
  
 /**
  * Call action
@@ -79,4 +80,8 @@ $view = Router::getInstance()->run($request);
 /**
  * Render
  */
-echo $twig->render($view[0], $view[1]);
+$twig = new MyTwig($session);
+$twig->getRender($view);
+
+//echo $twig->render($view[0], $view[1]);
+
