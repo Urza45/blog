@@ -18,8 +18,8 @@ class Utilities
      * @return void
      */
     public static function checkDate($date) {
-        $dt = \DateTime::createFromFormat("Y/m/d", $date);
-        return $dt && $dt->format("Y/m/d") === $date;
+        $formatedDate = \DateTime::createFromFormat("Y/m/d", $date);
+        return $formatedDate && $formatedDate->format("Y/m/d") === $date;
     }
     
     /**

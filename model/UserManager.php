@@ -38,10 +38,10 @@ class UserManager extends Manager
     /**
      * getUnique
      *
-     * @param  mixed $id
+     * @param  mixed $idUser
      * @return instance of User
      */
-    public function getUnique(int $id)
+    public function getUnique(int $idUser)
     {
         $sql = 'SELECT id, name, firstName, pseudo, email, phone, portable,'
         .' password, salt, statusConnected, activeUser, validationKey'
@@ -49,7 +49,7 @@ class UserManager extends Manager
         .' FROM user WHERE id = :id';
         
         $requete = $this->dao->prepare($sql);
-        $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+        $requete->bindValue(':id', (int) $idUser, \PDO::PARAM_INT);
         $requete->execute();
     
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\User');
@@ -164,12 +164,12 @@ class UserManager extends Manager
     /**
      * delete
      *
-     * @param  mixed $id
+     * @param  mixed $idUser
      * @return void
      */
-    public function delete(int $id)
+    public function delete(int $idUser)
     {
-        $countUser = $this->dao->exec('DELETE FROM user WHERE id = '.(int) $id);
+        $countUser = $this->dao->exec('DELETE FROM user WHERE id = '.(int) $idUser);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. L\'utilisateur n\'a pas été effacé.'];
         }
@@ -195,12 +195,12 @@ class UserManager extends Manager
     /**
      * askPromotion
      *
-     * @param  mixed $id
+     * @param  mixed $idUser
      * @return void
      */
-    public function askPromotion(int $id)
+    public function askPromotion(int $idUser)
     {
-        $countUser = $this->dao->exec('UPDATE user SET askpromotion = 1 WHERE id = '.(int) $id);
+        $countUser = $this->dao->exec('UPDATE user SET askpromotion = 1 WHERE id = '.(int) $idUser);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
         }
@@ -210,12 +210,12 @@ class UserManager extends Manager
     /**
      * promote
      *
-     * @param  mixed $id
+     * @param  mixed $idUser
      * @return void
      */
-    public function promote(int $id)
+    public function promote(int $idUser)
     {
-        $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser + 1, askPromotion = 0 WHERE id = '.(int) $id;
+        $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser + 1, askPromotion = 0 WHERE id = '.(int) $idUser;
         $countUser = $this->dao->exec($sql);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
@@ -226,12 +226,12 @@ class UserManager extends Manager
     /**
      * demote
      *
-     * @param  mixed $id
+     * @param  mixed $idUser
      * @return void
      */
-    public function demote(int $id)
+    public function demote(int $idUser)
     {
-        $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser - 1 WHERE id = '.(int) $id;
+        $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser - 1 WHERE id = '.(int) $idUser;
         $countUser = $this->dao->exec($sql);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
@@ -242,12 +242,12 @@ class UserManager extends Manager
     /**
      * ban
      *
-     * @param  mixed $id
+     * @param  mixed $idUser
      * @return void
      */
-    public function ban(int $id)
+    public function ban(int $idUser)
     {
-        $countUser = $this->dao->exec('UPDATE user SET activeUser = 0 WHERE id ='. (int) $id);
+        $countUser = $this->dao->exec('UPDATE user SET activeUser = 0 WHERE id ='. (int) $idUser);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
         }
@@ -257,12 +257,12 @@ class UserManager extends Manager
     /**
      * active
      *
-     * @param  mixed $id
+     * @param  mixed $idUser
      * @return void
      */
-    public function active(int $id)
+    public function active(int $idUser)
     {
-        $countUser = $this->dao->exec('UPDATE user SET activeUser = 1 WHERE id ='. (int) $id);
+        $countUser = $this->dao->exec('UPDATE user SET activeUser = 1 WHERE id ='. (int) $idUser);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
         }
@@ -272,16 +272,16 @@ class UserManager extends Manager
     /**
      * getCode
      *
-     * @param  mixed $id
+     * @param  mixed $idUser
      * @return void
      */
-    public function getCode(int $id)
+    public function getCode(int $idUser)
     {
         $sql = 'SELECT code FROM user WHERE id = :id';
 
         $requete = $this->dao->prepare($sql);
 
-        $requete->bindValue(':id', $id, \PDO::PARAM_INT);
+        $requete->bindValue(':id', $idUser, \PDO::PARAM_INT);
 
         $requete->execute();
         
@@ -295,7 +295,7 @@ class UserManager extends Manager
      * @param  mixed $id
      * @return void
      */
-    public function saveCode($code, $id)
+    public function saveCode($code, $idUser)
     {
         $sql = 'UPDATE user SET '
         . 'code = :code '
@@ -304,7 +304,7 @@ class UserManager extends Manager
         $requete = $this->dao->prepare($sql);
 
         $requete->bindValue(':code', $code, \PDO::PARAM_INT);
-        $requete->bindValue(':id', $id, \PDO::PARAM_INT);
+        $requete->bindValue(':id', $idUser, \PDO::PARAM_INT);
 
         $requete->execute();
         $row_count = $requete->rowCount();

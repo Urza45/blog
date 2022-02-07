@@ -29,12 +29,12 @@ class TypeUserManager extends Manager
     /**
      * getLabel
      *
-     * @param  mixed $id
+     * @param  mixed $idTypeUser
      * @return void
      */
-    public function getLabel(int $id)
+    public function getLabel(int $idTypeUser)
     {
-        $sql = 'SELECT id,label FROM typeuser WHERE id ='.$id;
+        $sql = 'SELECT id,label FROM typeuser WHERE id ='.$idTypeUser;
         $requete = $this->dao->query($sql);
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\TypeUser');
 

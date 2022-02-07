@@ -48,13 +48,13 @@ class CommentsManager extends Manager
     /**
      * getUnique
      *
-     * @param  mixed $id
+     * @param  mixed $idComment
      * @return void
      */
-    public function getUnique(int $id)
+    public function getUnique(int $idComment)
     {
         $requete = $this->dao->prepare('SELECT id, content, user_idUser, post_idPost, date, disabled FROM comments WHERE id = :id');
-        $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+        $requete->bindValue(':id', (int) $idComment, \PDO::PARAM_INT);
         $requete->execute();
     
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\Comments');
@@ -72,10 +72,10 @@ class CommentsManager extends Manager
      *
      * @return void
      */
-    public function count(int $id = null)
+    public function count(int $idPost = null)
     {
         if (isset($id)) {
-            return $this->dao->query('SELECT COUNT(*) FROM comments WHERE post_idPost = '.$id)->fetchColumn();
+            return $this->dao->query('SELECT COUNT(*) FROM comments WHERE post_idPost = '.$idPost)->fetchColumn();
         } else {
             return $this->dao->query('SELECT COUNT(*) FROM comments')->fetchColumn();
         }
@@ -152,12 +152,12 @@ class CommentsManager extends Manager
     /**
      * delete
      *
-     * @param  mixed $id
+     * @param  mixed $idComment
      * @return void
      */
-    public function delete(int $id)
+    public function delete(int $idComment)
     {
-        $countComment = $this->dao->exec('DELETE FROM comments WHERE id = '.(int) $id);
+        $countComment = $this->dao->exec('DELETE FROM comments WHERE id = '.(int) $idComment);
         if ($countComment == 0) {
             return [ 'type' => 'danger', 'message' => 'Un problème est survenu. Le commentaire n\'a pas été effacé.'];
         }
@@ -167,13 +167,13 @@ class CommentsManager extends Manager
     /**
      * ban
      *
-     * @param  mixed $id
+     * @param  mixed $idComment
      * @param  mixed $disabled
      * @return void
      */
-    public function ban(int $id, int $disabled)
+    public function ban(int $idComment, int $disabled)
     {
-        $sql = 'UPDATE comments SET disabled = '. $disabled .' WHERE id = '.(int) $id;
+        $sql = 'UPDATE comments SET disabled = '. $disabled .' WHERE id = '.(int) $idComment;
 
         $countComment = $this->dao->exec($sql);
         if ($disabled == 1 ) {

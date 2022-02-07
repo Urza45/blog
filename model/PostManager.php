@@ -35,13 +35,13 @@ class PostManager extends Manager
     /**
      * getUniquePost
      *
-     * @param  mixed $id
+     * @param  mixed $idPost
      * @return instance of User
      */
-    public function getUniquePost(int $id)
+    public function getUniquePost(int $idPost)
     {
         $requete = $this->dao->prepare('SELECT id, title, chapo, content, dateCreate, user_idUser FROM post WHERE id = :id');
-        $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+        $requete->bindValue(':id', (int) $idPost, \PDO::PARAM_INT);
         $requete->execute();
     
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\Post');
@@ -138,13 +138,13 @@ class PostManager extends Manager
      * @param  mixed $id
      * @return void
      */
-    public function delete(int $id)
+    public function delete(int $idPost)
     {
-        $countPost = $this->dao->exec('DELETE FROM post WHERE id = '.(int) $id);
+        $countPost = $this->dao->exec('DELETE FROM post WHERE id = '.(int) $idPost);
         if ($countPost == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Le post n\'a pas été effacé.'];
         }
-        $countComment = $this->dao->exec('DELETE FROM comments WHERE Post_idPOST = '.(int) $id);
+        $countComment = $this->dao->exec('DELETE FROM comments WHERE Post_idPOST = '.(int) $idPost);
         return [ 'type' => 'success', 'message' => 'Le post est bien effacé. '. $countComment . ' commentaire(s) correspondant ont également été supprimés.'];
     }
 
