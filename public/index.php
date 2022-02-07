@@ -34,7 +34,7 @@ $config = Config::getInstance();
 /**
  * Automatic loading of third-party classes 
  */
-if (file_exists($config->get('directory') . '/vendor/autoload.php')) {
+if (is_file($config->get('directory') . '/vendor/autoload.php')) {
     include_once $config->get('directory') . '/vendor/autoload.php';
 } else {
     die('Problème d&acute;installation.<br/>Avez-vous exécuté Composer Install ?');

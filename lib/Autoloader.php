@@ -22,7 +22,7 @@ class Autoloader {
     static function autoload($class_name) : void
     {
         $class = self::DIRECTORY . DIRECTORY_SEPARATOR . lcfirst(str_replace('\\', DIRECTORY_SEPARATOR, $class_name)) . '.php';
-        if(file_exists($class))
+        if(is_file($class))
         {
             require_once($class);
         } else {
