@@ -109,110 +109,56 @@ class UserManager extends Manager
     {
         if ($user->isValid())
         {
+            $chaine = 'name = :name,'
+            . 'firstName = :firstName, '
+            . 'pseudo = :pseudo, '
+            . 'email = :email, '
+            . 'phone = :phone, '
+            . 'portable = :portable, '
+            . 'password = :password, '
+            . 'salt = :salt, '
+            . 'statusConnected = :statusConnected, '
+            . 'activeUser = :activeUser, '
+            . 'validationKey = :validationKey, '
+            . 'activatedUser = :activatedUser, '
+            . 'dateCreate = :dateCreate, '
+            . 'TypeUser_idTypeUser = :TypeUser_idTypeUser';
+
             if ($user->isNew()) {
-                return $this->add($user);
+                $sql = 'INSERT INTO user SET ' . $chaine;
+                //return $this->add($user);
             } else {
-                return $this->modify($user);
+                $sql = 'UPDATE user SET ' . $chaine . ' WHERE id = :id';
+                //return $this->modify($user);
             }
+            $requete = $this->dao->prepare($sql);
+
+            $requete->bindValue(':name', $user->getName());
+            $requete->bindValue(':firstName', $user->getFirstName());
+            $requete->bindValue(':pseudo', $user->getPseudo());
+            $requete->bindValue(':email', $user->getEmail());
+            $requete->bindValue(':phone', $user->getPhone());
+            $requete->bindValue(':portable', $user->getPortable());
+            $requete->bindValue(':password', $user->getPassword());
+            $requete->bindValue(':salt', $user->getSalt());
+            $requete->bindValue(':statusConnected', $user->getStatusConnected(), \PDO::PARAM_INT);
+            $requete->bindValue(':activeUser', $user->getActiveUser(), \PDO::PARAM_INT);
+            $requete->bindValue(':validationKey', $user->getValidationKey());
+            $requete->bindValue(':activatedUser', $user->getActivatedUser());
+            $requete->bindValue(':dateCreate', $user->getDateCreate());
+            $requete->bindValue(':TypeUser_idTypeUser', $user->getTypeUser_idTypeUser(), \PDO::PARAM_INT);
+            if (!$user->isNew()) {
+                $requete->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
+            }
+            
+            $requete->execute();
+            $row_count = $requete->rowCount();
+            return $row_count;
         }
         else
         {
             throw new \RuntimeException('Votre User doit être validé pour être enregistré.');
         }
-    }
-    
-    /**
-     * add
-     *
-     * @param  mixed $user
-     * @return void
-     */
-    private function add(User $user)
-    {
-        $sql = 'INSERT INTO user SET '
-        . 'name = :name,'
-        . 'firstName = :firstName, '
-        . 'pseudo = :pseudo, '
-        . 'email = :email, '
-        . 'phone = :phone, '
-        . 'portable = :portable, '
-        . 'password = :password, '
-        . 'salt = :salt, '
-        . 'statusConnected = :statusConnected, '
-        . 'activeUser = :activeUser, '
-        . 'validationKey = :validationKey, '
-        . 'activatedUser = :activatedUser, '
-        . 'dateCreate = :dateCreate, '
-        . 'TypeUser_idTypeUser = :TypeUser_idTypeUser';
-        $requete = $this->dao->prepare($sql);
-
-        $requete->bindValue(':name', $user->getName());
-        $requete->bindValue(':firstName', $user->getFirstName());
-        $requete->bindValue(':pseudo', $user->getPseudo());
-        $requete->bindValue(':email', $user->getEmail());
-        $requete->bindValue(':phone', $user->getPhone());
-        $requete->bindValue(':portable', $user->getPortable());
-        $requete->bindValue(':password', $user->getPassword());
-        $requete->bindValue(':salt', $user->getSalt());
-        $requete->bindValue(':statusConnected', $user->getStatusConnected());
-        $requete->bindValue(':activeUser', $user->getActiveUser());
-        $requete->bindValue(':validationKey', $user->getValidationKey());
-        $requete->bindValue(':activatedUser', $user->getActivatedUser());
-        $requete->bindValue(':dateCreate', $user->getDateCreate());
-        $requete->bindValue(':TypeUser_idTypeUser', $user->getTypeUser_idTypeUser());
-        
-        $requete->execute();
-        $row_count = $requete->rowCount();
-        return $row_count;
-    }
-    
-    /**
-     * modify
-     *
-     * @param  mixed $user
-     * @return void
-     */
-    private function modify(User $user)
-    {
-        
-        $sql = 'UPDATE user SET '
-        . 'name = :name, '
-        . 'firstName = :firstName, '
-        . 'pseudo = :pseudo, '
-        . 'email = :email, '
-        . 'phone = :phone, '
-        . 'portable = :portable, '
-        . 'password = :password, '
-        . 'salt = :salt, '
-        . 'statusConnected = :statusConnected, '
-        . 'activeUser = :activeUser, '
-        . 'validationKey = :validationKey, '
-        . 'activatedUser = :activatedUser, '
-        . 'dateCreate = :dateCreate, '
-        . 'TypeUser_idTypeUser = :TypeUser_idTypeUser '
-        . 'WHERE id = :id';
-
-        $requete = $this->dao->prepare($sql);
-
-        $requete->bindValue(':name', $user->getName());
-        $requete->bindValue(':firstName', $user->getFirstName());
-        $requete->bindValue(':pseudo', $user->getPseudo());
-        $requete->bindValue(':email', $user->getEmail());
-        $requete->bindValue(':phone', $user->getPhone());
-        $requete->bindValue(':portable', $user->getPortable());
-        $requete->bindValue(':password', $user->getPassword());
-        $requete->bindValue(':salt', $user->getSalt());
-        $requete->bindValue(':statusConnected', $user->getStatusConnected(), \PDO::PARAM_INT);
-        $requete->bindValue(':activeUser', $user->getActiveUser(), \PDO::PARAM_INT);
-        $requete->bindValue(':validationKey', $user->getValidationKey());
-        $requete->bindValue(':activatedUser', $user->getActivatedUser());
-        $requete->bindValue(':dateCreate', $user->getDateCreate());
-        $requete->bindValue(':TypeUser_idTypeUser', $user->getTypeUser_idTypeUser(), \PDO::PARAM_INT);
-        $requete->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
-        
-        $requete->execute();
-        $row_count = $requete->rowCount();
-        return $row_count;
     }
     
     /**
