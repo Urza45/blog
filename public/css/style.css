@@ -125,7 +125,7 @@ section.admin {
 }
 
 section.account {
-  background: #e3e3e4;
+    background: #e3e3e4;
 }
 
 nav {
@@ -154,12 +154,12 @@ nav .main_pages a {
 }
 
 nav .main_pages a.active {
-  color: #d2a058;
-  font-weight: bold;
+    color: #d2a058;
+    font-weight: bold;
 }
 
 nav .main_pages a:hover {
-  background: #60a5bc;
+    background: #60a5bc;
 }
 
 @media all and (max-width: 991px) {
@@ -201,7 +201,7 @@ nav label {
 }
 
 #toggle {
-  display: none;
+    display: none;
 }
 
 @media all and (max-width: 991px) {
