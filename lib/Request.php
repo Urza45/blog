@@ -22,11 +22,7 @@ class Request
      */
     public function __construct()
     {
-        $this->method = (isset($_SERVER)) ? $_SERVER['REQUEST_METHOD'] : null;
-        $this->url = (isset($_SERVER)) ? $_SERVER['REQUEST_URI'] : null;
-        $this->query = (isset($_SERVER)) ? $_SERVER['QUERY_STRING'] : null;
-        $this->post = (isset($_POST)) ? $_POST : null;
-        $this->get = (isset($_GET)) ? $_GET : null;
+        $this->define_global();
     }
     
     /**
@@ -96,5 +92,14 @@ class Request
      */
     public function getQuery() {
         return $this->query;
+    }
+
+    private function define_global()
+    {
+        $this->method = (isset($_SERVER)) ? $_SERVER['REQUEST_METHOD'] : null;
+        $this->url = (isset($_SERVER)) ? $_SERVER['REQUEST_URI'] : null;
+        $this->query = (isset($_SERVER)) ? $_SERVER['QUERY_STRING'] : null;
+        $this->post = (isset($_POST)) ? $_POST : null;
+        $this->get = (isset($_GET)) ? $_GET : null;
     }
 }
