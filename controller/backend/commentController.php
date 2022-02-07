@@ -9,6 +9,17 @@ use \Lib\Security;
 class CommentController extends Controller
 {    
     /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->security = Security::verifAccess($this->session, Security::MODERATOR_USER);
+    }
+    
+    /**
      * list
      *
      * @param  mixed $request
@@ -16,7 +27,7 @@ class CommentController extends Controller
      */
     public function list(Request $request)
     {        
-        if (Security::verifAccess($this->session, Security::MODERATOR_USER))
+        if ($this->security)
         {
             return $this->processReturn();
         }
@@ -33,7 +44,7 @@ class CommentController extends Controller
      */
     public function valid(Request $request, $vars)
     {
-        if (Security::verifAccess($this->session, Security::MODERATOR_USER))
+        if ($this->security)
         {
             $this->response = $this->manager->getManagerOf('Comments')->ban($vars['id_comment'], 0);
             return $this->processReturn();
@@ -50,7 +61,7 @@ class CommentController extends Controller
      */
     public function ban(Request $request, $vars)
     {
-        if (Security::verifAccess($this->session, Security::MODERATOR_USER))
+        if ($this->security)
         {
             $this->response = $this->manager->getManagerOf('Comments')->ban($vars['id_comment'], 1);
             return $this->processReturn();
@@ -67,7 +78,7 @@ class CommentController extends Controller
      */
     public function delete(Request $request, $vars)
     {
-        if (Security::verifAccess($this->session, Security::MODERATOR_USER))
+        if ($this->security)
         {
             if (isset($request->getParams()['action'])) {
                 $this->response = $this->manager->getManagerOf('Comments')->delete($vars['id_comment']);

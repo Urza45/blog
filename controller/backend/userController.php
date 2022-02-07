@@ -9,6 +9,17 @@ use \Lib\Security;
 class UserController extends Controller
 {    
     /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->security = Security::verifAccess($this->session, Security::SUPER_ADMIN_USER);
+    }
+    
+    /**
      * list
      *
      * @param  mixed $request
@@ -16,7 +27,7 @@ class UserController extends Controller
      */
     public function list(Request $request)
     {
-        if (Security::verifAccess($this->session, Security::SUPER_ADMIN_USER))
+        if ($this->security)
         {
             $users = $this->manager->getManagerOf('User')->getListUser();
             $types = $this->manager->getManagerOf('TypeUser')->getListType();
@@ -41,7 +52,7 @@ class UserController extends Controller
      */
     public function delete(Request $request, $vars)
     {
-        if (Security::verifAccess($this->session, Security::SUPER_ADMIN_USER))
+        if ($this->security)
         {
             $this->response = $this->manager->getManagerOf('User')->delete($vars['id_user']);
 
@@ -69,7 +80,7 @@ class UserController extends Controller
      */
     public function promote(Request $request, $vars)
     {
-        if (Security::verifAccess($this->session, Security::SUPER_ADMIN_USER))
+        if ($this->security)
         {
             $this->response = $this->manager->getManagerOf('User')->promote($vars['id_user']);
 
@@ -97,7 +108,7 @@ class UserController extends Controller
      */
     public function demote(Request $request, $vars)
     {
-        if (Security::verifAccess($this->session, Security::SUPER_ADMIN_USER))
+        if ($this->security)
         {
             $this->response = $this->manager->getManagerOf('User')->demote($vars['id_user']);
 
@@ -125,7 +136,7 @@ class UserController extends Controller
      */
     public function ban(Request $request, $vars)
     {
-        if (Security::verifAccess($this->session, Security::SUPER_ADMIN_USER))
+        if ($this->security)
         {
             $this->response = $this->manager->getManagerOf('User')->ban($vars['id_user']);
 

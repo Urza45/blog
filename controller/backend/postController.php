@@ -11,6 +11,16 @@ use \Lib\Security;
 
 class PostController extends Controller
 {
+    /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->security = Security::verifAccess($this->session, Security::ADMINISTRATOR_USER);
+    }    
     
     /**
      * index
@@ -20,7 +30,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        if (Security::verifAccess($this->session, Security::ADMINISTRATOR_USER))
+        if ($this->security)
         {
             $postManager = $this->manager->getManagerOf('Post');
 
@@ -41,7 +51,7 @@ class PostController extends Controller
      */
     public function add(Request $request)
     {
-        if (Security::verifAccess($this->session, Security::ADMINISTRATOR_USER))
+        if ($this->security)
         {
             $postManager = $this->manager->getManagerOf('Post');
         
@@ -80,7 +90,7 @@ class PostController extends Controller
      */
     public function modify(Request $request, $vars)
     {
-        if (Security::verifAccess($this->session, Security::ADMINISTRATOR_USER))
+        if ($this->security)
         {
             $post = $this->manager->getManagerOf('Post')->getUniquePost($vars['id_post']);
 
@@ -103,7 +113,7 @@ class PostController extends Controller
      */
     public function delete(Request $request, $vars)
     {
-        if (Security::verifAccess($this->session, Security::ADMINISTRATOR_USER))
+        if ($this->security)
         {
             $this->response = $this->manager->getManagerOf('Post')->delete($vars['id_post']);
         

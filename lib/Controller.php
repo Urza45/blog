@@ -10,6 +10,7 @@ abstract class Controller
     protected $manager;
     protected $session;
     protected $response = [];
+    protected $security = false;
     
     public function __construct()
     {
