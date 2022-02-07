@@ -76,9 +76,8 @@ class CommentsManager extends Manager
     {
         if (isset($idPost)) {
             return $this->dao->query('SELECT COUNT(*) FROM comments WHERE post_idPost = '.$idPost)->fetchColumn();
-        } else {
-            return $this->dao->query('SELECT COUNT(*) FROM comments')->fetchColumn();
         }
+        return $this->dao->query('SELECT COUNT(*) FROM comments')->fetchColumn();
     }
     
     /**

@@ -47,12 +47,8 @@ class Router {
 
         $config = Config::getInstance();
         
-        if (preg_match("/\?/", $request->getUrl())) {
-            $url = '/' . trim($request->getParams()['url'], '/');
-         } else {
-            $url = '/' . trim($request->getUrl(), '/');
-        }
-
+        $url = (preg_match("/\?/", $request->getUrl())) ? '/' . trim($request->getParams()['url'], '/') : '/' . trim($request->getUrl(), '/');
+        
         // On parcourt les routes du fichier XML.
         foreach ($this->routes as $route)
         {

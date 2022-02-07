@@ -24,12 +24,11 @@ class MainController extends Controller
 
         if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
         {
+            $this->response = [ 'type' => 'danger', 'message' => 'Captcha erroné'];
             if ($request->getParams()['captcha'] == $this->session->getAttribute('captcha'))
             {
                 $email = new MyMail;
                 $this->response = $email->sendEmailToAdmin($request->getParams());
-            } else {
-                $this->response = [ 'type' => 'danger', 'message' => 'Captcha erroné'];
             }
         }
 
