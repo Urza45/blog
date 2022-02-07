@@ -5,7 +5,14 @@ namespace Lib;
 /**
  * Session
  */
-class Session {
+class Session
+{
+    private $_SESSION;
+    
+    public function __construct()
+    {
+        $this->_SESSION = (isset($_SESSION)) ? $_SESSION : null;
+    }
     
     /**
      * start
@@ -53,7 +60,7 @@ class Session {
      */
     public function existsAttribute($name)
     {
-        return (isset($_SESSION[$name]) && $_SESSION[$name] != "");
+        return (isset($this->_SESSION[$name]) && $this->_SESSION[$name] != "");
     }
     
     /**
@@ -67,7 +74,7 @@ class Session {
     {
         if ($this->existsAttribute($name)) 
         {
-            return $_SESSION[$name];
+            return $this->_SESSION[$name];
         }
         else 
         {

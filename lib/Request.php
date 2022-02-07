@@ -12,6 +12,8 @@ class Request
     private $url;
     private $method;
     private $query;
+    private $post;
+    private $get;
     
     /**
      * __construct
@@ -20,9 +22,11 @@ class Request
      */
     public function __construct()
     {
-        $this->method = $_SERVER['REQUEST_METHOD'];
-        $this->url = $_SERVER['REQUEST_URI'];
-        $this->query = $_SERVER['QUERY_STRING'];
+        $this->method = (isset($_SERVER)) ? $_SERVER['REQUEST_METHOD'] : null;
+        $this->url = (isset($_SERVER)) ? $_SERVER['REQUEST_URI'] : null;
+        $this->query = (isset($_SERVER)) ? $_SERVER['QUERY_STRING'] : null;
+        $this->post = (isset($_POST)) ? $_POST : null;
+        $this->get = (isset($_GET)) ? $_GET : null;
     }
     
     /**
@@ -52,14 +56,14 @@ class Request
         
         if ($this->isPost()) {
             $params = [];
-            foreach ($_POST as $key => $value) {
+            foreach ($this->post as $key => $value) {
                 $params[$key] = FormValidator::purify($value);
             }
             return $params;
         }
         if ($this->isGet()) {
             $params = [];
-            foreach ($_GET as $key => $value) {
+            foreach ($this->get as $key => $value) {
                 $params[$key] = FormValidator::purify($value);
             }
             return $params;
