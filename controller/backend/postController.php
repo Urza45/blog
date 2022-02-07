@@ -4,10 +4,8 @@ namespace Controller\Backend;
 
 use \Lib\Controller;
 use \Lib\Request;
-use \Lib\Managers;
-use \Lib\PDOFactory;
-use \Model\Post;
 use \Lib\Security;
+use \Model\Post;
 
 class PostController extends Controller
 {

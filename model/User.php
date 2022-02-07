@@ -5,6 +5,9 @@ namespace Model;
 use \Model\Entity;
 use \Lib\Utilities;
 
+/**
+ * User
+ */
 class User extends Entity
 {
     private $name;
@@ -37,15 +40,18 @@ class User extends Entity
     const INVALID_DATE = 12;
     const INVALID_IDUSER = 13;
     const INVALID_ASKPROMOTION = 14;
-
+    
+    /**
+     * isVAlid
+     *
+     * @return void
+     */
     public function isVAlid()
     {
         return !(empty($this->name));
     }
     
     /** GETTERS */
-
-
 
     /**
      * Get the value of name

@@ -6,6 +6,9 @@ namespace Lib;
 use \Lib\Request;
 use \Lib\Config;
 
+/**
+ * Router
+ */
 class Router {
 
     private $routes = [];
@@ -21,14 +24,25 @@ class Router {
         }
         return self::$_instance;
     }
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     private function __construct()
     {
         $xml = new \DOMDocument;
         $xml->load(__DIR__.'/../config/routes.xml');
         $this->routes = $xml->getElementsByTagName('route');
     }
-    
+        
+    /**
+     * run
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function run(Request $request) {
 
         $config = Config::getInstance();

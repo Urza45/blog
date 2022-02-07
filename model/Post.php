@@ -5,6 +5,9 @@ namespace Model;
 use \Model\Entity;
 use \Lib\Utilities;
 
+/**
+ * Post
+ */
 class Post extends Entity
 {
     private $title;
@@ -18,7 +21,12 @@ class Post extends Entity
     const INVALID_CONTENT = 3;
     const INVALID_DATE = 4;
     const INVALID_IDUSER = 5;
-
+    
+    /**
+     * isValid
+     *
+     * @return void
+     */
     public function isValid()
     {
         return !(empty($this->title) || empty($this->chapo)

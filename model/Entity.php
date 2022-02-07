@@ -2,11 +2,20 @@
 
 namespace Model;
 
+/**
+ * Entity
+ */
 abstract class Entity
 {
     protected $errors = [];
     protected $id;
-
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $donnees
+     * @return void
+     */
     public function __construct(array $donnees = [])
     {
         if (!empty($donnees))
@@ -14,12 +23,22 @@ abstract class Entity
         $this->hydrate($donnees);
         }
     }
-
+    
+    /**
+     * isNew
+     *
+     * @return void
+     */
     public function isNew()
     {
         return empty($this->id);
     }
-
+    
+    /**
+     * erreurs
+     *
+     * @return void
+     */
     public function erreurs()
     {
         return $this->errors;
@@ -44,7 +63,13 @@ abstract class Entity
 
         return $this;
     }
-
+    
+    /**
+     * hydrate
+     *
+     * @param  mixed $donnees
+     * @return void
+     */
     public function hydrate(array $donnees)
     {
         foreach ($donnees as $attribut => $valeur)

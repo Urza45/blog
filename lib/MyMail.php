@@ -5,6 +5,9 @@ namespace Lib;
 use \Lib\Config;
 use \Model\User;
 
+/**
+ * MyMail
+ */
 class MyMail 
 {
     private $from = '';
@@ -126,7 +129,14 @@ class MyMail
             return array('type' => 'danger', 'message' => self::ERROR_MESSAGE);
         }
     }
-
+    
+    /**
+     * sendConnectedMail
+     *
+     * @param  mixed $user
+     * @param  mixed $code
+     * @return void
+     */
     public function sendConnectedMail(User $user, $code)
     {
         

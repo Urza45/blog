@@ -3,8 +3,11 @@
 namespace Lib;
 
 use \Lib\Managers;
-use Lib\Session;
+use \Lib\Session;
 
+/**
+ * Controller
+ */
 abstract class Controller
 {
     protected $manager;

@@ -5,6 +5,9 @@ namespace Model;
 use \Model\Manager;
 use \Model\User;
 
+/**
+ * UserManager
+ */
 class UserManager extends Manager
 {    
     /**
@@ -58,7 +61,13 @@ class UserManager extends Manager
     
         return null;
     }
-
+    
+    /**
+     * getUniqueByPseudo
+     *
+     * @param  mixed $pseudo
+     * @return void
+     */
     public function getUniqueByPseudo(string $pseudo)
     {
         $sql = 'SELECT id, name, firstName, pseudo, email, phone, portable,'
@@ -298,7 +307,13 @@ class UserManager extends Manager
         }
         return [ 'type' => 'success', 'message' => 'Utilisateur banni.'];
     }
-
+    
+    /**
+     * active
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function active(int $id)
     {
         $countUser = $this->dao->exec('UPDATE user SET activeUser = 1 WHERE id ='. (int) $id);
@@ -307,7 +322,13 @@ class UserManager extends Manager
         }
         return [ 'type' => 'success', 'message' => 'Utilisateur activé.'];
     }
-
+    
+    /**
+     * getCode
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function getCode(int $id)
     {
         $sql = 'SELECT code FROM user WHERE id = :id';
@@ -320,7 +341,14 @@ class UserManager extends Manager
         
         return $requete->fetch();
     }
-
+    
+    /**
+     * saveCode
+     *
+     * @param  mixed $code
+     * @param  mixed $id
+     * @return void
+     */
     public function saveCode($code, $id)
     {
         $sql = 'UPDATE user SET '

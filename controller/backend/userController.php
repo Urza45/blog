@@ -154,7 +154,14 @@ class UserController extends Controller
         }
         return ['error/403.html.twig', [] ];
     }
-
+    
+    /**
+     * active
+     *
+     * @param  mixed $request
+     * @param  mixed $vars
+     * @return void
+     */
     public function active(Request $request, $vars)
     {
         $this->response = $this->manager->getManagerOf('User')->active($vars['id_user']);

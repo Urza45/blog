@@ -5,6 +5,9 @@ namespace Lib;
 use \Lib\Session;
 use \Lib\Config;
 
+/**
+ * Utilities
+ */
 class Utilities
 {    
     /**

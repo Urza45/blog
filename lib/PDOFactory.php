@@ -4,8 +4,16 @@ namespace Lib;
 
 use \Lib\Config;
 
+/**
+ * PDOFactory
+ */
 class PDOFactory
-{
+{   
+   /**
+    * getMysqlConnexion
+    *
+    * @return void
+    */
    public static function getMysqlConnexion()
    {
         $config = Config::getInstance();

@@ -4,12 +4,20 @@ namespace Model;
 
 use \Model\Entity;
 
+/**
+ * TypeUser
+ */
 class TypeUser extends Entity
 {
     private $label;
 
     const INVALID_LABEL = 1;
-
+    
+    /**
+     * isVAlid
+     *
+     * @return void
+     */
     public function isVAlid()
     {
         return !(empty($this->label));

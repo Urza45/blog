@@ -2,6 +2,9 @@
 
 namespace Lib;
 
+/**
+ * Session
+ */
 class Session {
     
     /**
@@ -71,7 +74,12 @@ class Session {
             throw new \Exception("Attribut '$name' absent de la session");
         }
     }
-
+    
+    /**
+     * existSession
+     *
+     * @return void
+     */
     public function existSession()
     {
         return isset($_SESSION);

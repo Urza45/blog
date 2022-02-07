@@ -40,7 +40,7 @@ class CommentController extends Controller
      *
      * @param  mixed $request
      * @param  mixed $vars
-     * @return void
+     * @return array $response[]
      */
     public function valid(Request $request, $vars)
     {
@@ -101,15 +101,13 @@ class CommentController extends Controller
     /**
      * processReturn
      *
-     * @return void
+     * @return mixed
      */
     private function processReturn()
     {
-        $comments = $this->manager->getManagerOf('Comments')->getList();
-
         return ['backend/listcomment.html.twig', [
             'Response' => $this->response,
-            'Comments' => $comments
+            'Comments' => $this->manager->getManagerOf('Comments')->getList()
             ]
         ];
     }

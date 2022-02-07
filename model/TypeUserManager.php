@@ -3,10 +3,17 @@
 namespace Model;
 
 use \Model\Manager;
-use \Model\TypeUser;
 
+/**
+ * TypeUserManager
+ */
 class TypeUserManager extends Manager
-{
+{    
+    /**
+     * getListType
+     *
+     * @return void
+     */
     public function getListType()
     {
         $sql = 'SELECT id, label FROM typeuser ORDER BY label';
@@ -18,7 +25,13 @@ class TypeUserManager extends Manager
         
         return $listType;
     }
-
+    
+    /**
+     * getLabel
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function getLabel(int $id)
     {
         $sql = 'SELECT id,label FROM typeuser WHERE id ='.$id;

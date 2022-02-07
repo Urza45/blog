@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Controller\Frontend;
 
 use \Lib\Controller;
-use Lib\MyMail;
+use \Lib\MyMail;
 use \Lib\Request;
 use \Lib\Utilities;
 
@@ -137,7 +137,13 @@ class ConnexionController extends Controller
             ]
         ];
     }
-    
+        
+    /**
+     * code
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function code(Request $request)
     {
         $userManager = $this->manager->getManagerOf('User');

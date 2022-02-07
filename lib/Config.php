@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Lib;
 
 /**
- * Class Autoloader
- * Allows you to search for a class in the Model directory 
+ * Class Config
+ * Load parameters
  */
 class Config {
 

@@ -2,6 +2,9 @@
 
 namespace Lib;
 
+/**
+ * FormValidator
+ */
 class FormValidator
 {
     /**
@@ -16,9 +19,8 @@ class FormValidator
         if ( (isset($data) && ($data != ''))) {
             $data = trim($data);
             $data = stripslashes($data);
-            //$data = htmlentities($data, ENT_QUOTES, 'UTF-8');
             $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
-             
+            
             return $data;
         }
     }

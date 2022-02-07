@@ -2,9 +2,9 @@
 
 namespace Controller\Frontend;
 
-use Lib\Controller;
-use Lib\Request;
-use Model\Comments;
+use \Lib\Controller;
+use \Lib\Request;
+use \Model\Comments;
 
 class CommentController extends Controller
 {    

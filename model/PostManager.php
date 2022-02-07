@@ -5,6 +5,9 @@ namespace Model;
 use \Model\Manager;
 use \Model\Post;
 
+/**
+ * PostManager
+ */
 class PostManager extends Manager
 {
     

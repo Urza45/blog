@@ -5,6 +5,9 @@ namespace Model;
 use \Model\Entity;
 use \Lib\Utilities;
 
+/**
+ * Comments
+ */
 class Comments extends Entity
 {
     private $content;
