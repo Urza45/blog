@@ -19,23 +19,26 @@ use \Lib\Autoloader;
 use \Lib\Router;
 use \Lib\Request;
 use \Lib\Session;
+use \Lib\Config;
 use \Twig\Extra\Intl\IntlExtension;
-
-/**
- * Automatic loading of third-party classes 
- */
-if (file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
-    include_once dirname(__DIR__) . '/vendor/autoload.php';
-} else {
-    die('Problème d&acute;installation.<br/>Avez-vous exécuter Composer Install ?');
-}
 
 /**
  * Automatic loading of project classes 
  * Another method is to use Composer
  */
-require dirname(__DIR__) . '/lib/Autoloader.php';
+require '../lib/Autoloader.php';
 Autoloader::register();
+
+$config = Config::getInstance();
+
+/**
+ * Automatic loading of third-party classes 
+ */
+if (file_exists($config->get('directory') . '/vendor/autoload.php')) {
+    include_once $config->get('directory') . '/vendor/autoload.php';
+} else {
+    die('Problème d&acute;installation.<br/>Avez-vous exécuté Composer Install ?');
+}
 
 $session = new Session();
 $session->start();
@@ -45,7 +48,7 @@ $request = new Request();
 /**
  * Twig initiation 
  */
-$loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/template');
+$loader = new \Twig\Loader\FilesystemLoader($config->get('directory') . '/template');
 $twig = new \Twig\Environment(
     $loader, 
     [

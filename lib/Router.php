@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Lib;
 
 use \Lib\Request;
+use \Lib\Config;
 
 class Router {
 
@@ -30,6 +31,8 @@ class Router {
     
     public function run(Request $request) {
 
+        $config = Config::getInstance();
+        
         if (preg_match("/\?/", $request->getUrl())) {
             $url = '/' . trim($request->getParams()['url'], '/');
          } else {
@@ -64,8 +67,7 @@ class Router {
                 * Controller initiation 
                 */
                 $var = '\Controller\\' . $app . '\\' . $module . 'Controller';
-
-                if (is_file(dirname(__DIR__) . '/controller//' . $app . '//' . $module . 'Controller.php')) {
+                if (is_file($config->get('directory') . $var . '.php')) {
                     $controller = new $var();
                     if (!empty($vars)) {
                         return $controller->$action($request, $vars);

@@ -24,11 +24,11 @@ class Config {
     }
 
     /**
-    * Le constrcuteur avec sa logique est privé pour émpêcher l'instanciation en dehors de la classe
+    * Le constructeur avec sa logique est privé pour émpêcher l'instanciation en dehors de la classe
     **/
     private function __construct()
     {
-        $this->settings = require dirname(__DIR__) . '/config/config.php';
+        $this->settings = require '../config/config.php';
     }
 
     /**

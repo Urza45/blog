@@ -2,7 +2,8 @@
 
 namespace Lib;
 
-use \lib\Session;
+use \Lib\Session;
+use \Lib\Config;
 
 class Utilities
 {    
@@ -82,11 +83,13 @@ class Utilities
      */
     public static function captcha(Session $session)
     {
+        $config = Config::getInstance();
         $session->setAttribute('captcha', mt_rand(1000,9999));
 
         $img = imagecreate(65,30);
-	    $font = dirname(__DIR__) .'/public/fonts/28_Days_Later.ttf';
-	 
+        
+	    $font = $config->get('directory') .'/public/fonts/28_Days_Later.ttf';
+
 	    $textcolor = imagecolorallocate($img,255,255,255); // First use define background color
 	    $textcolor = imagecolorallocate($img, 0, 0, 0);    // Second use define text color
 	 

@@ -10,5 +10,6 @@ return [
     "sendTo" => "xx@xxxxx.fr",
     "from" => "xx@xxxxx.fr",
     "subject" => "Nouveau message depuis le formulaire de contact",
-    "webUrl" => "https://..."
+    "webUrl" => "https://...",
+    "directory" => "D:\WAMP\www\..."
 ];

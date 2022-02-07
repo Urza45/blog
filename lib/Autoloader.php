@@ -9,14 +9,19 @@ namespace Lib;
  */
 class Autoloader {
 
+    /**
+     * Replace with the correct path 
+     */
+    const DIRECTORY = 'D:\WAMP\www\blog';
+    
     static function register() : void
     {
-            spl_autoload_register([__CLASS__, 'autoload']);
+        spl_autoload_register([__CLASS__, 'autoload']);
     }
 
     static function autoload($class_name) : void
     {
-        $class = dirname(__DIR__) . '/' . lcfirst(str_replace('\\', DIRECTORY_SEPARATOR, $class_name)) . '.php';
+        $class = self::DIRECTORY . DIRECTORY_SEPARATOR . lcfirst(str_replace('\\', DIRECTORY_SEPARATOR, $class_name)) . '.php';
         if(file_exists($class))
         {
             require_once($class);
