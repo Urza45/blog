@@ -96,9 +96,9 @@ class Request
 
     private function define_global()
     {
-        $this->method = (isset($_SERVER)) ? $_SERVER['REQUEST_METHOD'] : null;
-        $this->url = (isset($_SERVER)) ? $_SERVER['REQUEST_URI'] : null;
-        $this->query = (isset($_SERVER)) ? $_SERVER['QUERY_STRING'] : null;
+        $this->method = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : null;
+        $this->url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : null;
+        $this->query = (isset($_SERVER['QUERY_STRING'])) ? $_SERVER['QUERY_STRING'] : null;
         $this->post = (isset($_POST)) ? $_POST : null;
         $this->get = (isset($_GET)) ? $_GET : null;
     }
