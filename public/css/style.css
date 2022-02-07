@@ -56,15 +56,15 @@ button {
 }
 
 .red {
-    color: red !important;
+    color: red;
 }
 
 .green {
-    color: green !important;
+    color: green;
 }
 
 .blue {
-    color: blue !important;
+    color: blue;
 }
 
 .small {
