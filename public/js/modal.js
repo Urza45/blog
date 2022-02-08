@@ -7,7 +7,7 @@ $(".userinfo").click(function(){
         url: urlDest,
         type: "post",
         data: {
-            userId: userId
+            userId: userId,
         },
         success: function(response){ 
             // Add response in Modal body

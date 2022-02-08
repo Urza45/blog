@@ -19,7 +19,7 @@ class CommentsManager extends Manager
      */
     public function getList(int $number = null)
     {
-        $sql = 'SELECT id, content, user_idUser, post_idPost, date, disabled FROM comments ORDER BY id DESC';
+        $sql = 'SELECT id, content, user_idUser, post_idPost, date, disabled, new FROM comments ORDER BY id DESC';
         if (isset($number)) {
             $sql .= ' limit ' . $number;
         }
@@ -34,7 +34,7 @@ class CommentsManager extends Manager
 
     public function getListFromPost(int $number)
     {
-        $sql = 'SELECT comments.id, content, user_idUser, post_idPost, user.pseudo, date, disabled FROM comments, user '
+        $sql = 'SELECT comments.id, content, user_idUser, post_idPost, user.pseudo, date, disabled, new FROM comments, user '
             . 'WHERE post_idPost=' . $number. ' AND user.id=user_idUser '
             . 'ORDER BY comments.id DESC';
         
@@ -117,7 +117,7 @@ class CommentsManager extends Manager
         $requete->bindValue(':content', $comments->getContent());
         $requete->bindValue(':user_idUser', $comments->getUser_idUser());
         $requete->bindValue(':post_idPost', $comments->getPost_idPost());
-        $requete->bindValue(':disabled', 0);
+        $requete->bindValue(':disabled', 1);
     
         $requete->execute();
     } 
@@ -172,7 +172,7 @@ class CommentsManager extends Manager
      */
     public function ban(int $idComment, int $disabled)
     {
-        $sql = 'UPDATE comments SET disabled = '. $disabled .' WHERE id = '.(int) $idComment;
+        $sql = 'UPDATE comments SET disabled = '. $disabled .', new = 0 WHERE id = '.(int) $idComment;
 
         $countComment = $this->dao->exec($sql);
         if ($disabled == 1 ) {
@@ -186,7 +186,6 @@ class CommentsManager extends Manager
             }
             return [ 'type' => 'success', 'message' => 'Le commentaire est bien autorisé.'];
         }
-        
     }
 
 

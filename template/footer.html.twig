@@ -18,6 +18,9 @@
                         <h1><a href="https://fr.linkedin.com/in/serge-pillay-6b428853" class="btn-social btn-outline" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a></h1>
                     </li>
                 </ul>
+                {% if session.admin > 1 %}
+                    <a href="/admin" class="btn btn-primary">Administration</a>
+                {% endif %}
             </div>
             <div class="footer-col col-md-4">
                 <h3>Mon CV</h3>

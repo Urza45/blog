@@ -28,11 +28,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>{{ post.title|raw }} <br/> {{ post.dateCreate|date("m - d - Y") }}</h2>
+                <h2>{{ post.title|raw }} <br/> {{ post.dateCreate|date("d - m - Y") }}</h2>
                 <hr/>
             </div>
             <div class="col-lg-12">
-                <p><b>{{ post.chapo|raw|nl2br }}</b></p>
+                <p class="blue"><b>{{ post.chapo|raw|nl2br }}</b></p>
                 <p>{{ post.content|raw|nl2br }}</p>
             </div>
         </div>
@@ -47,12 +47,19 @@
             <div class="col-lg-12">
             {% if comments %}
                 {% for comment in comments %}
-                    <hr/>
-                    <h4>Par {{ comment.pseudo|raw }} - {{ comment.dateCreate|date("m/d/Y") }}</h4>
-                    <p>{{ comment.content|raw|nl2br }}</p>
-                    {% if comment.user_idUser == session.idUser %}
-                        <p><button id="theElement1" name="theElement1" data-id="{{ comment.id }}" data-route="/modifycomment-{{ comment.id }}" data-title="Modifier votre commentaire" class='btn btn-info userinfo'>Modifier votre commentaire</button> - 
-                        <button id="theElement1" name="theElement1" data-id="{{ comment.id }}" data-route="/deletecomment-{{ comment.id }}" data-title="Supprimer votre commentaire" class='btn btn-info userinfo'>Supprimer votre commentaire</button>
+                    {% if comment.new == 0 %}
+                        <hr/>
+                        <h4>Par {{ comment.pseudo|raw }} - {{ comment.dateCreate|date("d/m/Y") }}</h4>
+                        {% if comment.disabled == 1 %}
+                            <p>Commentaire interdit par un modérateur</p>
+                        {% else %}
+                            <p>{{ comment.content|raw|nl2br }}</p>
+                            {% if comment.user_idUser == session.idUser %}
+                                <p><button id="theElement1" name="theElement1" data-id="{{ comment.id }}" data-route="/modifycomment-{{ comment.id }}" data-title="Modifier votre commentaire" class='btn btn-info userinfo'>Modifier votre commentaire</button> - 
+                                <button id="theElement1" name="theElement1" data-id="{{ comment.id }}" data-route="/deletecomment-{{ comment.id }}" data-title="Supprimer votre commentaire" class='btn btn-info userinfo'>Supprimer votre commentaire</button>
+                            {% endif %}
+                        {% endif %}
+                        
                     {% endif %}
                 {% endfor %}
             {% else %}

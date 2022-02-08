@@ -48,7 +48,7 @@ class ConnexionController extends Controller
                                 $userManager->saveCode($code, $user->getId());
                                 $mail = new MyMail;
                                 $mail->sendConnectedMail($user, $code);
-                                $this->response = ['type' => 'danger' , 'message' => 'Vous êtes déjà connecté. Un email avec un code vous a été envoyé.'];
+                                $this->response = ['type' => 'danger' , 'message' => 'Vous êtes déjà connecté. Un email avec un lien vous a été envoyé.'];
 
                             } else { // All is ok :)
                                 $this->response = ['type' => 'success' , 'message' => 'Connexion réussie'];
@@ -155,8 +155,8 @@ class ConnexionController extends Controller
             if ($request->getParams()['v'] === $user->getValidationKey()) {
                 $user->setStatusConnected(0);
                 $userManager->save($user);
-                return ['frontend/code.html.twig', [
-                    'Response' => $this->response,
+                return ['frontend/connexion.html.twig', [
+                    'Response' => ['type' => 'success', 'message' => 'Vous êtes débloqué. Vous pouvez à présent vous connecter.'],
                     'Page' => '/'
                     ]
                 ]; 

@@ -15,12 +15,14 @@ class Comments extends Entity
     private $disabled;
     private $user_idUser;
     private $post_idPost;
+    private $new;
 
     const INVALID_CONTENT = 1;
     const INVALID_DATE =2;
     const INVALID_DISABLED = 3;
     const INVALID_IDUSER = 4;
     const INVALID_IDPOST = 5;
+    const INVALID_NEW = 6;
     
     /**
      * isValid
@@ -75,6 +77,14 @@ class Comments extends Entity
     public function getPost_idPost()
     {
         return $this->post_idPost;
+    }
+
+    /**
+     * Get the value of new
+     */ 
+    public function getNew()
+    {
+        return $this->new;
     }
 
     /** SETTERS */
@@ -146,6 +156,20 @@ class Comments extends Entity
             $this->errors[] = self::INVALID_IDPOST;
         } else {
             $this->post_idPost = $post_idPost;
+        }
+    }
+
+    /**
+     * Set the value of new
+     *
+     * @return  void
+     */ 
+    public function setNew($new)
+    {
+        if (!(in_array($new, ['0', '1'])  )) {
+            $this->errors[] = self::INVALID_NEW;
+        } else {
+            $this->new = $new;
         }
     }
 }

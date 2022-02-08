@@ -13,7 +13,7 @@
             {% if LastPostList %}
                 {% for post in LastPostList %}
                     <hr/>
-                    <h3>{{ post.dateCreate|date("m/d/Y") }} - {{ post.title|raw }}</h3>
+                    <h3>{{ post.dateCreate|date("d/m/Y") }} - {{ post.title|raw }}</h3>
                     <p><b>{{ post.chapo|raw }}</b></p>
                     <p><a href="/post-{{ post.id }}">Voir plus ...</a></p>
                 {% endfor %}

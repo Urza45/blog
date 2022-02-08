@@ -139,12 +139,10 @@ class MyMail
      */
     public function sendConnectedMail(User $user, $code)
     {
-        
-        
         try
         {
             $this->sendTo = $user->getEmail();
-            $this->subject = 'Vous êtes déjà coonecté.';
+            $this->subject = 'Vous êtes déjà connecté.';
 
             $this->emailText = '<html> 
         <head> 
@@ -162,7 +160,8 @@ class MyMail
                 </tr> 
             </table>
             <br/>
-            <p>Code pour déboquer votre compte : ' . $code . '</p>
+            <p>Pour déboquer votre compte, cliquer sur le lien ci-dessous.</p>
+            <p>Si cela n\'était pas vous, nous vous recommendons de changer votre mot de passe une fois connecté.</p>
             <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
                 <tr style="background-color: #e0e0e0;"> 
                     <th><a href="' . $this->webUrl .'/code/?p=' . $user->getPseudo() . '&v=' . $user->getValidationKey() . '">Débloquer votre compte</a></th> 
