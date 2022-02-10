@@ -7,11 +7,11 @@ namespace Lib;
  */
 class Security
 {
-    const CONNECTED_USER = 1;
-    const MODERATOR_USER = 2;
-    const ADMINISTRATOR_USER = 3;
-    const SUPER_ADMIN_USER = 4;
-    
+    public const CONNECTED_USER = 1;
+    public const MODERATOR_USER = 2;
+    public const ADMINISTRATOR_USER = 3;
+    public const SUPER_ADMIN_USER = 4;
+
     /**
      * verifAccess
      *

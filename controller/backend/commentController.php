@@ -2,14 +2,12 @@
 
 namespace Controller\Backend;
 
-use \Lib\Controller;
-use \Lib\Request;
-use \Lib\Security;
+use Lib\Controller;
+use Lib\Request;
+use Lib\Security;
 
 class CommentController extends Controller
 {
-
-    
     /**
      * __construct
      *
@@ -20,7 +18,7 @@ class CommentController extends Controller
         parent::__construct();
         $this->security = Security::verifAccess($this->session, Security::MODERATOR_USER);
     }
-    
+
     /**
      * list
      *
@@ -28,14 +26,13 @@ class CommentController extends Controller
      * @return void
      */
     public function list(Request $request)
-    {        
+    {
         if ($this->security) {
             return $this->processReturn();
         }
         return ['error/403.html.twig', [] ];
-        
     }
-        
+
     /**
      * valid
      *
@@ -51,7 +48,7 @@ class CommentController extends Controller
         }
         return ['error/403.html.twig', [] ];
     }
-    
+
     /**
      * ban
      *
@@ -67,7 +64,7 @@ class CommentController extends Controller
         }
         return ['error/403.html.twig', [] ];
     }
-    
+
     /**
      * delete
      *
@@ -87,7 +84,7 @@ class CommentController extends Controller
             $comment = $commentManager->getUnique((int) $vars['id_comment']);
 
             return ['backend/commentDelete.html.twig', [
-                'action' => '/admin/deletecomment-'.$vars['id_comment'],
+                'action' => '/admin/deletecomment-' . $vars['id_comment'],
                 'Params' => $comment,
                 'Response' => $this->response
                 ]
@@ -95,7 +92,7 @@ class CommentController extends Controller
         }
         return ['error/403.html.twig', [] ];
     }
-    
+
     /**
      * processReturn
      *
@@ -109,5 +106,4 @@ class CommentController extends Controller
             ]
         ];
     }
-
 }

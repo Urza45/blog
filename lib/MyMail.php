@@ -2,8 +2,8 @@
 
 namespace Lib;
 
-use \Lib\Config;
-use \Model\User;
+use Lib\Config;
+use Model\User;
 
 /**
  * MyMail
@@ -13,13 +13,19 @@ class MyMail
     private $from = '';
     private $sendTo = '';
     private $subject = '';
-    private $fields = ['name' => 'Name', 'surname' => 'Surname', 'need' => 'Need', 'email' => 'Email', 'message' => 'Message'];
+    private $fields = [
+        'name' => 'Name',
+        'surname' => 'Surname',
+        'need' => 'Need',
+        'email' => 'Email',
+        'message' => 'Message'
+    ];
     private $emailText = '';
     private $webUrl = '';
-    const OK_MESSAGE = 'Votre message a bien été envoyé.';
-    const ACTIVATION_MESSAGE = 'Un email d\'activation vous a été envoyé.';
-    const ERROR_MESSAGE = 'Une erreur est survenue. Veuillez réessayer plus tard.';
-    
+    private const OK_MESSAGE = 'Votre message a bien été envoyé.';
+    private const ACTIVATION_MESSAGE = 'Un email d\'activation vous a été envoyé.';
+    private const ERROR_MESSAGE = 'Une erreur est survenue. Veuillez réessayer plus tard.';
+
     /**
      * __construct
      *
@@ -33,7 +39,7 @@ class MyMail
         $this->subject = $config->get('subject');
         $this->webUrl = $config->get('webUrl');
     }
-    
+
     /**
      * sendEmailToAdmin
      *
@@ -42,12 +48,11 @@ class MyMail
      */
     public function sendEmailToAdmin(array $tab)
     {
-        try
-        {   
+        try {
             foreach ($tab as $key => $value) {
-                // If the field exists in the $fields array, include it in the email 
+                // If the field exists in the $fields array, include it in the email
                 if (isset($this->fields[$key])) {
-                    $this->emailText .= $this->fields[$key]. ": $value\n";
+                    $this->emailText .= $this->fields[$key] . ": $value\n";
                 }
             }
             // use wordwrap() if lines are longer than 70 characters
@@ -65,13 +70,11 @@ class MyMail
                 return array('type' => 'success', 'message' => self::OK_MESSAGE);
             }
             return array('type' => 'danger', 'message' => self::ERROR_MESSAGE);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return array('type' => 'danger', 'message' => self::ERROR_MESSAGE);
         }
     }
-    
+
     /**
      * sendActivationEmail
      *
@@ -80,8 +83,7 @@ class MyMail
      */
     public function sendActivationEmail(User $user)
     {
-        try
-        {
+        try {
             $this->sendTo = $user->getEmail();
             $this->subject = 'Validation de votre compte.';
 
@@ -104,11 +106,12 @@ class MyMail
             <p>Activer votre compte</p>
             <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
                 <tr style="background-color: #e0e0e0;"> 
-                    <th><a href="' . $this->webUrl .'/activation/?p=' . $user->getPseudo() . '&v=' . $user->getValidationKey() . '">Activer votre compte</a></th> 
+                    <th><a href="' . $this->webUrl . '/activation/?p='
+                    . $user->getPseudo() . '&v=' . $user->getValidationKey() . '">Activer votre compte</a></th> 
                 </tr> 
             </table>
         </body> 
-        </html>'; 
+        </html>';
 
             // All the neccessary headers for the email.
             $headers = [
@@ -123,13 +126,11 @@ class MyMail
                 return array('type' => 'success', 'message' => self::ACTIVATION_MESSAGE);
             }
             return array('type' => 'danger', 'message' => self::ERROR_MESSAGE);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return array('type' => 'danger', 'message' => self::ERROR_MESSAGE);
         }
     }
-    
+
     /**
      * sendConnectedMail
      *
@@ -139,8 +140,7 @@ class MyMail
      */
     public function sendConnectedMail(User $user, $code)
     {
-        try
-        {
+        try {
             $this->sendTo = $user->getEmail();
             $this->subject = 'Vous êtes déjà connecté.';
 
@@ -164,11 +164,12 @@ class MyMail
             <p>Si cela n\'était pas vous, nous vous recommendons de changer votre mot de passe une fois connecté.</p>
             <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
                 <tr style="background-color: #e0e0e0;"> 
-                    <th><a href="' . $this->webUrl .'/code/?p=' . $user->getPseudo() . '&v=' . $user->getValidationKey() . '">Débloquer votre compte</a></th> 
+                    <th><a href="' . $this->webUrl . '/code/?p='
+                    . $user->getPseudo() . '&v=' . $user->getValidationKey() . '">Débloquer votre compte</a></th> 
                 </tr> 
             </table>
         </body> 
-        </html>'; 
+        </html>';
 
             // All the neccessary headers for the email.
             $headers = [
@@ -183,9 +184,7 @@ class MyMail
                 return array('type' => 'success', 'message' => self::ACTIVATION_MESSAGE);
             }
             return array('type' => 'danger', 'message' => self::ERROR_MESSAGE);
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return array('type' => 'danger', 'message' => self::ERROR_MESSAGE);
         }
     }

@@ -1,31 +1,31 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lib;
 
-use \Lib\Request;
-use \Lib\Config;
+use Lib\Request;
+use Lib\Config;
 
 /**
  * Router
  */
 class Router
 {
-
     private $routes = [];
-    private static $_instance;
+    private static $instance;
 
     /**
      * La méthode statique qui permet d'instancier ou de récupérer l'instance unique
      **/
     public static function getInstance()
     {
-        if (self::$_instance === null) {
-            self::$_instance = new Router();
+        if (self::$instance === null) {
+            self::$instance = new Router();
         }
-        return self::$_instance;
+        return self::$instance;
     }
-    
+
     /**
      * __construct
      *
@@ -33,11 +33,11 @@ class Router
      */
     private function __construct()
     {
-        $xml = new \DOMDocument;
-        $xml->load(__DIR__.'/../config/routes.xml');
+        $xml = new \DOMDocument();
+        $xml->load(__DIR__ . '/../config/routes.xml');
         $this->routes = $xml->getElementsByTagName('route');
     }
-        
+
     /**
      * run
      *
@@ -48,34 +48,34 @@ class Router
     {
 
         $config = Config::getInstance();
-        
-        $url = (preg_match("/\?/", $request->getUrl())) ? '/' . trim($request->getParams()['url'], '/') : '/' . trim($request->getUrl(), '/');
-        
+
+        $url = (preg_match("/\?/", $request->getUrl())) ? '/' . trim($request->getParams()['url'], '/') : '/'
+            . trim($request->getUrl(), '/');
+
         // On parcourt les routes du fichier XML.
-        foreach ($this->routes as $route)
-        {
+        foreach ($this->routes as $route) {
             $vars = [];
 
-            $pattern = '`^'.$route->getAttribute('url').'$`';
+            $pattern = '`^' . $route->getAttribute('url') . '$`';
             $app = $route->getAttribute('app');
             $module = $route->getAttribute('module');
             $action = $route->getAttribute('action');
 
             if (preg_match($pattern, $url)) {
                 // On regarde si des variables sont présentes dans l'URL.
-                if ($route->hasAttribute('vars')) {    
+                if ($route->hasAttribute('vars')) {
                     $varsNames = explode(',', $route->getAttribute('vars'));
                     $varsValues = explode('-', $url);
 
-                    for ($i=0; $i<count($varsNames); $i++) {
-                        if (isset($varsValues[$i+1])) {
-                            $vars[$varsNames[$i]] = $varsValues[$i+1];
+                    for ($i = 0; $i < count($varsNames); $i++) {
+                        if (isset($varsValues[$i + 1])) {
+                            $vars[$varsNames[$i]] = $varsValues[$i + 1];
                         }
                     }
                 }
-                
+
                 /**
-                * Controller initiation 
+                * Controller initiation
                 */
                 $var = '\Controller\\' . $app . '\\' . $module . 'Controller';
                 if (is_file($config->get('directory') . $var . '.php')) {
@@ -86,7 +86,7 @@ class Router
                     return $controller->$action($request);
                 }
                 return ['error/404.html.twig', []];
-            }       
+            }
         }
         return ['error/404.html.twig', []];
     }

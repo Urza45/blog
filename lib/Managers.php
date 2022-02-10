@@ -9,7 +9,7 @@ class Managers
 {
     protected $dao = null;
     protected $managers = [];
-    
+
     /**
      * __construct
      *
@@ -20,7 +20,7 @@ class Managers
     {
         $this->dao = $dao;
     }
-    
+
     /**
      * getManagerOf
      *
@@ -34,7 +34,7 @@ class Managers
         }
 
         if (!isset($this->managers[$module])) {
-            $manager = '\\Model\\'.$module.'Manager';
+            $manager = '\\Model\\' . $module . 'Manager';
             $this->managers[$module] = new $manager($this->dao);
         }
 

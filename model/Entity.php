@@ -9,7 +9,7 @@ abstract class Entity
 {
     protected $errors = [];
     protected $id;
-    
+
     /**
      * __construct
      *
@@ -22,7 +22,7 @@ abstract class Entity
             $this->hydrate($donnees);
         }
     }
-    
+
     /**
      * isNew
      *
@@ -32,7 +32,7 @@ abstract class Entity
     {
         return empty($this->id);
     }
-    
+
     /**
      * erreurs
      *
@@ -45,7 +45,7 @@ abstract class Entity
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -55,14 +55,14 @@ abstract class Entity
      * Set the value of id
      *
      * @return self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
 
         return $this;
     }
-    
+
     /**
      * hydrate
      *
@@ -71,9 +71,8 @@ abstract class Entity
      */
     public function hydrate(array $donnees)
     {
-        foreach ($donnees as $attribut => $valeur)
-        {
-            $methode = 'set'.ucfirst($attribut);
+        foreach ($donnees as $attribut => $valeur) {
+            $methode = 'set' . ucfirst($attribut);
 
             if (is_callable([$this, $methode])) {
                 $this->$methode($valeur);

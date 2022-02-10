@@ -2,7 +2,7 @@
 
 namespace Lib;
 
-use \Lib\FormValidator;
+use Lib\FormValidator;
 
 /**
  * Request
@@ -14,7 +14,7 @@ class Request
     private $query;
     private $post;
     private $get;
-    
+
     /**
      * __construct
      *
@@ -22,9 +22,9 @@ class Request
      */
     public function __construct()
     {
-        $this->define_global();
+        $this->defineGlobal();
     }
-    
+
     /**
      * isGet
      *
@@ -34,7 +34,7 @@ class Request
     {
         return ($this->method == 'GET') ? true : false;
     }
-    
+
     /**
      * isPost
      *
@@ -44,7 +44,7 @@ class Request
     {
         return ($this->method == 'POST') ? true : false;
     }
-    
+
     /**
      * getParams
      *
@@ -52,7 +52,7 @@ class Request
      */
     public function getParams()
     {
-        
+
         if ($this->isPost()) {
             $params = [];
             foreach ($this->post as $key => $value) {
@@ -69,7 +69,7 @@ class Request
         }
         return array();
     }
-    
+
     /**
      * getMethod
      *
@@ -79,7 +79,7 @@ class Request
     {
         return $this->method;
     }
-    
+
     /**
      * getUrl
      *
@@ -89,7 +89,7 @@ class Request
     {
         return $this->url;
     }
-    
+
     /**
      * getQuery
      *
@@ -100,7 +100,7 @@ class Request
         return $this->query;
     }
 
-    private function define_global()
+    private function defineGlobal()
     {
         $this->method = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : null;
         $this->url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : null;

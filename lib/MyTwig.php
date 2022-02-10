@@ -2,32 +2,30 @@
 
 namespace Lib;
 
-use \Twig\Extra\Intl\IntlExtension;
-use \Lib\Session;
+use Twig\Extra\Intl\IntlExtension;
+use Lib\Session;
 
 class MyTwig
 {
-
-       
     private $twig;
-    
+
     /**
      * __construct
      *
      * @param  mixed $session
      * @return void
      */
-    public function __construct(SESSION $session)   
+    public function __construct(SESSION $session)
     {
         $config = Config::getInstance();
 
         //var_dump($config);
         /**
-        * Twig initiation 
+        * Twig initiation
         */
         $loader = new \Twig\Loader\FilesystemLoader($config->get('directory') . '/template');
         $this->twig = new \Twig\Environment(
-            $loader, 
+            $loader,
             [
                 'debug' => true,
                 'cache' => false,
@@ -42,14 +40,14 @@ class MyTwig
         */
         $this->twig->addExtension(new IntlExtension());
         /**
-        * Allow twig to access the session 
+        * Allow twig to access the session
         */
         if ($session->existSession()) {
             $this->twig->addGlobal('session', $_SESSION);
         }
     }
 
-    public function getRender(array $view) 
+    public function getRender(array $view)
     {
         ob_start();
             print_r($this->twig->render($view[0], $view[1]));

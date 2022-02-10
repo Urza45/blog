@@ -2,14 +2,12 @@
 
 namespace Controller\Backend;
 
-use \Lib\Controller;
-use \Lib\Request;
-use \Lib\Security;
+use Lib\Controller;
+use Lib\Request;
+use Lib\Security;
 
 class UserController extends Controller
 {
-
-    
     /**
      * __construct
      *
@@ -20,7 +18,7 @@ class UserController extends Controller
         parent::__construct();
         $this->security = Security::verifAccess($this->session, Security::SUPER_ADMIN_USER);
     }
-    
+
     /**
      * list
      *
@@ -38,12 +36,12 @@ class UserController extends Controller
                     'Users' => $users,
                     'ListType' => $types,
                     'nbComments' => $nbComments
-                ] 
+                ]
             ];
         }
         return ['error/403.html.twig', [] ];
     }
-    
+
     /**
      * delete
      *
@@ -65,12 +63,12 @@ class UserController extends Controller
                     'ListType' => $types,
                     'nbComments' => $nbComments,
                     'Response' => $this->response
-                ] 
+                ]
             ];
         }
         return ['error/403.html.twig', [] ];
     }
-    
+
     /**
      * promote
      *
@@ -92,12 +90,12 @@ class UserController extends Controller
                     'ListType' => $types,
                     'nbComments' => $nbComments,
                     'Response' => $this->response
-                ] 
+                ]
             ];
         }
         return ['error/403.html.twig', [] ];
     }
-    
+
     /**
      * demote
      *
@@ -119,12 +117,12 @@ class UserController extends Controller
                     'ListType' => $types,
                     'nbComments' => $nbComments,
                     'Response' => $this->response
-                ] 
+                ]
             ];
         }
         return ['error/403.html.twig', [] ];
     }
-    
+
     /**
      * ban
      *
@@ -146,12 +144,12 @@ class UserController extends Controller
                     'ListType' => $types,
                     'nbComments' => $nbComments,
                     'Response' => $this->response
-                ] 
+                ]
             ];
         }
         return ['error/403.html.twig', [] ];
     }
-    
+
     /**
      * active
      *
@@ -172,7 +170,7 @@ class UserController extends Controller
                 'ListType' => $types,
                 'nbComments' => $nbComments,
                 'Response' => $this->response
-            ] 
+            ]
         ];
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Controller\Backend;
 
-use \Lib\Controller;
-use \Lib\Request;
-use \Lib\Security;
-use \Model\Post;
+use Lib\Controller;
+use Lib\Request;
+use Lib\Security;
+use Model\Post;
 
 class PostController extends Controller
 {
@@ -18,8 +18,8 @@ class PostController extends Controller
     {
         parent::__construct();
         $this->security = Security::verifAccess($this->session, Security::ADMINISTRATOR_USER);
-    }    
-    
+    }
+
     /**
      * index
      *
@@ -39,7 +39,7 @@ class PostController extends Controller
         }
         return ['error/403.html.twig', [] ];
     }
-        
+
     /**
      * add
      *
@@ -50,7 +50,7 @@ class PostController extends Controller
     {
         if ($this->security) {
             $postManager = $this->manager->getManagerOf('Post');
-        
+
             if (isset($request->getParams()['action'])) {
                 $post = new Post();
                 $post->hydrate($request->getParams());
@@ -66,7 +66,7 @@ class PostController extends Controller
                     ]
                 ];
             }
-        
+
             return ['backend/post.html.twig', [
                 'action' => 'newpost',
                 'Params' => $request->getParams(),
@@ -76,7 +76,7 @@ class PostController extends Controller
         }
         return ['error/403.html.twig', [] ];
     }
-    
+
     /**
      * modify
      *
@@ -98,7 +98,7 @@ class PostController extends Controller
         }
         return ['error/403.html.twig', [] ];
     }
-    
+
     /**
      * delete
      *
@@ -110,7 +110,7 @@ class PostController extends Controller
     {
         if ($this->security) {
             $this->response = $this->manager->getManagerOf('Post')->delete($vars['id_post']);
-        
+
             $postManager = $this->manager->getManagerOf('Post');
 
             return ['backend/listpost.html.twig', [

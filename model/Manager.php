@@ -8,7 +8,7 @@ namespace Model;
 abstract class Manager
 {
     protected $dao;
-      
+
     /**
      * __construct
      *

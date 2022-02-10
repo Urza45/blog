@@ -2,16 +2,14 @@
 
 namespace Model;
 
-use \Model\Manager;
-use \Model\User;
+use Model\Manager;
+use Model\User;
 
 /**
  * UserManager
  */
 class UserManager extends Manager
 {
-
-    
     /**
      * getListUser
      *
@@ -21,9 +19,9 @@ class UserManager extends Manager
     public function getListUser(int $number = null)
     {
         $sql = 'SELECT id, name, firstName, pseudo, email, phone, portable,'
-        .' password, salt, statusConnected, activeUser, validationKey'
-        .' validationKey, activatedUser, dateCreate, typeUser_idTypeUSer, askPromotion' 
-        .' FROM user ORDER BY name, firstName DESC';
+        . ' password, salt, statusConnected, activeUser, validationKey'
+        . ' validationKey, activatedUser, dateCreate, typeUser_idTypeUSer, askPromotion'
+        . ' FROM user ORDER BY name, firstName DESC';
 
         if (isset($number)) {
             $sql .= ' limit ' . $number;
@@ -33,10 +31,10 @@ class UserManager extends Manager
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\User');
 
         $listUser = $requete->fetchAll();
-        
+
         return $listUser;
     }
-    
+
     /**
      * getUnique
      *
@@ -46,23 +44,23 @@ class UserManager extends Manager
     public function getUnique(int $idUser)
     {
         $sql = 'SELECT id, name, firstName, pseudo, email, phone, portable,'
-        .' password, salt, statusConnected, activeUser, validationKey'
-        .' validationKey, activatedUser, dateCreate, typeUser_idTypeUSer, askPromotion'
-        .' FROM user WHERE id = :id';
-        
+        . ' password, salt, statusConnected, activeUser, validationKey'
+        . ' validationKey, activatedUser, dateCreate, typeUser_idTypeUSer, askPromotion'
+        . ' FROM user WHERE id = :id';
+
         $requete = $this->dao->prepare($sql);
         $requete->bindValue(':id', (int) $idUser, \PDO::PARAM_INT);
         $requete->execute();
-    
+
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\User');
-    
+
         if ($user = $requete->fetch()) {
             return $user;
         }
-    
+
         return null;
     }
-    
+
     /**
      * getUniqueByPseudo
      *
@@ -72,23 +70,23 @@ class UserManager extends Manager
     public function getUniqueByPseudo(string $pseudo)
     {
         $sql = 'SELECT id, name, firstName, pseudo, email, phone, portable,'
-        .' password, salt, statusConnected, activeUser, validationKey'
-        .' validationKey, activatedUser, dateCreate, typeUser_idTypeUSer, askpromotion'
-        .' FROM user WHERE pseudo = :pseudo';
-        
+        . ' password, salt, statusConnected, activeUser, validationKey'
+        . ' validationKey, activatedUser, dateCreate, typeUser_idTypeUSer, askpromotion'
+        . ' FROM user WHERE pseudo = :pseudo';
+
         $requete = $this->dao->prepare($sql);
         $requete->bindValue(':pseudo', $pseudo);
         $requete->execute();
-    
+
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\User');
-    
+
         if ($user = $requete->fetch()) {
             return $user;
         }
-    
+
         return null;
     }
-    
+
     /**
      * count
      *
@@ -98,7 +96,7 @@ class UserManager extends Manager
     {
         return $this->dao->query('SELECT COUNT(*) FROM User')->fetchColumn();
     }
-    
+
     /**
      * save
      *
@@ -149,17 +147,15 @@ class UserManager extends Manager
             if (!$user->isNew()) {
                 $requete->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
             }
-            
+
             $requete->execute();
             $row_count = $requete->rowCount();
             return $row_count;
-        }
-        else
-        {
+        } else {
             throw new \RuntimeException('Votre User doit être validé pour être enregistré.');
         }
     }
-    
+
     /**
      * delete
      *
@@ -168,29 +164,29 @@ class UserManager extends Manager
      */
     public function delete(int $idUser)
     {
-        $countUser = $this->dao->exec('DELETE FROM user WHERE id = '.(int) $idUser);
+        $countUser = $this->dao->exec('DELETE FROM user WHERE id = ' . (int) $idUser);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. L\'utilisateur n\'a pas été effacé.'];
         }
         return [ 'type' => 'success', 'message' => 'L\'utilisateur a bien été supprimé. '];
     }
-    
+
     /**
      * ifExistPseudo
      *
      * @param  mixed $pseudo
      * @return bool
      */
-    public function ifExistPseudo(string $pseudo ) : bool
+    public function ifExistPseudo(string $pseudo): bool
     {
         $ifExistPseudo = false;
-        $requete = $this->dao->query('SELECT COUNT(*) FROM User WHERE pseudo="' . $pseudo.'"')->fetchColumn();
+        $requete = $this->dao->query('SELECT COUNT(*) FROM User WHERE pseudo="' . $pseudo . '"')->fetchColumn();
         if ($requete > 0) {
             $ifExistPseudo = true;
         }
         return $ifExistPseudo;
     }
-    
+
     /**
      * askPromotion
      *
@@ -199,13 +195,13 @@ class UserManager extends Manager
      */
     public function askPromotion(int $idUser)
     {
-        $countUser = $this->dao->exec('UPDATE user SET askpromotion = 1 WHERE id = '.(int) $idUser);
+        $countUser = $this->dao->exec('UPDATE user SET askpromotion = 1 WHERE id = ' . (int) $idUser);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
         }
         return [ 'type' => 'success', 'message' => 'Votre demande est bien enregistrée.'];
     }
-    
+
     /**
      * promote
      *
@@ -214,14 +210,15 @@ class UserManager extends Manager
      */
     public function promote(int $idUser)
     {
-        $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser + 1, askPromotion = 0 WHERE id = '.(int) $idUser;
+        $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser + 1, askPromotion = 0 WHERE id = '
+            . (int) $idUser;
         $countUser = $this->dao->exec($sql);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
         }
         return [ 'type' => 'success', 'message' => 'Promotion bien enregistrée.'];
     }
-    
+
     /**
      * demote
      *
@@ -230,14 +227,14 @@ class UserManager extends Manager
      */
     public function demote(int $idUser)
     {
-        $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser - 1 WHERE id = '.(int) $idUser;
+        $sql = 'UPDATE user SET TypeUser_idTypeUser = TypeUser_idTypeUser - 1 WHERE id = ' . (int) $idUser;
         $countUser = $this->dao->exec($sql);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
         }
         return [ 'type' => 'success', 'message' => 'Rétrogradation bien enregistrée.'];
     }
-    
+
     /**
      * ban
      *
@@ -246,13 +243,13 @@ class UserManager extends Manager
      */
     public function ban(int $idUser)
     {
-        $countUser = $this->dao->exec('UPDATE user SET activeUser = 0 WHERE id ='. (int) $idUser);
+        $countUser = $this->dao->exec('UPDATE user SET activeUser = 0 WHERE id =' . (int) $idUser);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
         }
         return [ 'type' => 'success', 'message' => 'Utilisateur banni.'];
     }
-    
+
     /**
      * active
      *
@@ -261,13 +258,13 @@ class UserManager extends Manager
      */
     public function active(int $idUser)
     {
-        $countUser = $this->dao->exec('UPDATE user SET activeUser = 1 WHERE id ='. (int) $idUser);
+        $countUser = $this->dao->exec('UPDATE user SET activeUser = 1 WHERE id =' . (int) $idUser);
         if ($countUser == 0) {
             return [ 'type' => 'danger', 'Un problème est survenu. Votre demande n\'a pas aboutie.'];
         }
         return [ 'type' => 'success', 'message' => 'Utilisateur activé.'];
     }
-    
+
     /**
      * getCode
      *
@@ -283,10 +280,10 @@ class UserManager extends Manager
         $requete->bindValue(':id', $idUser, \PDO::PARAM_INT);
 
         $requete->execute();
-        
+
         return $requete->fetch();
     }
-    
+
     /**
      * saveCode
      *
@@ -299,7 +296,7 @@ class UserManager extends Manager
         $sql = 'UPDATE user SET '
         . 'code = :code '
         . 'WHERE id = :id';
-        
+
         $requete = $this->dao->prepare($sql);
 
         $requete->bindValue(':code', $code, \PDO::PARAM_INT);
@@ -308,6 +305,5 @@ class UserManager extends Manager
         $requete->execute();
         $row_count = $requete->rowCount();
         return $row_count;
-
     }
 }

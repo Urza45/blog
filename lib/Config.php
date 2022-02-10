@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lib;
@@ -9,19 +10,18 @@ namespace Lib;
  */
 class Config
 {
-
     private $settings = [];
-    private static $_instance; // L'attribut qui stockera l'instance unique
+    private static $instance; // L'attribut qui stockera l'instance unique
 
     /**
      * La méthode statique qui permet d'instancier ou de récupérer l'instance unique
      **/
     public static function getInstance()
     {
-        if (self::$_instance === null) {
-            self::$_instance = new Config();
+        if (self::$instance === null) {
+            self::$instance = new Config();
         }
-        return self::$_instance;
+        return self::$instance;
     }
 
     /**
@@ -45,5 +45,4 @@ class Config
         }
         return $this->settings[$key];
     }
-
 }
