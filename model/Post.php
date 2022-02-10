@@ -35,7 +35,10 @@ class Post extends Entity
         );
     }
 
-    /** GETTERS */
+    /**
+     * 
+     * GETTERS 
+     */
 
     /**
      * Get the value of title
@@ -77,12 +80,15 @@ class Post extends Entity
         return $this->user_idUser;
     }
 
-    /** SETTERS */
+    /**
+     * 
+     * SETTERS 
+     */
 
     /**
      * Set the value of title
      *
-     * @return  void
+     * @return void
      */ 
     public function setTitle($title)
     {
@@ -97,7 +103,7 @@ class Post extends Entity
     /**
      * Set the value of chapo
      *
-     * @return  void
+     * @return void
      */ 
     public function setChapo($chapo)
     {
@@ -111,7 +117,7 @@ class Post extends Entity
     /**
      * Set the value of content
      *
-     * @return  void
+     * @return void
      */ 
     public function setContent($content)
     {
@@ -125,7 +131,7 @@ class Post extends Entity
     /**
      * Set the value of dateCreate
      *
-     * @return  void
+     * @return void
      */ 
     public function setDateCreate($dateCreate)
     {
@@ -139,7 +145,7 @@ class Post extends Entity
     /**
      * Set the value of user_idUser
      *
-     * @return  void
+     * @return void
      */ 
     public function setUser_idUser($user_idUser)
     {

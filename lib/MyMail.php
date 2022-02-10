@@ -8,7 +8,7 @@ use \Model\User;
 /**
  * MyMail
  */
-class MyMail 
+class MyMail
 {
     private $from = '';
     private $sendTo = '';
@@ -51,7 +51,7 @@ class MyMail
                 }
             }
             // use wordwrap() if lines are longer than 70 characters
-            $this->emailText = wordwrap($this->emailText,70);
+            $this->emailText = wordwrap($this->emailText, 70);
 
             // All the neccessary headers for the email.
             $headers = [

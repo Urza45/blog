@@ -7,7 +7,9 @@ use \Lib\Request;
 use \Lib\Security;
 
 class CommentController extends Controller
-{    
+{
+
+    
     /**
      * __construct
      *
@@ -27,8 +29,7 @@ class CommentController extends Controller
      */
     public function list(Request $request)
     {        
-        if ($this->security)
-        {
+        if ($this->security) {
             return $this->processReturn();
         }
         return ['error/403.html.twig', [] ];
@@ -44,8 +45,7 @@ class CommentController extends Controller
      */
     public function valid(Request $request, $vars)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $this->response = $this->manager->getManagerOf('Comments')->ban($vars['id_comment'], 0);
             return $this->processReturn();
         }
@@ -61,8 +61,7 @@ class CommentController extends Controller
      */
     public function ban(Request $request, $vars)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $this->response = $this->manager->getManagerOf('Comments')->ban($vars['id_comment'], 1);
             return $this->processReturn();
         }
@@ -78,8 +77,7 @@ class CommentController extends Controller
      */
     public function delete(Request $request, $vars)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             if (isset($request->getParams()['action'])) {
                 $this->response = $this->manager->getManagerOf('Comments')->delete($vars['id_comment']);
                 return $this->processReturn();

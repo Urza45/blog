@@ -28,8 +28,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $postManager = $this->manager->getManagerOf('Post');
 
             return ['backend/listpost.html.twig', [
@@ -49,8 +48,7 @@ class PostController extends Controller
      */
     public function add(Request $request)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $postManager = $this->manager->getManagerOf('Post');
         
             if (isset($request->getParams()['action'])) {
@@ -88,8 +86,7 @@ class PostController extends Controller
      */
     public function modify(Request $request, $vars)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $post = $this->manager->getManagerOf('Post')->getUniquePost($vars['id_post']);
 
             return ['backend/post.html.twig', [
@@ -111,8 +108,7 @@ class PostController extends Controller
      */
     public function delete(Request $request, $vars)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $this->response = $this->manager->getManagerOf('Post')->delete($vars['id_post']);
         
             $postManager = $this->manager->getManagerOf('Post');

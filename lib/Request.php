@@ -30,7 +30,8 @@ class Request
      *
      * @return void
      */
-    public function isGet() {
+    public function isGet()
+    {
         return ($this->method == 'GET') ? true : false;
     }
     
@@ -39,7 +40,8 @@ class Request
      *
      * @return void
      */
-    public function isPost() {
+    public function isPost()
+    {
         return ($this->method == 'POST') ? true : false;
     }
     
@@ -48,7 +50,8 @@ class Request
      *
      * @return void
      */
-    public function getParams() {
+    public function getParams()
+    {
         
         if ($this->isPost()) {
             $params = [];
@@ -72,7 +75,8 @@ class Request
      *
      * @return void
      */
-    public function getMethod() {
+    public function getMethod()
+    {
         return $this->method;
     }
     
@@ -81,7 +85,8 @@ class Request
      *
      * @return void
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
     
@@ -90,7 +95,8 @@ class Request
      *
      * @return void
      */
-    public function getQuery() {
+    public function getQuery()
+    {
         return $this->query;
     }
 

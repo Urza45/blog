@@ -9,7 +9,9 @@ use \Model\User;
  * UserManager
  */
 class UserManager extends Manager
-{    
+{
+
+    
     /**
      * getListUser
      *
@@ -54,8 +56,7 @@ class UserManager extends Manager
     
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\User');
     
-        if ($user = $requete->fetch())
-        {
+        if ($user = $requete->fetch()) {
             return $user;
         }
     
@@ -81,8 +82,7 @@ class UserManager extends Manager
     
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\User');
     
-        if ($user = $requete->fetch())
-        {
+        if ($user = $requete->fetch()) {
             return $user;
         }
     
@@ -107,8 +107,7 @@ class UserManager extends Manager
      */
     public function save(User $user)
     {
-        if ($user->isValid())
-        {
+        if ($user->isValid()) {
             $chaine = 'name = :name,'
             . 'firstName = :firstName, '
             . 'pseudo = :pseudo, '

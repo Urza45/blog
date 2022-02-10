@@ -51,7 +51,10 @@ class User extends Entity
         return !(empty($this->name));
     }
     
-    /** GETTERS */
+    /**
+     * 
+     * GETTERS 
+     */
 
     /**
      * Get the value of name
@@ -175,12 +178,15 @@ class User extends Entity
         return $this->askPromotion;
     }
 
-    /** SETTERS */
+    /**
+     * 
+     * SETTERS 
+     */
 
     /**
      * Set the value of name
      *
-     * @return  self
+     * @return self
      */ 
     public function setName($name)
     {
@@ -192,7 +198,7 @@ class User extends Entity
     /**
      * Set the value of firstName
      *
-     * @return  self
+     * @return self
      */ 
     public function setFirstName($firstName)
     {
@@ -204,7 +210,7 @@ class User extends Entity
     /**
      * Set the value of pseudo
      *
-     * @return  self
+     * @return self
      */ 
     public function setPseudo($pseudo)
     {
@@ -216,7 +222,7 @@ class User extends Entity
     /**
      * Set the value of email
      *
-     * @return  self
+     * @return self
      */ 
     public function setEmail($email)
     {
@@ -228,7 +234,7 @@ class User extends Entity
     /**
      * Set the value of phone
      *
-     * @return  self
+     * @return self
      */ 
     public function setPhone($phone)
     {
@@ -240,7 +246,7 @@ class User extends Entity
     /**
      * Set the value of portable
      *
-     * @return  self
+     * @return self
      */ 
     public function setPortable($portable)
     {
@@ -252,7 +258,7 @@ class User extends Entity
     /**
      * Set the value of password
      *
-     * @return  self
+     * @return self
      */ 
     public function setPassword($password)
     {
@@ -264,7 +270,7 @@ class User extends Entity
     /**
      * Set the value of salt
      *
-     * @return  self
+     * @return self
      */ 
     public function setSalt($salt)
     {
@@ -276,7 +282,7 @@ class User extends Entity
     /**
      * Set the value of statusConnected
      *
-     * @return  self
+     * @return self
      */ 
     public function setStatusConnected($statusConnected)
     {
@@ -288,7 +294,7 @@ class User extends Entity
     /**
      * Set the value of activeUser
      *
-     * @return  self
+     * @return self
      */ 
     public function setActiveUser($activeUser)
     {
@@ -301,7 +307,7 @@ class User extends Entity
     /**
      * Set the value of validationKey
      *
-     * @return  self
+     * @return self
      */ 
     public function setValidationKey($validationKey)
     {
@@ -313,7 +319,7 @@ class User extends Entity
     /**
      * Set the value of activatedUser
      *
-     * @return  self
+     * @return self
      */ 
     public function setActivatedUser($activatedUser)
     {
@@ -325,7 +331,7 @@ class User extends Entity
     /**
      * Set the value of dateCreate
      *
-     * @return  self
+     * @return self
      */ 
     public function setDateCreate($dateCreate)
     {
@@ -337,7 +343,7 @@ class User extends Entity
     /**
      * Set the value of typeUser_idTypeUSer
      *
-     * @return  self
+     * @return self
      */ 
     public function setTypeUser_idTypeUSer($typeUser_idTypeUSer)
     {

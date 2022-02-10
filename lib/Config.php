@@ -7,14 +7,15 @@ namespace Lib;
  * Class Config
  * Load parameters
  */
-class Config {
+class Config
+{
 
     private $settings = [];
     private static $_instance; // L'attribut qui stockera l'instance unique
 
     /**
-    * La méthode statique qui permet d'instancier ou de récupérer l'instance unique
-    **/
+     * La méthode statique qui permet d'instancier ou de récupérer l'instance unique
+     **/
     public static function getInstance()
     {
         if (self::$_instance === null) {
@@ -24,18 +25,19 @@ class Config {
     }
 
     /**
-    * Le constructeur avec sa logique est privé pour émpêcher l'instanciation en dehors de la classe
-    **/
+     * Le constructeur avec sa logique est privé pour émpêcher l'instanciation en dehors de la classe
+     **/
     private function __construct()
     {
-        $this->settings = require '../config/config.php';
+        $this->settings = include '../config/config.php';
     }
 
     /**
-    *  Permet d'obtenir la valeur de la configuration
-    *  @param $key string clef à récupérer
-    *  @return mixed
-    **/
+     *  Permet d'obtenir la valeur de la configuration
+     *
+     * @param  $key string clef à récupérer
+     * @return mixed
+     **/
     public function get($key)
     {
         if (!isset($this->settings[$key])) {

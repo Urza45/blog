@@ -8,7 +8,9 @@ use \Model\Manager;
  * TypeUserManager
  */
 class TypeUserManager extends Manager
-{    
+{
+
+    
     /**
      * getListType
      *

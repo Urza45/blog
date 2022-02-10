@@ -11,22 +11,23 @@ use \Model\Comments;
 use \Model\User;
 
 class MainController extends Controller
-{    
+{
+
+    
     /**
      * index
      *
      * @param  mixed $request
      * @return void
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         $postManager = $this->manager->getManagerOf('Post');
 
-        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
-        {
+        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending')) {
             $this->response = [ 'type' => 'danger', 'message' => 'Captcha erroné'];
-            if ($request->getParams()['captcha'] == $this->session->getAttribute('captcha'))
-            {
+            if ($request->getParams()['captcha'] == $this->session->getAttribute('captcha')) {
                 $email = new MyMail;
                 $this->response = $email->sendEmailToAdmin($request->getParams());
             }
@@ -46,7 +47,8 @@ class MainController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function list(Request $request) {
+    public function list(Request $request)
+    {
 
         $postManager = $this->manager->getManagerOf('Post');
 
@@ -65,12 +67,12 @@ class MainController extends Controller
      * @param  mixed $vars
      * @return void
      */
-    public function post(Request $request, $vars) {
+    public function post(Request $request, $vars)
+    {
 
         $Params = null;
 
-        if ($this->session->existsAttribute('idUser')) 
-        {
+        if ($this->session->existsAttribute('idUser')) {
             $Params = new Comments();
             $Params->setDisabled('0');
             $Params->setPost_idPost($vars['id_post']);
@@ -99,12 +101,12 @@ class MainController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
 
         $userManager = $this->manager->getManagerOf('User');
 
-        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'registration'))
-        {
+        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'registration')) {
             // Check password matching
             if ($request->getParams()['passwordFirst'] === $request->getParams()['confirmedPassword'] ) {
                 // Verification of the existence of nickname 
@@ -117,7 +119,7 @@ class MainController extends Controller
                     $user->setEmail($request->getParams()['email']);
                     $user->setPseudo($request->getParams()['pseudo']);
                     $user->setSalt(Utilities::Salt());
-                    $user->setPassword(Utilities::password_encode($request->getParams()['passwordFirst'],$user->getSalt()));
+                    $user->setPassword(Utilities::password_encode($request->getParams()['passwordFirst'], $user->getSalt()));
                     $user->setValidationKey(Utilities::RandomToken());
                     $user->setDateCreate(date('Y/m/d'));
                     $tab = [
@@ -153,10 +155,10 @@ class MainController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function contact(Request $request) {
+    public function contact(Request $request)
+    {
 
-        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
-        {
+        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending')) {
             $email = new \Lib\MyMail;
             $this->response = $email->sendEmailToAdmin($request->getParams());
         }
@@ -187,8 +189,8 @@ class MainController extends Controller
     public function picture(Request $request)
     {
         if (isset($request->getParams()['name']) && isset($request->getParams()['type']) 
-            && (in_array(strtoupper($request->getParams()['type']), ['PDF', 'JPG', 'JPEG', 'PNG']))) 
-        {
+            && (in_array(strtoupper($request->getParams()['type']), ['PDF', 'JPG', 'JPEG', 'PNG']))
+        ) {
             return Utilities::ViewPicture($request->getParams()['name'], $request->getParams()['type']);
         }
         return ['error/404.html.twig', [] ];

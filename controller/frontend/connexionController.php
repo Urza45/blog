@@ -12,14 +12,17 @@ use \Lib\Utilities;
  * ConnexionController
  */
 class ConnexionController extends Controller
-{    
+{
+
+    
     /**
      * signin
      *
      * @param  mixed $request
      * @return void
      */
-    public function signin(Request $request) {
+    public function signin(Request $request)
+    {
     
         $userManager = $this->manager->getManagerOf('User');
 
@@ -32,8 +35,7 @@ class ConnexionController extends Controller
             // If user exist
             if ($user) {
                 // Password verification
-                if (Utilities::verify_password($request->getParams()['password'], $user->getSalt(), $user->getPassword()))
-                {
+                if (Utilities::verify_password($request->getParams()['password'], $user->getSalt(), $user->getPassword())) {
                     // Activated user 
                     if ($user->getActivatedUser() == '0') {
                         $this->response = ['type' => 'danger' , 'message' => 'Vous n\'avez pas activé votre compte.'];
@@ -44,7 +46,7 @@ class ConnexionController extends Controller
                         } else {
                             // Connected user
                             if ($user->getStatusConnected() == '1') {
-                                $code = mt_rand(1000,9999);
+                                $code = mt_rand(1000, 9999);
                                 $userManager->saveCode($code, $user->getId());
                                 $mail = new MyMail;
                                 $mail->sendConnectedMail($user, $code);
@@ -87,10 +89,10 @@ class ConnexionController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function signout(Request $request) {
+    public function signout(Request $request)
+    {
         
-        if ($this->session->existsAttribute('idUser')) 
-        {
+        if ($this->session->existsAttribute('idUser')) {
             $userManager = $this->manager->getManagerOf('User');
 
             $user = $userManager->getUnique((int) $this->session->getAttribute('idUser'));
@@ -173,10 +175,8 @@ class ConnexionController extends Controller
      */
     public function account(Request $request, $vars)
     {
-        if ($this->session->existsAttribute('connected')) 
-        {
-            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) 
-            {
+        if ($this->session->existsAttribute('connected')) {
+            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) {
                 return ['error/403.html.twig', [] ];
             }
             $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
@@ -201,10 +201,8 @@ class ConnexionController extends Controller
      */
     public function ask(Request $request, $vars)
     {
-        if ($this->session->existsAttribute('connected')) 
-        {
-            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) 
-            {
+        if ($this->session->existsAttribute('connected')) {
+            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) {
                 return ['error/403.html.twig', [] ];
             }
             $this->response = $this->manager->getManagerOf('USer')->askPromotion((int) $vars['id_user']);
@@ -231,10 +229,8 @@ class ConnexionController extends Controller
      */
     public function modify(Request $request, $vars)
     {
-        if ($this->session->existsAttribute('connected')) 
-        {
-            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) 
-            {
+        if ($this->session->existsAttribute('connected')) {
+            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) {
                 return ['error/403.html.twig', [] ];
             }
             $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
@@ -271,19 +267,16 @@ class ConnexionController extends Controller
      */
     public function password(Request $request, $vars)
     {
-        if ($this->session->existsAttribute('connected')) 
-        {
-            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) 
-            {
+        if ($this->session->existsAttribute('connected')) {
+            if ($vars['id_user'] <> $this->session->getAttribute('idUser')) {
                 return ['error/403.html.twig', [] ];
             }
             $user = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
 
             // Password verification
-            if (!Utilities::verify_password($request->getParams()['passwordOld'], $user->getSalt(), $user->getPassword()))
-            {
+            if (!Utilities::verify_password($request->getParams()['passwordOld'], $user->getSalt(), $user->getPassword())) {
                 $this->response = [ 'type'=> 'danger', 'message' => 'L\'ancien mot de passe n\'est pas correct.'];
-            } elseif ( $request->getParams()['passwordFirst'] <> $request->getParams()['confirmedPassword']) {
+            } elseif ($request->getParams()['passwordFirst'] <> $request->getParams()['confirmedPassword']) {
                 $this->response = [ 'type'=> 'danger', 'message' => 'Confirmation de mot de passe erronée.'];
             } else {
                 $user->setSalt(Utilities::Salt());

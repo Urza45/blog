@@ -46,8 +46,7 @@ class PostManager extends Manager
     
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\Post');
     
-        if ($post = $requete->fetch())
-        {
+        if ($post = $requete->fetch()) {
             return $post;
         }
     
@@ -72,8 +71,7 @@ class PostManager extends Manager
      */
     public function save(Post $post)
     {
-        if ($post->isValid())
-        {
+        if ($post->isValid()) {
             $post->isNew() ? $this->add($post) : $this->modify($post);
         }
         else

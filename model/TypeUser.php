@@ -23,7 +23,10 @@ class TypeUser extends Entity
         return !(empty($this->label));
     }
 
-    /** GETTERS */
+    /**
+     * 
+     * GETTERS 
+     */
 
     /**
      * Get the value of label
@@ -33,12 +36,15 @@ class TypeUser extends Entity
         return $this->label;
     }
 
-    /** SETTERS */
+    /**
+     * 
+     * SETTERS 
+     */
 
     /**
      * Set the value of label
      *
-     * @return  void
+     * @return void
      */ 
     public function setLabel($label)
     {

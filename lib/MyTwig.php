@@ -6,7 +6,9 @@ use \Twig\Extra\Intl\IntlExtension;
 use \Lib\Session;
 
 class MyTwig
-{       
+{
+
+       
     private $twig;
     
     /**

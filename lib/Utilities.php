@@ -9,7 +9,9 @@ use \Lib\Config;
  * Utilities
  */
 class Utilities
-{    
+{
+
+    
     /**
      * checkDate
      * Checks the validity of a date 
@@ -17,7 +19,8 @@ class Utilities
      * @param  mixed $date
      * @return void
      */
-    public static function checkDate($date) {
+    public static function checkDate($date)
+    {
         $formatedDate = \DateTime::createFromFormat("Y/m/d", $date);
         return $formatedDate && $formatedDate->format("Y/m/d") === $date;
     }
@@ -29,7 +32,8 @@ class Utilities
      * @param  mixed $code
      * @return void
      */
-    public static function checkPostalCode($code) {
+    public static function checkPostalCode($code)
+    {
         return (preg_match("#^[0-9]{5}$#", $code));
     }
     
@@ -40,9 +44,10 @@ class Utilities
      * @param  mixed $length
      * @return string
      */
-    public static function RandomToken($length = null){
-        if(!isset($length) || intval($length) <= 8 ){
-          $length = 32;
+    public static function RandomToken($length = null)
+    {
+        if(!isset($length) || intval($length) <= 8 ) {
+            $length = 32;
         }
         if (function_exists('random_bytes')) {
             return bin2hex(random_bytes($length));
@@ -55,8 +60,9 @@ class Utilities
      *
      * @return string
      */
-    public static function Salt(){
-        return substr(strtr(base64_encode(hex2bin( self::RandomToken(32))), '+', '.'), 0, 10);
+    public static function Salt()
+    {
+        return substr(strtr(base64_encode(hex2bin(self::RandomToken(32))), '+', '.'), 0, 10);
     }
     
     /**
@@ -87,20 +93,20 @@ class Utilities
     public static function captcha(Session $session)
     {
         $config = Config::getInstance();
-        $session->setAttribute('captcha', mt_rand(1000,9999));
+        $session->setAttribute('captcha', mt_rand(1000, 9999));
 
-        $img = imagecreate(65,30);
+        $img = imagecreate(65, 30);
         
-	    $font = $config->get('directory') .'/public/fonts/28_Days_Later.ttf';
+        $font = $config->get('directory') .'/public/fonts/28_Days_Later.ttf';
 
-	    $textcolor = imagecolorallocate($img,255,255,255); // First use define background color
-	    $textcolor = imagecolorallocate($img, 0, 0, 0);    // Second use define text color
-	 
-	    imagettftext($img, 23, 0, 3, 30, $textcolor, $font, $session->getAttribute('captcha'));
-	 
-	    header('Content-type:image/jpeg');
-	    imagejpeg($img);
-	    imagedestroy($img);
+        $textcolor = imagecolorallocate($img, 255, 255, 255); // First use define background color
+        $textcolor = imagecolorallocate($img, 0, 0, 0);    // Second use define text color
+     
+        imagettftext($img, 23, 0, 3, 30, $textcolor, $font, $session->getAttribute('captcha'));
+     
+        header('Content-type:image/jpeg');
+        imagejpeg($img);
+        imagedestroy($img);
     }
     
     /**

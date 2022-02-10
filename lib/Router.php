@@ -9,14 +9,15 @@ use \Lib\Config;
 /**
  * Router
  */
-class Router {
+class Router
+{
 
     private $routes = [];
     private static $_instance;
 
     /**
-    * La méthode statique qui permet d'instancier ou de récupérer l'instance unique
-    **/
+     * La méthode statique qui permet d'instancier ou de récupérer l'instance unique
+     **/
     public static function getInstance()
     {
         if (self::$_instance === null) {
@@ -43,7 +44,8 @@ class Router {
      * @param  mixed $request
      * @return void
      */
-    public function run(Request $request) {
+    public function run(Request $request)
+    {
 
         $config = Config::getInstance();
         
@@ -61,10 +63,9 @@ class Router {
 
             if (preg_match($pattern, $url)) {
                 // On regarde si des variables sont présentes dans l'URL.
-                if ($route->hasAttribute('vars'))
-                {    
+                if ($route->hasAttribute('vars')) {    
                     $varsNames = explode(',', $route->getAttribute('vars'));
-                    $varsValues = explode('-' , $url);
+                    $varsValues = explode('-', $url);
 
                     for ($i=0; $i<count($varsNames); $i++) {
                         if (isset($varsValues[$i+1])) {

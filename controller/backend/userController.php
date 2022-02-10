@@ -7,7 +7,9 @@ use \Lib\Request;
 use \Lib\Security;
 
 class UserController extends Controller
-{    
+{
+
+    
     /**
      * __construct
      *
@@ -27,8 +29,7 @@ class UserController extends Controller
      */
     public function list(Request $request)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $users = $this->manager->getManagerOf('User')->getListUser();
             $types = $this->manager->getManagerOf('TypeUser')->getListType();
             $nbComments = $this->manager->getManagerOf('Comments')->countByUser();
@@ -52,8 +53,7 @@ class UserController extends Controller
      */
     public function delete(Request $request, $vars)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $this->response = $this->manager->getManagerOf('User')->delete($vars['id_user']);
 
             $users = $this->manager->getManagerOf('User')->getListUser();
@@ -80,8 +80,7 @@ class UserController extends Controller
      */
     public function promote(Request $request, $vars)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $this->response = $this->manager->getManagerOf('User')->promote($vars['id_user']);
 
             $users = $this->manager->getManagerOf('User')->getListUser();
@@ -108,8 +107,7 @@ class UserController extends Controller
      */
     public function demote(Request $request, $vars)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $this->response = $this->manager->getManagerOf('User')->demote($vars['id_user']);
 
             $users = $this->manager->getManagerOf('User')->getListUser();
@@ -136,8 +134,7 @@ class UserController extends Controller
      */
     public function ban(Request $request, $vars)
     {
-        if ($this->security)
-        {
+        if ($this->security) {
             $this->response = $this->manager->getManagerOf('User')->ban($vars['id_user']);
 
             $users = $this->manager->getManagerOf('User')->getListUser();

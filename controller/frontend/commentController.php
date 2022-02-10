@@ -7,7 +7,9 @@ use \Lib\Request;
 use \Model\Comments;
 
 class CommentController extends Controller
-{    
+{
+
+    
     /**
      * add
      *
@@ -16,8 +18,7 @@ class CommentController extends Controller
      */
     public function add(Request $request)
     {
-        if ($this->session->existsAttribute('connected') <> 1) 
-        {
+        if ($this->session->existsAttribute('connected') <> 1) {
             return ['error/403.html.twig', [] ];
         }
         
@@ -55,8 +56,7 @@ class CommentController extends Controller
      */
     public function modify(Request $request, $vars)
     {
-        if ($this->session->existsAttribute('connected') <> 1) 
-        {
+        if ($this->session->existsAttribute('connected') <> 1) {
             return ['error/403.html.twig', [] ];
         }
 
@@ -98,8 +98,7 @@ class CommentController extends Controller
      */
     public function delete(Request $request, $vars)
     {
-        if ($this->session->existsAttribute('connected') <> 1) 
-        {
+        if ($this->session->existsAttribute('connected') <> 1) {
             return ['error/403.html.twig', [] ];
         }
         

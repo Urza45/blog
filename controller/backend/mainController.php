@@ -7,7 +7,9 @@ use \Lib\Controller;
 use \Lib\Security;
 
 class MainController extends Controller
-{    
+{
+
+    
     /**
      * __construct
      *
@@ -27,8 +29,7 @@ class MainController extends Controller
     public function index()
     {
         //if (Security::verifAccess($this->session, Security::MODERATOR_USER))
-        if ($this->security)
-        {
+        if ($this->security) {
             return ['backend/index.html.twig', [] ];
         }
         return ['error/403.html.twig', [] ];

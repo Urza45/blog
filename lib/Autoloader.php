@@ -7,7 +7,8 @@ namespace Lib;
  * Class Autoloader
  * Allows you to search for a class in the Model directory 
  */
-class Autoloader {
+class Autoloader
+{
 
     /**
      * Replace with the correct path 
@@ -22,7 +23,7 @@ class Autoloader {
     static function autoload($class_name) : void
     {
         $class = self::DIRECTORY . DIRECTORY_SEPARATOR . lcfirst(str_replace('\\', DIRECTORY_SEPARATOR, $class_name)) . '.php';
-        if ( (require_once($class)) == false ) {
+        if ((include_once $class) == false ) {
             print_r('ERROR: '. $class . '<br/>');
         } 
     }

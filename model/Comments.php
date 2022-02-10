@@ -37,7 +37,10 @@ class Comments extends Entity
         );
     }
 
-    /** GETTERS */
+    /**
+     * 
+     * GETTERS 
+     */
 
     /**
      * Get the value of content
@@ -87,12 +90,15 @@ class Comments extends Entity
         return $this->new;
     }
 
-    /** SETTERS */
+    /**
+     * 
+     * SETTERS 
+     */
 
     /**
      * Set the value of content
      *
-     * @return  void
+     * @return void
      */ 
     public function setContent($content)
     {
@@ -106,7 +112,7 @@ class Comments extends Entity
     /**
      * Set the value of date
      *
-     * @return  void
+     * @return void
      */ 
     public function setDate($date)
     {
@@ -120,7 +126,7 @@ class Comments extends Entity
     /**
      * Set the value of disabled
      *
-     * @return  void
+     * @return void
      */ 
     public function setDisabled($disabled)
     {
@@ -132,10 +138,10 @@ class Comments extends Entity
     }
 
      /**
-     * Set the value of user_idUser
-     *
-     * @return  void
-     */ 
+      * Set the value of user_idUser
+      *
+      * @return void
+      */ 
     public function setUser_idUser($user_idUser)
     {
         if (!is_int(intval($user_idUser))) {
@@ -148,7 +154,7 @@ class Comments extends Entity
     /**
      * Set the value of post_idPost
      *
-     * @return  void
+     * @return void
      */ 
     public function setPost_idPost($post_idPost)
     {
@@ -162,7 +168,7 @@ class Comments extends Entity
     /**
      * Set the value of new
      *
-     * @return  void
+     * @return void
      */ 
     public function setNew($new)
     {

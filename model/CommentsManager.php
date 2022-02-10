@@ -31,7 +31,13 @@ class CommentsManager extends Manager
         
         return $listComments;
     }
-
+    
+    /**
+     * getListFromPost
+     *
+     * @param  mixed $number
+     * @return void
+     */
     public function getListFromPost(int $number)
     {
         $sql = 'SELECT comments.id, content, user_idUser, post_idPost, user.pseudo, date, disabled, new FROM comments, user '
@@ -59,8 +65,7 @@ class CommentsManager extends Manager
     
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Model\Comments');
     
-        if ($comments = $requete->fetch())
-        {
+        if ($comments = $requete->fetch()) {
             return $comments;
         }
     
@@ -88,8 +93,7 @@ class CommentsManager extends Manager
      */
     public function save(Comments $comments)
     {
-        if ($comments->isValid())
-        {
+        if ($comments->isValid()) {
             $comments->isNew() ? $this->add($comments) : $this->modify($comments);
         }
         else
@@ -188,7 +192,12 @@ class CommentsManager extends Manager
         }
     }
 
-
+    
+    /**
+     * countByUser
+     *
+     * @return void
+     */
     public function countByUser()
     {
         return $this->dao->query('SELECT `User_idUser`, disabled, COUNT(disabled) as nbc FROM `comments` GROUP BY User_idUser, disabled')->fetchall();

@@ -18,9 +18,8 @@ abstract class Entity
      */
     public function __construct(array $donnees = [])
     {
-        if (!empty($donnees))
-        {
-        $this->hydrate($donnees);
+        if (!empty($donnees)) {
+            $this->hydrate($donnees);
         }
     }
     
@@ -55,7 +54,7 @@ abstract class Entity
     /**
      * Set the value of id
      *
-     * @return  self
+     * @return self
      */ 
     public function setId($id)
     {
@@ -76,8 +75,7 @@ abstract class Entity
         {
             $methode = 'set'.ucfirst($attribut);
 
-            if (is_callable([$this, $methode]))
-            {
+            if (is_callable([$this, $methode])) {
                 $this->$methode($valeur);
             }
         }
