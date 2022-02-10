@@ -138,7 +138,7 @@ class MyMail
      * @param  mixed $code
      * @return void
      */
-    public function sendConnectedMail(User $user, $code)
+    public function sendConnectedMail(User $user)
     {
         try {
             $this->sendTo = $user->getEmail();
