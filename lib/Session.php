@@ -2,8 +2,18 @@
 
 namespace Lib;
 
-class Session {
-    
+/**
+ * Session
+ */
+class Session
+{
+    private $SESSION;
+
+    public function __construct()
+    {
+        $this->SESSION = (isset($_SESSION)) ? $_SESSION : null;
+    }
+
     /**
      * start
      * Start or restore the session
@@ -14,7 +24,7 @@ class Session {
     {
         session_start();
     }
-    
+
     /**
      * destroy
      * Destroy the current session
@@ -25,10 +35,10 @@ class Session {
     {
         session_destroy();
     }
-    
+
     /**
      * setAttribute
-     * Add an attribute to the session 
+     * Add an attribute to the session
      *
      * @param  mixed $name
      * @param  mixed $value
@@ -40,41 +50,42 @@ class Session {
         $value = htmlspecialchars($value);
         $_SESSION[$name] = $value;
     }
-    
+
     /**
      * existsAttribute
-     * Returns true if the attribute exists in the session 
+     * Returns true if the attribute exists in the session
      *
      * @param  mixed $name
      * @return void
      */
     public function existsAttribute($name)
     {
-        return (isset($_SESSION[$name]) && $_SESSION[$name] != "");
+        return (isset($this->SESSION[$name]) && $this->SESSION[$name] != "");
     }
-    
+
     /**
      * getAttribute
      * Returns the value of the requested attribute
-     * 
+     *
      * @param  mixed $name
      * @return void
      */
     public function getAttribute($name)
     {
-        if ($this->existsAttribute($name)) 
-        {
-            return $_SESSION[$name];
-        }
-        else 
-        {
+        if ($this->existsAttribute($name)) {
+            return $this->SESSION[$name];
+        } else {
             throw new \Exception("Attribut '$name' absent de la session");
         }
     }
 
+    /**
+     * existSession
+     *
+     * @return void
+     */
     public function existSession()
     {
         return isset($_SESSION);
     }
-
 }

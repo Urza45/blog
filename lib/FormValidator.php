@@ -2,6 +2,9 @@
 
 namespace Lib;
 
+/**
+ * FormValidator
+ */
 class FormValidator
 {
     /**
@@ -13,12 +16,11 @@ class FormValidator
      */
     public static function purify($data)
     {
-        if ( (isset($data) && ($data != ''))) {
+        if ((isset($data) && ($data != ''))) {
             $data = trim($data);
             $data = stripslashes($data);
-            //$data = htmlentities($data, ENT_QUOTES, 'UTF-8');
             $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
-             
+
             return $data;
         }
     }
@@ -33,7 +35,6 @@ class FormValidator
     public static function purifyContent($data)
     {
         if (isset($data) && ($data != '')) {
-
             return $data;
         }
     }
@@ -45,12 +46,11 @@ class FormValidator
      *
      * @return bool
      */
-    public static function is_alpha($value)
+    public static function isAlpha($value)
     {
         if (preg_match('/^[a-zA-Z]+$/', $value) && !empty($value)) {
             return true;
         }
-
     }
 
     /**
@@ -60,7 +60,7 @@ class FormValidator
      *
      * @return bool
      */
-    public static function is_alphanum($value)
+    public static function isAlphanum($value)
     {
         if (preg_match('/^[a-zA-Z0-9_]+$/', $value) && !empty($value)) {
             return true;
@@ -74,7 +74,7 @@ class FormValidator
      *
      * @return bool
      */
-    public static function is_email($value)
+    public static function isEmail($value)
     {
         if (filter_var($value, FILTER_VALIDATE_EMAIL) && !empty($value)) {
             return true;

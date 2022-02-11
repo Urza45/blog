@@ -2,9 +2,12 @@
 
 namespace Model;
 
-use \Model\Entity;
-use \Lib\Utilities;
+use Model\Entity;
+use Lib\Utilities;
 
+/**
+ * Post
+ */
 class Post extends Entity
 {
     private $title;
@@ -19,6 +22,11 @@ class Post extends Entity
     const INVALID_DATE = 4;
     const INVALID_IDUSER = 5;
 
+    /**
+     * isValid
+     *
+     * @return void
+     */
     public function isValid()
     {
         return !(empty($this->title) || empty($this->chapo)
@@ -27,11 +35,14 @@ class Post extends Entity
         );
     }
 
-    /** GETTERS */
+    /**
+     *
+     * GETTERS
+     */
 
     /**
      * Get the value of title
-     */ 
+     */
     public function getTitle()
     {
         return $this->title;
@@ -39,7 +50,7 @@ class Post extends Entity
 
     /**
      * Get the value of chapo
-     */ 
+     */
     public function getChapo()
     {
         return $this->chapo;
@@ -47,7 +58,7 @@ class Post extends Entity
 
     /**
      * Get the value of content
-     */ 
+     */
     public function getContent()
     {
         return $this->content;
@@ -55,7 +66,7 @@ class Post extends Entity
 
     /**
      * Get the value of dateCreate
-     */ 
+     */
     public function getDateCreate()
     {
         return $this->dateCreate;
@@ -63,23 +74,26 @@ class Post extends Entity
 
     /**
      * Get the value of User_idUser
-     */ 
+     */
     public function getUser_idUser()
     {
         return $this->user_idUser;
     }
 
-    /** SETTERS */
+    /**
+     *
+     * SETTERS
+     */
 
     /**
      * Set the value of title
      *
-     * @return  void
-     */ 
+     * @return void
+     */
     public function setTitle($title)
     {
-        
-        if(empty($title) || !is_string($title)) {
+
+        if (empty($title) || !is_string($title)) {
             $this->errors[] = self::INVALID_TITLE;
         } else {
             $this->title = $title;
@@ -89,11 +103,11 @@ class Post extends Entity
     /**
      * Set the value of chapo
      *
-     * @return  void
-     */ 
+     * @return void
+     */
     public function setChapo($chapo)
     {
-        if(empty($chapo) || !is_string($chapo)) {
+        if (empty($chapo) || !is_string($chapo)) {
             $this->errors[] = self::INVALID_CHAPO;
         } else {
             $this->chapo = $chapo;
@@ -103,11 +117,11 @@ class Post extends Entity
     /**
      * Set the value of content
      *
-     * @return  void
-     */ 
+     * @return void
+     */
     public function setContent($content)
     {
-        if(empty($content)) {
+        if (empty($content)) {
             $this->errors[] = self::INVALID_CONTENT;
         } else {
             $this->content = $content;
@@ -117,8 +131,8 @@ class Post extends Entity
     /**
      * Set the value of dateCreate
      *
-     * @return  void
-     */ 
+     * @return void
+     */
     public function setDateCreate($dateCreate)
     {
         if (!Utilities::checkDate($dateCreate)) {
@@ -131,8 +145,8 @@ class Post extends Entity
     /**
      * Set the value of user_idUser
      *
-     * @return  void
-     */ 
+     * @return void
+     */
     public function setUser_idUser($user_idUser)
     {
         if (!is_int(intval($user_idUser))) {

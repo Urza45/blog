@@ -1,28 +1,31 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Lib;
 
 /**
  * Class Autoloader
- * Allows you to search for a class in the Model directory 
+ * Allows you to search for a class in the Model directory
  */
-class Autoloader {
+class Autoloader
+{
+    /**
+     * Replace with the correct path
+     */
+    private const DIRECTORY = 'D:\WAMP\www\blog';
 
-    static function register() : void
+    public static function register(): void
     {
-            spl_autoload_register([__CLASS__, 'autoload']);
+        spl_autoload_register([__CLASS__, 'autoload']);
     }
 
-    static function autoload($class_name) : void
+    public static function autoload($class_name): void
     {
-        $class = dirname(__DIR__) . '/' . lcfirst(str_replace('\\', DIRECTORY_SEPARATOR, $class_name)) . '.php';
-        if(file_exists($class))
-        {
-            require_once($class);
-        } else {
-            echo 'ERROR: '. $class . '<br/>';
+        $class = self::DIRECTORY . DIRECTORY_SEPARATOR
+            . lcfirst(str_replace('\\', DIRECTORY_SEPARATOR, $class_name)) . '.php';
+        if ((include_once $class) == false) {
+            print_r('ERROR: ' . $class . '<br/>');
         }
     }
-
 }

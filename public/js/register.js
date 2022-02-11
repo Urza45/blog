@@ -4,8 +4,8 @@ $(function () {
     // validator files are included in the download package
     // otherwise download from http://1000hz.github.io/bootstrap-validator
 
-    $('#login-form').validator();
-    $('#register-form').validator();
+    $("#login-form").validator();
+    $("#register-form").validator();
 
     // when the form is submitted
     // $('#login-form').on('submit', function (e) {

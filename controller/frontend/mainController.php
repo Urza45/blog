@@ -1,36 +1,34 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Controller\Frontend;
 
-use \Lib\Controller;
-use \Lib\Request;
-use \Lib\Utilities;
-use \Lib\MyMail;
-use \Model\Comments;
-use \Model\User;
+use Lib\Controller;
+use Lib\Request;
+use Lib\Utilities;
+use Lib\MyMail;
+use Model\Comments;
+use Model\User;
 
 class MainController extends Controller
-{    
+{
     /**
      * index
      *
      * @param  mixed $request
      * @return void
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         $postManager = $this->manager->getManagerOf('Post');
-        $userManager = $this->manager->getManagerOf('User');
 
-        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
-        {
-            if ($request->getParams()['captcha'] == $this->session->getAttribute('captcha'))
-            {
-                $email = new MyMail;
+        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending')) {
+            $this->response = [ 'type' => 'danger', 'message' => 'Captcha erroné'];
+            if ($request->getParams()['captcha'] == $this->session->getAttribute('captcha')) {
+                $email = new MyMail();
                 $this->response = $email->sendEmailToAdmin($request->getParams());
-            } else {
-                $this->response = [ 'type' => 'danger', 'message' => 'Captcha erroné'];
             }
         }
 
@@ -42,7 +40,14 @@ class MainController extends Controller
         ];
     }
 
-    public function list(Request $request) {
+    /**
+     * list
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function list(Request $request)
+    {
 
         $postManager = $this->manager->getManagerOf('Post');
 
@@ -54,12 +59,19 @@ class MainController extends Controller
         ];
     }
 
-    public function post(Request $request, $vars) {
+    /**
+     * post
+     *
+     * @param  mixed $request
+     * @param  mixed $vars
+     * @return void
+     */
+    public function post(Request $request, $vars)
+    {
 
         $Params = null;
 
-        if ($this->session->existsAttribute('idUser')) 
-        {
+        if ($this->session->existsAttribute('idUser')) {
             $Params = new Comments();
             $Params->setDisabled('0');
             $Params->setPost_idPost($vars['id_post']);
@@ -69,12 +81,12 @@ class MainController extends Controller
 
         $postManager = $this->manager->getManagerOf('Post');
         $commentsManager = $this->manager->getManagerOf('Comments');
-        
+
         return ['frontend/post.html.twig', [
             'post' => $postManager->getUniquePost((int) $vars['id_post']),
             'action' => '/addcomment',
             'comments' => $commentsManager->getListFromPost((int) $vars['id_post']),
-            'vars' => $vars,  
+            'vars' => $vars,
             'Params' => $Params,
             'Response' => $this->response,
             'Page' => $request->getUrl()
@@ -82,18 +94,22 @@ class MainController extends Controller
         ];
     }
 
-    public function register(Request $request) {
+    /**
+     * register
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function register(Request $request)
+    {
 
         $userManager = $this->manager->getManagerOf('User');
 
-        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'registration'))
-        {
+        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'registration')) {
             // Check password matching
-            if ($request->getParams()['passwordFirst'] === $request->getParams()['confirmedPassword'] ) {
-                // Verification of the existence of nickname 
-                $user = $userManager->getUniqueByPseudo($request->getParams()['pseudo']);
-
-                if ($user) {
+            if ($request->getParams()['passwordFirst'] === $request->getParams()['confirmedPassword']) {
+                // Verification of the existence of nickname
+                if ($userManager->ifExistPseudo($request->getParams()['pseudo'])) {
                     $this->response = ['type' => 'danger' , 'message' => 'Le pseudo est déjà pris'];
                 } else {
                     $user = new User();
@@ -102,7 +118,9 @@ class MainController extends Controller
                     $user->setEmail($request->getParams()['email']);
                     $user->setPseudo($request->getParams()['pseudo']);
                     $user->setSalt(Utilities::Salt());
-                    $user->setPassword(Utilities::password_encode($request->getParams()['passwordFirst'],$user->getSalt()));
+                    $user->setPassword(
+                        Utilities::passwordEncode($request->getParams()['passwordFirst'], $user->getSalt())
+                    );
                     $user->setValidationKey(Utilities::RandomToken());
                     $user->setDateCreate(date('Y/m/d'));
                     $tab = [
@@ -115,15 +133,14 @@ class MainController extends Controller
                     ];
                     $user->hydrate($tab);
                     $userManager->save($user);
-                    $email = new MyMail;
+                    $email = new MyMail();
                     $this->response = $email->sendActivationEmail($user);
                 }
             } else {
                 $this->response = ['type' => 'danger' , 'message' => 'Les mots de passe ne correspondent pas'];
             }
-            
         }
-        
+
         return ['frontend/register.html.twig', [
             'Params' => $request->getParams(),
             'Response' => $this->response,
@@ -132,11 +149,17 @@ class MainController extends Controller
         ];
     }
 
-    public function contact(Request $request) {
+    /**
+     * contact
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function contact(Request $request)
+    {
 
-        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending'))
-        {
-            $email = new \Lib\MyMail;
+        if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending')) {
+            $email = new \Lib\MyMail();
             $this->response = $email->sendEmailToAdmin($request->getParams());
         }
 
@@ -147,21 +170,38 @@ class MainController extends Controller
         ];
     }
 
+    /**
+     * captcha
+     *
+     * @return void
+     */
     public function captcha()
     {
         return Utilities::captcha($this->session);
     }
 
+    /**
+     * picture
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function picture(Request $request)
     {
-        if (isset($request->getParams()['name']) && isset($request->getParams()['type']) 
-            && (in_array(strtoupper($request->getParams()['type']), ['PDF', 'JPG', 'JPEG', 'PNG']))) 
-        {
+        if (
+            isset($request->getParams()['name']) && isset($request->getParams()['type'])
+            && (in_array(strtoupper($request->getParams()['type']), ['PDF', 'JPG', 'JPEG', 'PNG']))
+        ) {
             return Utilities::ViewPicture($request->getParams()['name'], $request->getParams()['type']);
         }
         return ['error/404.html.twig', [] ];
     }
 
+    /**
+     * error403
+     *
+     * @return void
+     */
     public function error403()
     {
         return ['error/403.html.twig', [] ];

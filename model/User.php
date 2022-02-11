@@ -2,9 +2,12 @@
 
 namespace Model;
 
-use \Model\Entity;
-use \Lib\Utilities;
+use Model\Entity;
+use Lib\Utilities;
 
+/**
+ * User
+ */
 class User extends Entity
 {
     private $name;
@@ -38,18 +41,24 @@ class User extends Entity
     const INVALID_IDUSER = 13;
     const INVALID_ASKPROMOTION = 14;
 
+    /**
+     * isVAlid
+     *
+     * @return void
+     */
     public function isVAlid()
     {
         return !(empty($this->name));
     }
-    
-    /** GETTERS */
 
-
+    /**
+     *
+     * GETTERS
+     */
 
     /**
      * Get the value of name
-     */ 
+     */
     public function getName()
     {
         return $this->name;
@@ -57,7 +66,7 @@ class User extends Entity
 
     /**
      * Get the value of firstName
-     */ 
+     */
     public function getFirstName()
     {
         return $this->firstName;
@@ -65,7 +74,7 @@ class User extends Entity
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -73,7 +82,7 @@ class User extends Entity
 
     /**
      * Get the value of phone
-     */ 
+     */
     public function getPhone()
     {
         return $this->phone;
@@ -81,7 +90,7 @@ class User extends Entity
 
     /**
      * Get the value of portable
-     */ 
+     */
     public function getPortable()
     {
         return $this->portable;
@@ -89,7 +98,7 @@ class User extends Entity
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -97,7 +106,7 @@ class User extends Entity
 
     /**
      * Get the value of salt
-     */ 
+     */
     public function getSalt()
     {
         return $this->salt;
@@ -105,7 +114,7 @@ class User extends Entity
 
     /**
      * Get the value of statusConnected
-     */ 
+     */
     public function getStatusConnected()
     {
         return $this->statusConnected;
@@ -113,7 +122,7 @@ class User extends Entity
 
     /**
      * Get the value of activeUser
-     */ 
+     */
     public function getActiveUser()
     {
         return $this->activeUser;
@@ -121,7 +130,7 @@ class User extends Entity
 
     /**
      * Get the value of validationKey
-     */ 
+     */
     public function getValidationKey()
     {
         return $this->validationKey;
@@ -129,7 +138,7 @@ class User extends Entity
 
     /**
      * Get the value of activatedUser
-     */ 
+     */
     public function getActivatedUser()
     {
         return $this->activatedUser;
@@ -137,7 +146,7 @@ class User extends Entity
 
     /**
      * Get the value of dateCreate
-     */ 
+     */
     public function getDateCreate()
     {
         return $this->dateCreate;
@@ -145,7 +154,7 @@ class User extends Entity
 
     /**
      * Get the value of typeUser_idTypeUSer
-     */ 
+     */
     public function getTypeUser_idTypeUSer()
     {
         return $this->typeUser_idTypeUSer;
@@ -153,12 +162,12 @@ class User extends Entity
 
     /**
      * Get the value of pseudo
-     */ 
+     */
     public function getPseudo()
     {
         return $this->pseudo;
     }
-    
+
     /**
      * Get the value of askPromotion
      *
@@ -169,13 +178,16 @@ class User extends Entity
         return $this->askPromotion;
     }
 
-    /** SETTERS */
+    /**
+     *
+     * SETTERS
+     */
 
     /**
      * Set the value of name
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -186,8 +198,8 @@ class User extends Entity
     /**
      * Set the value of firstName
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
@@ -198,8 +210,8 @@ class User extends Entity
     /**
      * Set the value of pseudo
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setPseudo($pseudo)
     {
         $this->pseudo = $pseudo;
@@ -210,8 +222,8 @@ class User extends Entity
     /**
      * Set the value of email
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -222,8 +234,8 @@ class User extends Entity
     /**
      * Set the value of phone
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setPhone($phone)
     {
         $this->phone = $phone;
@@ -234,8 +246,8 @@ class User extends Entity
     /**
      * Set the value of portable
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setPortable($portable)
     {
         $this->portable = $portable;
@@ -246,8 +258,8 @@ class User extends Entity
     /**
      * Set the value of password
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -258,8 +270,8 @@ class User extends Entity
     /**
      * Set the value of salt
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setSalt($salt)
     {
         $this->salt = $salt;
@@ -270,8 +282,8 @@ class User extends Entity
     /**
      * Set the value of statusConnected
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setStatusConnected($statusConnected)
     {
         $this->statusConnected = $statusConnected;
@@ -282,21 +294,21 @@ class User extends Entity
     /**
      * Set the value of activeUser
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setActiveUser($activeUser)
     {
         $this->activeUser = $activeUser;
 
         return $this;
     }
-    
+
 
     /**
      * Set the value of validationKey
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setValidationKey($validationKey)
     {
         $this->validationKey = $validationKey;
@@ -307,8 +319,8 @@ class User extends Entity
     /**
      * Set the value of activatedUser
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setActivatedUser($activatedUser)
     {
         $this->activatedUser = $activatedUser;
@@ -319,8 +331,8 @@ class User extends Entity
     /**
      * Set the value of dateCreate
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setDateCreate($dateCreate)
     {
         $this->dateCreate = $dateCreate;
@@ -331,8 +343,8 @@ class User extends Entity
     /**
      * Set the value of typeUser_idTypeUSer
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setTypeUser_idTypeUSer($typeUser_idTypeUSer)
     {
         $this->typeUser_idTypeUSer = $typeUser_idTypeUSer;
@@ -346,5 +358,4 @@ class User extends Entity
 
         return $this;
     }
-    
 }
