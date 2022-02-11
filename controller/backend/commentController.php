@@ -30,7 +30,11 @@ class CommentController extends Controller
         if ($this->security) {
             return $this->processReturn();
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
 
     /**
@@ -46,8 +50,13 @@ class CommentController extends Controller
             $this->response = $this->manager->getManagerOf('Comments')->ban($vars['id_comment'], 0);
             return $this->processReturn();
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * ban
@@ -62,8 +71,13 @@ class CommentController extends Controller
             $this->response = $this->manager->getManagerOf('Comments')->ban($vars['id_comment'], 1);
             return $this->processReturn();
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * delete
@@ -81,17 +95,24 @@ class CommentController extends Controller
             }
 
             $commentManager = $this->manager->getManagerOf('Comments');
-            $comment = $commentManager->getUnique((int) $vars['id_comment']);
+            $comment        = $commentManager->getUnique((int) $vars['id_comment']);
 
-            return ['backend/commentDelete.html.twig', [
-                'action' => '/admin/deletecomment-' . $vars['id_comment'],
-                'Params' => $comment,
-                'Response' => $this->response
-                ]
+            return [
+                'backend/commentDelete.html.twig',
+                [
+                    'action'   => '/admin/deletecomment-' . $vars['id_comment'],
+                    'Params'   => $comment,
+                    'Response' => $this->response,
+                ],
             ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * processReturn
@@ -100,10 +121,12 @@ class CommentController extends Controller
      */
     private function processReturn()
     {
-        return ['backend/listcomment.html.twig', [
-            'Response' => $this->response,
-            'Comments' => $this->manager->getManagerOf('Comments')->getList()
-            ]
+        return [
+            'backend/listcomment.html.twig',
+            [
+                'Response' => $this->response,
+                'Comments' => $this->manager->getManagerOf('Comments')->getList(),
+            ],
         ];
     }
 }

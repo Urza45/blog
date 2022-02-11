@@ -20,6 +20,7 @@ class MainController extends Controller
         $this->security = Security::verifAccess($this->session, Security::MODERATOR_USER);
     }
 
+
     /**
      * Index function
      *
@@ -27,10 +28,16 @@ class MainController extends Controller
      */
     public function index()
     {
-        //if (Security::verifAccess($this->session, Security::MODERATOR_USER))
         if ($this->security) {
-            return ['backend/index.html.twig', [] ];
+            return [
+                'backend/index.html.twig',
+                [],
+            ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
 }

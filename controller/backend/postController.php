@@ -20,6 +20,7 @@ class PostController extends Controller
         $this->security = Security::verifAccess($this->session, Security::ADMINISTRATOR_USER);
     }
 
+
     /**
      * index
      *
@@ -31,14 +32,21 @@ class PostController extends Controller
         if ($this->security) {
             $postManager = $this->manager->getManagerOf('Post');
 
-            return ['backend/listpost.html.twig', [
-                'Posts' => $postManager->getListPost(),
-                'Response' => $this->response
-                ]
+            return [
+                'backend/listpost.html.twig',
+                [
+                    'Posts'    => $postManager->getListPost(),
+                    'Response' => $this->response,
+                ],
             ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * add
@@ -55,27 +63,40 @@ class PostController extends Controller
                 $post = new Post();
                 $post->hydrate($request->getParams());
                 $post->setDateCreate(date('Y/m/d'));
-                if ($request->getParams()['action'] == "newpost") {
+                if ($request->getParams()['action'] == 'newpost') {
                     $post->setUser_idUser($this->session->getAttribute('idUser'));
                 }
+
                 $postManager->save($post);
-                $this->response = [ 'type' => 'success', 'message' => 'Votre post a bien été enregistré.'];
-                return ['backend/listpost.html.twig', [
-                    'Posts' => $postManager->getListPost(),
-                    'Response' => $this->response
-                    ]
+                $this->response = [
+                    'type'    => 'success',
+                    'message' => 'Votre post a bien été enregistré.',
+                ];
+                return [
+                    'backend/listpost.html.twig',
+                    [
+                        'Posts'    => $postManager->getListPost(),
+                        'Response' => $this->response,
+                    ],
                 ];
             }
 
-            return ['backend/post.html.twig', [
-                'action' => 'newpost',
-                'Params' => $request->getParams(),
-                'Response' => $this->response
-                ]
+            return [
+                'backend/post.html.twig',
+                [
+                    'action'   => 'newpost',
+                    'Params'   => $request->getParams(),
+                    'Response' => $this->response,
+                ],
             ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * modify
@@ -89,15 +110,22 @@ class PostController extends Controller
         if ($this->security) {
             $post = $this->manager->getManagerOf('Post')->getUniquePost($vars['id_post']);
 
-            return ['backend/post.html.twig', [
-                'action' => 'modifypost',
-                'Params' => $post,
-                'Response' => $this->response
-                ]
+            return [
+                'backend/post.html.twig',
+                [
+                    'action'   => 'modifypost',
+                    'Params'   => $post,
+                    'Response' => $this->response,
+                ],
             ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * delete
@@ -113,12 +141,18 @@ class PostController extends Controller
 
             $postManager = $this->manager->getManagerOf('Post');
 
-            return ['backend/listpost.html.twig', [
-                'Posts' => $postManager->getListPost(),
-                'Response' => $this->response
-                ]
+            return [
+                'backend/listpost.html.twig',
+                [
+                    'Posts'    => $postManager->getListPost(),
+                    'Response' => $this->response,
+                ],
             ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
 }

@@ -19,6 +19,7 @@ class UserController extends Controller
         $this->security = Security::verifAccess($this->session, Security::SUPER_ADMIN_USER);
     }
 
+
     /**
      * list
      *
@@ -28,19 +29,26 @@ class UserController extends Controller
     public function list(Request $request)
     {
         if ($this->security) {
-            $users = $this->manager->getManagerOf('User')->getListUser();
-            $types = $this->manager->getManagerOf('TypeUser')->getListType();
+            $users      = $this->manager->getManagerOf('User')->getListUser();
+            $types      = $this->manager->getManagerOf('TypeUser')->getListType();
             $nbComments = $this->manager->getManagerOf('Comments')->countByUser();
 
-            return ['backend/listusers.html.twig', [
-                    'Users' => $users,
-                    'ListType' => $types,
-                    'nbComments' => $nbComments
-                ]
+            return [
+                'backend/listusers.html.twig',
+                [
+                    'Users'      => $users,
+                    'ListType'   => $types,
+                    'nbComments' => $nbComments,
+                ],
             ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * delete
@@ -54,20 +62,27 @@ class UserController extends Controller
         if ($this->security) {
             $this->response = $this->manager->getManagerOf('User')->delete($vars['id_user']);
 
-            $users = $this->manager->getManagerOf('User')->getListUser();
-            $types = $this->manager->getManagerOf('TypeUser')->getListType();
+            $users      = $this->manager->getManagerOf('User')->getListUser();
+            $types      = $this->manager->getManagerOf('TypeUser')->getListType();
             $nbComments = $this->manager->getManagerOf('Comments')->countByUser();
 
-            return ['backend/listusers.html.twig', [
-                    'Users' => $users,
-                    'ListType' => $types,
+            return [
+                'backend/listusers.html.twig',
+                [
+                    'Users'      => $users,
+                    'ListType'   => $types,
                     'nbComments' => $nbComments,
-                    'Response' => $this->response
-                ]
+                    'Response'   => $this->response,
+                ],
             ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * promote
@@ -81,20 +96,27 @@ class UserController extends Controller
         if ($this->security) {
             $this->response = $this->manager->getManagerOf('User')->promote($vars['id_user']);
 
-            $users = $this->manager->getManagerOf('User')->getListUser();
-            $types = $this->manager->getManagerOf('TypeUser')->getListType();
+            $users      = $this->manager->getManagerOf('User')->getListUser();
+            $types      = $this->manager->getManagerOf('TypeUser')->getListType();
             $nbComments = $this->manager->getManagerOf('Comments')->countByUser();
 
-            return ['backend/listusers.html.twig', [
-                    'Users' => $users,
-                    'ListType' => $types,
+            return [
+                'backend/listusers.html.twig',
+                [
+                    'Users'      => $users,
+                    'ListType'   => $types,
                     'nbComments' => $nbComments,
-                    'Response' => $this->response
-                ]
+                    'Response'   => $this->response,
+                ],
             ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * demote
@@ -108,20 +130,27 @@ class UserController extends Controller
         if ($this->security) {
             $this->response = $this->manager->getManagerOf('User')->demote($vars['id_user']);
 
-            $users = $this->manager->getManagerOf('User')->getListUser();
-            $types = $this->manager->getManagerOf('TypeUser')->getListType();
+            $users      = $this->manager->getManagerOf('User')->getListUser();
+            $types      = $this->manager->getManagerOf('TypeUser')->getListType();
             $nbComments = $this->manager->getManagerOf('Comments')->countByUser();
 
-            return ['backend/listusers.html.twig', [
-                    'Users' => $users,
-                    'ListType' => $types,
+            return [
+                'backend/listusers.html.twig',
+                [
+                    'Users'      => $users,
+                    'ListType'   => $types,
                     'nbComments' => $nbComments,
-                    'Response' => $this->response
-                ]
+                    'Response'   => $this->response,
+                ],
             ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * ban
@@ -135,20 +164,27 @@ class UserController extends Controller
         if ($this->security) {
             $this->response = $this->manager->getManagerOf('User')->ban($vars['id_user']);
 
-            $users = $this->manager->getManagerOf('User')->getListUser();
-            $types = $this->manager->getManagerOf('TypeUser')->getListType();
+            $users      = $this->manager->getManagerOf('User')->getListUser();
+            $types      = $this->manager->getManagerOf('TypeUser')->getListType();
             $nbComments = $this->manager->getManagerOf('Comments')->countByUser();
 
-            return ['backend/listusers.html.twig', [
-                    'Users' => $users,
-                    'ListType' => $types,
+            return [
+                'backend/listusers.html.twig',
+                [
+                    'Users'      => $users,
+                    'ListType'   => $types,
                     'nbComments' => $nbComments,
-                    'Response' => $this->response
-                ]
+                    'Response'   => $this->response,
+                ],
             ];
         }
-        return ['error/403.html.twig', [] ];
+
+        return [
+            'error/403.html.twig',
+            [],
+        ];
     }
+
 
     /**
      * active
@@ -161,16 +197,18 @@ class UserController extends Controller
     {
         $this->response = $this->manager->getManagerOf('User')->active($vars['id_user']);
 
-        $users = $this->manager->getManagerOf('User')->getListUser();
-        $types = $this->manager->getManagerOf('TypeUser')->getListType();
+        $users      = $this->manager->getManagerOf('User')->getListUser();
+        $types      = $this->manager->getManagerOf('TypeUser')->getListType();
         $nbComments = $this->manager->getManagerOf('Comments')->countByUser();
 
-        return ['backend/listusers.html.twig', [
-                'Users' => $users,
-                'ListType' => $types,
+        return [
+            'backend/listusers.html.twig',
+            [
+                'Users'      => $users,
+                'ListType'   => $types,
                 'nbComments' => $nbComments,
-                'Response' => $this->response
-            ]
+                'Response'   => $this->response,
+            ],
         ];
     }
 }
