@@ -46,7 +46,13 @@ class MyTwig
             $this->twig->addGlobal('session', $_SESSION);
         }
     }
-
+    
+    /**
+     * getRender
+     *
+     * @param  mixed $view
+     * @return void
+     */
     public function getRender(array $view)
     {
         ob_start();

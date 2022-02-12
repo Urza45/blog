@@ -81,9 +81,14 @@ class MainController extends Controller
 
         $postManager = $this->manager->getManagerOf('Post');
         $commentsManager = $this->manager->getManagerOf('Comments');
+        $post = $postManager->getUniquePost((int) $vars['id_post']);
+
+        if ($post === null) {
+            return ['error/404.html.twig', [] ];
+        }
 
         return ['frontend/post.html.twig', [
-            'post' => $postManager->getUniquePost((int) $vars['id_post']),
+            'post' => $post,
             'action' => '/addcomment',
             'comments' => $commentsManager->getListFromPost((int) $vars['id_post']),
             'vars' => $vars,
