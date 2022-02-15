@@ -81,9 +81,14 @@ class MainController extends Controller
 
         $postManager = $this->manager->getManagerOf('Post');
         $commentsManager = $this->manager->getManagerOf('Comments');
+        $post = $postManager->getUniquePost((int) $vars['id_post']);
+
+        if ($post === null) {
+            return ['error/404.html.twig', [] ];
+        }
 
         return ['frontend/post.html.twig', [
-            'post' => $postManager->getUniquePost((int) $vars['id_post']),
+            'post' => $post,
             'action' => '/addcomment',
             'comments' => $commentsManager->getListFromPost((int) $vars['id_post']),
             'vars' => $vars,
@@ -109,7 +114,7 @@ class MainController extends Controller
             // Check password matching
             if ($request->getParams()['passwordFirst'] === $request->getParams()['confirmedPassword']) {
                 // Verification of the existence of nickname
-                if ($userManager->ifExistPseudo($request->getParams()['pseudo'])) {
+                if ($userManager->ifExistPseudo($request->getParams()['pseudo']) === true) {
                     $this->response = ['type' => 'danger' , 'message' => 'Le pseudo est déjà pris'];
                 } else {
                     $user = new User();
@@ -117,11 +122,11 @@ class MainController extends Controller
                     $user->setFirstName($request->getParams()['firstname']);
                     $user->setEmail($request->getParams()['email']);
                     $user->setPseudo($request->getParams()['pseudo']);
-                    $user->setSalt(Utilities::Salt());
+                    $user->setSalt(Utilities::salt());
                     $user->setPassword(
                         Utilities::passwordEncode($request->getParams()['passwordFirst'], $user->getSalt())
                     );
-                    $user->setValidationKey(Utilities::RandomToken());
+                    $user->setValidationKey(Utilities::randomToken());
                     $user->setDateCreate(date('Y/m/d'));
                     $tab = [
                         'phone' => '',

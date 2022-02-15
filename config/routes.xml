@@ -30,10 +30,10 @@
     <route url="/admin/bancomment-([0-9]+)" app="backend" module="comment" action="ban" vars="id_comment"></route>
     <route url="/admin/deletecomment-([0-9]+)" app="backend" module="comment" action="delete" vars="id_comment"></route>
     <!-- Administrator -->
-    <route url="/admin/listpost" app="Backend" module="Post" action="index" ></route>
-    <route url="/admin/addpost" app="Backend" module="Post" action="add" ></route>
-    <route url="/admin/modifypost-([0-9]+)" app="Backend" module="Post" action="modify" vars="id_post"></route>
-    <route url="/admin/deletepost-([0-9]+)" app="Backend" module="Post" action="delete" vars="id_post"></route>
+    <route url="/admin/listpost" app="backend" module="post" action="index" ></route>
+    <route url="/admin/addpost" app="backend" module="post" action="add" ></route>
+    <route url="/admin/modifypost-([0-9]+)" app="backend" module="post" action="modify" vars="id_post"></route>
+    <route url="/admin/deletepost-([0-9]+)" app="backend" module="post" action="delete" vars="id_post"></route>
     <!-- Super administrator -->
     <route url="/admin/promote-([0-9]+)" app="backend" module="user" action="promote" vars="id_user"></route>
     <route url="/admin/demote-([0-9]+)" app="backend" module="user" action="demote" vars="id_user"></route>

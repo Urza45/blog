@@ -2,3 +2,5 @@
 /config/config.php
 /.vscode
 /.phpdoc
+phpdoc.xml
+/reference

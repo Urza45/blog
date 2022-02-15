@@ -42,7 +42,7 @@ class Router
      * run
      *
      * @param  mixed $request
-     * @return void
+     * @return array
      */
     public function run(Request $request)
     {
@@ -77,8 +77,9 @@ class Router
                 /**
                 * Controller initiation
                 */
-                $var = '\Controller\\' . $app . '\\' . $module . 'Controller';
-                if (is_file($config->get('directory') . $var . '.php')) {
+                $var = 'Controller' . DIRECTORY_SEPARATOR . $app . DIRECTORY_SEPARATOR . $module . 'Controller';
+                if (is_file($config->get('directory') . DIRECTORY_SEPARATOR . lcfirst($var) . '.php')) {
+                    $var = str_replace('/', '\\', $var);
                     $controller = new $var();
                     if (!empty($vars)) {
                         return $controller->$action($request, $vars);
