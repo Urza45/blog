@@ -261,7 +261,7 @@ class ConnexionController extends Controller
                 ];
             }
 
-            $this->response = $this->manager->getManagerOf('USer')->askPromotion((int) $vars['id_user']);
+            $this->response = $this->manager->getManagerOf('User')->askPromotion((int) $vars['id_user']);
             $user           = $this->manager->getManagerOf('User')->getUnique((int) $vars['id_user']);
             $level          = $this->manager->getManagerOf('TypeUser')->getLabel((int) $user->getTypeUser_idTypeUSer());
 
