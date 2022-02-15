@@ -18,6 +18,8 @@ git remote add origin <https://github.com/Urza45/blog.git>
 git branch -M main  
 git push -u origin main  
 
+## Finalize the installation
+
 If you don't have it, install Composer: <https://getcomposer.org/download/>
 
 Add third-party extensions with Composer : composer:install
