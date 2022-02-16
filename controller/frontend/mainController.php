@@ -25,14 +25,17 @@ class MainController extends Controller
         $postManager = $this->manager->getManagerOf('Post');
 
         if (isset($request->getParams()['action']) && ($request->getParams()['action'] === 'sending')) {
-            $this->response = [ 'type' => 'danger', 'message' => 'Captcha erroné'];
+
+            $this->response = ['type' => 'danger', 'message' => 'Captcha erroné'];
+
             if ($request->getParams()['captcha'] == $this->session->getAttribute('captcha')) {
                 $email = new MyMail();
                 $this->response = $email->sendEmailToAdmin($request->getParams());
             }
         }
 
-        return ['frontend/index.html.twig', [
+        return [
+            'frontend/index.html.twig', [
                 'LastPostList' => $postManager->getListPost(5),
                 'Response' => $this->response,
                 'Page' => $request->getUrl(),
@@ -51,7 +54,8 @@ class MainController extends Controller
 
         $postManager = $this->manager->getManagerOf('Post');
 
-        return ['frontend/list.html.twig', [
+        return [
+            'frontend/list.html.twig', [
                 'LastPostList' => $postManager->getListPost(),
                 'Response' => $this->response,
                 'Page' => $request->getUrl()
@@ -84,17 +88,18 @@ class MainController extends Controller
         $post = $postManager->getUniquePost((int) $vars['id_post']);
 
         if ($post === null) {
-            return ['error/404.html.twig', [] ];
+            return ['error/404.html.twig', []];
         }
 
-        return ['frontend/post.html.twig', [
-            'post' => $post,
-            'action' => '/addcomment',
-            'comments' => $commentsManager->getListFromPost((int) $vars['id_post']),
-            'vars' => $vars,
-            'Params' => $Params,
-            'Response' => $this->response,
-            'Page' => $request->getUrl()
+        return [
+            'frontend/post.html.twig', [
+                'post' => $post,
+                'action' => '/addcomment',
+                'comments' => $commentsManager->getListFromPost((int) $vars['id_post']),
+                'vars' => $vars,
+                'Params' => $Params,
+                'Response' => $this->response,
+                'Page' => $request->getUrl()
             ]
         ];
     }
@@ -115,7 +120,7 @@ class MainController extends Controller
             if ($request->getParams()['passwordFirst'] === $request->getParams()['confirmedPassword']) {
                 // Verification of the existence of nickname
                 if ($userManager->ifExistPseudo($request->getParams()['pseudo']) === true) {
-                    $this->response = ['type' => 'danger' , 'message' => 'Le pseudo est déjà pris'];
+                    $this->response = ['type' => 'danger', 'message' => 'Le pseudo est déjà pris'];
                 } else {
                     $user = new User();
                     $user->setName($request->getParams()['lastname']);
@@ -142,14 +147,15 @@ class MainController extends Controller
                     $this->response = $email->sendActivationEmail($user);
                 }
             } else {
-                $this->response = ['type' => 'danger' , 'message' => 'Les mots de passe ne correspondent pas'];
+                $this->response = ['type' => 'danger', 'message' => 'Les mots de passe ne correspondent pas'];
             }
         }
 
-        return ['frontend/register.html.twig', [
-            'Params' => $request->getParams(),
-            'Response' => $this->response,
-            'Page' => '/signin'
+        return [
+            'frontend/register.html.twig', [
+                'Params' => $request->getParams(),
+                'Response' => $this->response,
+                'Page' => '/signin'
             ]
         ];
     }
@@ -168,9 +174,10 @@ class MainController extends Controller
             $this->response = $email->sendEmailToAdmin($request->getParams());
         }
 
-        return ['frontend/index.html.twig', [
-            'Params' => $request->getParams(),
-            'Response' => $this->response
+        return [
+            'frontend/index.html.twig', [
+                'Params' => $request->getParams(),
+                'Response' => $this->response
             ]
         ];
     }
@@ -199,7 +206,7 @@ class MainController extends Controller
         ) {
             return Utilities::ViewPicture($request->getParams()['name'], $request->getParams()['type']);
         }
-        return ['error/404.html.twig', [] ];
+        return ['error/404.html.twig', []];
     }
 
     /**
@@ -209,6 +216,6 @@ class MainController extends Controller
      */
     public function error403()
     {
-        return ['error/403.html.twig', [] ];
+        return ['error/403.html.twig', []];
     }
 }
