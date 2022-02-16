@@ -91,7 +91,8 @@ class Utilities
     public static function captcha(Session $session)
     {
         $config = Config::getInstance();
-        $session->setAttribute('captcha', mt_rand(1000, 9999));
+        $captcha = mt_rand(1000, 9999);
+        $session->setAttribute('captcha', $captcha);
 
         $img = imagecreate(65, 30);
 
@@ -100,7 +101,7 @@ class Utilities
         $textcolor = imagecolorallocate($img, 255, 255, 255); // First use define background color
         $textcolor = imagecolorallocate($img, 0, 0, 0);    // Second use define text color
 
-        imagettftext($img, 23, 0, 3, 30, $textcolor, $font, $session->getAttribute('captcha'));
+        imagettftext($img, 23, 0, 3, 30, $textcolor, $font, $captcha);
 
         header('Content-type:image/jpeg');
         imagejpeg($img);
